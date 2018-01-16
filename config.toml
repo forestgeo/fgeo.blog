@@ -1,0 +1,58 @@
+baseurl = "https://fgeo.blog.netlify.com/"
+title = "fgeo blog"
+theme = "ghostwriter"
+languageCode = "en-us"
+copyright = "ForestGEO"
+# disqusShortname = "XXX"
+# googleAnalytics = "XXX"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[Author]
+    name = "Mauro Lepore"
+    profile = "https://forestgeo.github.io/fgeo/"
+
+[Taxonomies]
+    tag = "tags"
+
+[Params]
+    intro = true
+    headline = "fgeo blog"
+    description = "A for the community of fgeo"
+    github = "https://github.com/forestgeo/fgeo.blog"
+#    gitlab = "https://gitlab.com/XXX"
+#    linkedin = "https://linkedin.com/in/XXX/"
+#    gplus = "https://google.com/+XXX"
+#    twitter = "https://twitter.com/XXX"
+#    stackoverflow = "https://stackoverflow.com/users/XXX/YYY"
+    email = "leporem@si.edu"
+    opengraph = true
+    shareTwitter = true
+    shareFacebook = true
+    shareGooglePlus = true
+    shareLinkedIn = false
+    dateFormat = "Mon, Jan 2, 2006"
+    highlightJsUrl = ""
+    highlightJsLocalUrl = ""
+
+[Permalinks]
+    post = "/:year/:month/:day/:filename/"
+
+[[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Projects"
+    url = "/project/"
+    weight = 2
+
+[[menu.main]]
+    name = "Contact"
+    url = "/page/contact/"
+    weight = 3
+
+[[menu.main]]
+    name = "About"
+    url = "/page/about/"
+    weight = 4
