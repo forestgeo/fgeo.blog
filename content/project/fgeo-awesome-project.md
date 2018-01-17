@@ -1,8 +1,8 @@
 +++
-title = "My awesome project"
-description = "Description of my awesome project."
-date = 2014-11-18T02:13:50Z
-author = "My name"
+title = "fgeo awesome project"
+description = "Description of fgeo's awesome project."
+date = 2018-01-17
+author = "Mauro Lepore"
 +++
 
 ## About project
