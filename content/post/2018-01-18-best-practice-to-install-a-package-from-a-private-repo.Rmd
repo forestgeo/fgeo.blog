@@ -1,5 +1,5 @@
 ---
-title: BEST PRACTICE TO INSTALL A PACKAGE FROM A PRIVATE REPO
+title: Best practice to install a package from a private repo
 author: Mauro Lepore
 date: '2018-01-18'
 slug: best-practice-to-install-a-package-from-a-private-repo

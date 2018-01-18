@@ -1,5 +1,5 @@
 ---
-title: A CHECKLIST TO RENAME R PACKAGES
+title: A checklist to rename r packages
 author: Mauro Lepore
 date: '2018-01-18'
 slug: a-checklist-to-rename-r-packages
