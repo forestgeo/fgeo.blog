@@ -17,7 +17,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [Params]
     intro = true
     headline = "fgeo blog"
-    description = "A blog for the community of fgeo"
+    description = "A blog for those who use and build the fgeo package"
     github = "https://github.com/forestgeo/fgeo.blog"
 #    gitlab = "https://gitlab.com/XXX"
 #    linkedin = "https://linkedin.com/in/XXX/"
