@@ -1,0 +1,76 @@
+---
+title: Labelling and mapping trees that spillover
+author: Mauro Lepore
+date: '2018-01-18'
+slug: labelling-and-mapping-trees-that-spillover
+categories: []
+tags:
+  - R
+  - map
+  - fgeo
+  - fgeo.map
+  - tutorial
+---
+
+
+
+<div id="package" class="section level1">
+<h1>Package</h1>
+<pre class="r"><code>library(fgeo.map)</code></pre>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<pre class="r"><code># `sinharaja::sinh_vft_20180118` is a private dataset. Instead use your data.
+vft &lt;- sinharaja::sinh_vft_20180118</code></pre>
+</div>
+<div id="suffix-dead-trees-on-the-quadrat-edge" class="section level1">
+<h1>Suffix dead trees on the quadrat edge</h1>
+<pre class="r"><code>suffixed &lt;- suffix_edge_tag(
+  vft,
+  .match = &quot;dead&quot;,
+  suffix = &quot;_d&quot;,
+  x_q = 20
+)
+#&gt; One or more trees spillover.
+# Confirm that it worked
+dplyr::filter(suffixed, status == &quot;dead&quot;, (qx &gt; 20 | qy &gt; 20))
+#&gt; # A tibble: 234 x 7
+#&gt;    tag         qx    qy quadratname status censusid plotid
+#&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;int&gt;  &lt;int&gt;
+#&gt;  1 000956_d 20.1  11.3  0002        dead          4      1
+#&gt;  2 002646_d  2.60 20.3  0008        dead          4      1
+#&gt;  3 002735_d 20.1   7.60 0009        dead          4      1
+#&gt;  4 002930_d  6.50 20.1  0009        dead          4      1
+#&gt;  5 004025_d 20.5   3.30 0014        dead          4      1
+#&gt;  6 004146_d 20.1  19.0  0014        dead          4      1
+#&gt;  7 005841_d 20.2  16.1  0019        dead          4      1
+#&gt;  8 005843_d 20.5  16.7  0019        dead          4      1
+#&gt;  9 005845_d 20.2  17.7  0019        dead          4      1
+#&gt; 10 006135_d 20.5   2.30 0021        dead          4      1
+#&gt; # ... with 224 more rows</code></pre>
+</div>
+<div id="map" class="section level1">
+<h1>Map</h1>
+<pre class="r"><code># Showing only one quadrat
+vft_q0002 &lt;- dplyr::filter(suffixed, quadratname == &quot;0002&quot;)
+p &lt;- map_tag(vft_q0002)
+# Showing only one of the four maps of the quadrat 0002
+p[[3]]</code></pre>
+<p><img src="/post/2018-01-18-labelling-and-mapping-trees-that-spillover_files/figure-html/unnamed-chunk-4-1.png" width="98%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="print-to-.pdf" class="section level1">
+<h1>Print to .pdf</h1>
+<pre class="r"><code># Printing all plots of `p` to .pdf, with parameters optimized for size letter
+pdf(&quot;map.pdf&quot;, paper = &quot;letter&quot;, height = 10.5, width = 8)
+p
+#&gt; $`0002_1`
+#&gt; 
+#&gt; $`0002_2`
+#&gt; 
+#&gt; $`0002_3`
+#&gt; 
+#&gt; $`0002_4`
+dev.off()
+#&gt; png 
+#&gt;   2</code></pre>
+</div>
