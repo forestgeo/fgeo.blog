@@ -1,4 +1,4 @@
-baseurl = "https://fgeo.blog.netlify.com/"
+baseurl = "https://fgeo.netlify.com/"
 title = "fgeo blog"
 theme = "ghostwriter"
 languageCode = "en-us"
