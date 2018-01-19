@@ -1,0 +1,102 @@
+---
+title: Mapping tree tags for an upcomming census
+author: Mauro Lepore
+date: '2018-01-19'
+slug: mapping-tree-tags-for-an-upcomming-census
+categories: []
+tags:
+  - R
+  - tutorial
+  - fgeo
+  - fgeo.map
+  - map
+  - fieldwork
+---
+
+## An example based on maps produced in January 2018
+
+```{r setup, include=FALSE}
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  cache = TRUE,
+  out.width = "98%", 
+  fig.width = 12, 
+  fig.asp = 0.75,
+  fig.align = "center",
+  fig.show = "hold"
+)
+```
+
+## Packages
+
+```{r}
+library(fgeo.map)
+library(dplyr)
+```
+
+## Data
+
+```{r}
+# `sinharaja::sinh_vft_20180118` is a private dataset. Instead use your data.
+vft <- sinharaja::sinh_vft_20180118
+vft <- setNames(vft, tolower(names(vft)))
+
+# Filtering only a few quadrats for this example
+tricky_quadrtat_numbers <- c("0100", "0101", "1000")
+vft <- filter(vft, quadratname %in% tricky_quadrtat_numbers)
+vft
+```
+
+## Suffix dead trees on the quadrat edge
+
+```{r}
+suffixed <- suffix_edge_tag(
+  vft,
+  .match = "dead",
+  suffix = "_d",
+  x_q = 20
+)
+# Confirm that it worked
+dplyr::filter(suffixed, status == "dead", (qx > 20 | qy > 20))
+```
+
+## Map
+
+```{r}
+p <- map_tag(suffixed, title_quad = "Sinharaja, 2018.", move_edge = 0.5)
+```
+
+## Have a look
+
+```{r}
+p[[2]]
+```
+
+
+## Check the order of quadrats is correct
+
+```{r}
+names(p)
+```
+
+## Print pdf
+
+```{r}
+# Ensure R will let you print all the maps
+maps_n <- length(p)
+a_little_more <- 100
+options(max.print = maps_n + a_little_more)
+options("max.print")
+```
+
+```{r, eval=FALSE}
+pdf("Sinharaja_20180119.pdf", paper = "letter", height = 10.5, width = 8)
+p
+dev.off()
+```
+

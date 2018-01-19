@@ -1,0 +1,103 @@
+---
+title: Mapping tree tags for an upcomming census
+author: Mauro Lepore
+date: '2018-01-19'
+slug: mapping-tree-tags-for-an-upcomming-census
+categories: []
+tags:
+  - R
+  - tutorial
+  - fgeo
+  - fgeo.map
+  - map
+  - fieldwork
+---
+
+
+
+<div id="an-example-based-on-maps-produced-in-january-2018" class="section level2">
+<h2>An example based on maps produced in January 2018</h2>
+</div>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<pre class="r"><code>library(fgeo.map)
+library(dplyr)
+#&gt; 
+#&gt; Attaching package: &#39;dplyr&#39;
+#&gt; The following objects are masked from &#39;package:stats&#39;:
+#&gt; 
+#&gt;     filter, lag
+#&gt; The following objects are masked from &#39;package:base&#39;:
+#&gt; 
+#&gt;     intersect, setdiff, setequal, union</code></pre>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<pre class="r"><code># `sinharaja::sinh_vft_20180118` is a private dataset. Instead use your data.
+vft &lt;- sinharaja::sinh_vft_20180118
+vft &lt;- setNames(vft, tolower(names(vft)))
+
+# Filtering only a few quadrats for this example
+tricky_quadrtat_numbers &lt;- c(&quot;0100&quot;, &quot;0101&quot;, &quot;1000&quot;)
+vft &lt;- filter(vft, quadratname %in% tricky_quadrtat_numbers)
+vft
+#&gt; # A tibble: 1,096 x 7
+#&gt;    tag       qx    qy quadratname status censusid plotid
+#&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;int&gt;  &lt;int&gt;
+#&gt;  1 010001 0.100 0.300 0100        alive         4      1
+#&gt;  2 010002 0.100 0.500 0100        alive         4      1
+#&gt;  3 010003 0.500 0.900 0100        alive         4      1
+#&gt;  4 010004 0.600 0.900 0100        alive         4      1
+#&gt;  5 010006 0.700 3.20  0100        alive         4      1
+#&gt;  6 010007 0.200 3.70  0100        alive         4      1
+#&gt;  7 010008 0.900 4.60  0100        alive         4      1
+#&gt;  8 010009 1.20  5.00  0100        alive         4      1
+#&gt;  9 010010 2.90  4.90  0100        alive         4      1
+#&gt; 10 010011 3.90  3.90  0100        alive         4      1
+#&gt; # ... with 1,086 more rows</code></pre>
+</div>
+<div id="suffix-dead-trees-on-the-quadrat-edge" class="section level2">
+<h2>Suffix dead trees on the quadrat edge</h2>
+<pre class="r"><code>suffixed &lt;- suffix_edge_tag(
+  vft,
+  .match = &quot;dead&quot;,
+  suffix = &quot;_d&quot;,
+  x_q = 20
+)
+#&gt; One or more trees spillover.
+# Confirm that it worked
+dplyr::filter(suffixed, status == &quot;dead&quot;, (qx &gt; 20 | qy &gt; 20))
+#&gt; # A tibble: 2 x 7
+#&gt;   tag         qx    qy quadratname status censusid plotid
+#&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;int&gt;  &lt;int&gt;
+#&gt; 1 010342_d  20.2  3.10 0101        dead          4      1
+#&gt; 2 010544_d  20.1 17.1  0101        dead          4      1</code></pre>
+</div>
+<div id="map" class="section level2">
+<h2>Map</h2>
+<pre class="r"><code>p &lt;- map_tag(suffixed, title_quad = &quot;Sinharaja, 2018.&quot;, move_edge = 0.5)</code></pre>
+</div>
+<div id="have-a-look" class="section level2">
+<h2>Have a look</h2>
+<pre class="r"><code>p[[2]]</code></pre>
+<p><img src="/post/2018-01-19-mapping-tree-tags-for-an-upcomming-census_files/figure-html/unnamed-chunk-5-1.png" width="98%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="check-the-order-of-quadrats-is-correct" class="section level2">
+<h2>Check the order of quadrats is correct</h2>
+<pre class="r"><code>names(p)
+#&gt;  [1] &quot;0100_1&quot; &quot;0100_2&quot; &quot;0100_3&quot; &quot;0100_4&quot; &quot;0101_1&quot; &quot;0101_2&quot; &quot;0101_3&quot;
+#&gt;  [8] &quot;0101_4&quot; &quot;1000_1&quot; &quot;1000_2&quot; &quot;1000_3&quot; &quot;1000_4&quot;</code></pre>
+</div>
+<div id="print-pdf" class="section level2">
+<h2>Print pdf</h2>
+<pre class="r"><code># Ensure R will let you print all the maps
+maps_n &lt;- length(p)
+a_little_more &lt;- 100
+options(max.print = maps_n + a_little_more)
+options(&quot;max.print&quot;)
+#&gt; $max.print
+#&gt; [1] 112</code></pre>
+<pre class="r"><code>pdf(&quot;Sinharaja_20180119.pdf&quot;, paper = &quot;letter&quot;, height = 10.5, width = 8)
+p
+dev.off()</code></pre>
+</div>
