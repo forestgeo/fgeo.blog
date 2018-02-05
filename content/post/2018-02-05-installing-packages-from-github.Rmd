@@ -27,38 +27,41 @@ R packages are like any other software. To use an R package -- or any software -
 library(remotes)
 ```
 
-Now you can use the function `install_github()`. The description and examples of the help file `?install_github()` show you what to do next. You need to feed `install_github()` with a username and a repository name. For example, this is what you should run if you want to install the package __fgeo__ of the organization _forestgeo_:
+Now you can use the function `install_github()`. The description and examples of the help file `?install_github()` show you what to do next. You need to feed `install_github()` with a username and a repository name. For example, this is what you should run if you want to install the package __tidyverse__ from the GitHub username "hadley":
 
 ```
-install_github("forestgeo/fgeo")
+install_github("hadley/tidyverse")
 ```
 
 There is a way to save a little typing. You can use `install_github()` without running `library(remotes)`: This is how:
 
 ```
-remotes::install_github("forestgeo/fgeo")
+remotes::install_github("hadley/tidyverse")
 ```
 
-That syntax works for any package. For example, had you installed __devtools__, you could also install __fgeo__ with:
+The syntax `package::function` works for any package. For example, had you installed __devtools__, you could also install __tidyverse__ with:
 
 ```
-devtools::install_github("forestgeo/fgeo")
+devtools::install_github("hadley/tidyverse")
 ```
 
-And now of course you need to "open" __fgeo__ if you want to use it:
+And now you can "open" __tidyverse__ and start using it. For example:
 
 ```
-library(fgeo)
+# Open
+library(tidyverse)
+# Use
+tidyverse_update()
 ```
 
-Or you can use the syntax you just learned to use a specific function. For example:
+Or you can use the syntax you just learned:
 
 ```
-fgeo::fgeo_update()
+tidyverse::tidyverse_update()
 ```
 
 To learn what a package does you can run `help(package = "package-you-want-to-know-about")`. For example:
 
 ```
-help(package = "fgeo")
+help(package = "tidyverse")
 ```

@@ -20,15 +20,18 @@ tags:
 <pre><code>install.packages(&quot;remotes&quot;)</code></pre>
 <p>R packages are like any other software. To use an R package – or any software – you need to install it once, and then “open” (load) it every time you want to use it. In R you load a package with <code>library(package)</code>. Let’s open <strong>remotes</strong>:</p>
 <pre><code>library(remotes)</code></pre>
-<p>Now you can use the function <code>install_github()</code>. The description and examples of the help file <code>?install_github()</code> show you what to do next. You need to feed <code>install_github()</code> with a username and a repository name. For example, this is what you should run if you want to install the package <strong>fgeo</strong> of the organization <em>forestgeo</em>:</p>
-<pre><code>install_github(&quot;forestgeo/fgeo&quot;)</code></pre>
+<p>Now you can use the function <code>install_github()</code>. The description and examples of the help file <code>?install_github()</code> show you what to do next. You need to feed <code>install_github()</code> with a username and a repository name. For example, this is what you should run if you want to install the package <strong>tidyverse</strong> from the GitHub username “hadley”:</p>
+<pre><code>install_github(&quot;hadley/tidyverse&quot;)</code></pre>
 <p>There is a way to save a little typing. You can use <code>install_github()</code> without running <code>library(remotes)</code>: This is how:</p>
-<pre><code>remotes::install_github(&quot;forestgeo/fgeo&quot;)</code></pre>
-<p>That syntax works for any package. For example, had you installed <strong>devtools</strong>, you could also install <strong>fgeo</strong> with:</p>
-<pre><code>devtools::install_github(&quot;forestgeo/fgeo&quot;)</code></pre>
-<p>And now of course you need to “open” <strong>fgeo</strong> if you want to use it:</p>
-<pre><code>library(fgeo)</code></pre>
-<p>Or you can use the syntax you just learned to use a specific function. For example:</p>
-<pre><code>fgeo::fgeo_update()</code></pre>
+<pre><code>remotes::install_github(&quot;hadley/tidyverse&quot;)</code></pre>
+<p>The syntax <code>package::function</code> works for any package. For example, had you installed <strong>devtools</strong>, you could also install <strong>tidyverse</strong> with:</p>
+<pre><code>devtools::install_github(&quot;hadley/tidyverse&quot;)</code></pre>
+<p>And now you can “open” <strong>tidyverse</strong> and start using it. For example:</p>
+<pre><code># Open
+library(tidyverse)
+# Use
+tidyverse_update()</code></pre>
+<p>Or you can use the syntax you just learned:</p>
+<pre><code>tidyverse::tidyverse_update()</code></pre>
 <p>To learn what a package does you can run <code>help(package = &quot;package-you-want-to-know-about&quot;)</code>. For example:</p>
-<pre><code>help(package = &quot;fgeo&quot;)</code></pre>
+<pre><code>help(package = &quot;tidyverse&quot;)</code></pre>
