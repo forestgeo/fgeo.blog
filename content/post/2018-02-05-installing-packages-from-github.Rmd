@@ -1,0 +1,64 @@
+---
+title: Installing packages from GitHub
+author: Mauro Lepore
+date: '2018-02-05'
+slug: installing-packages-from-github
+categories: []
+tags:
+  - R
+  - r rstudio
+  - remotes
+  - fgeo
+  - devtools
+  - install
+  - github
+---
+
+R packages live most commonly on [CRAN](https://cran.r-project.org/) or [GitHub](https://github.com/). To install packages that live on CRAN you use the function `install.packages()` which comes by default with R. 
+To install packages that live on GitHub you use the function `install_github()`, which comes not by default but with the packages __devtools__ and __remotes__. I recommend __remotes__ because it is lighter. __remotes__ lives in CRAN, so you can install it with:
+
+```
+install.packages("remotes")
+```
+
+R packages are like any other software. To use an R package -- or any software -- you need to install it once, and then "open" (load) it every time you want to use it. In R you load a package with `library(package)`. Let's open __remotes__: 
+
+```
+library(remotes)
+```
+
+Now you can use the function `install_github()`. The description and examples of the help file `?install_github()` show you what to do next. You need to feed `install_github()` with a username and a repository name. For example, this is what you should run if you want to install the package __fgeo__ of the organization _forestgeo_:
+
+```
+install_github("forestgeo/fgeo")
+```
+
+There is a way to save a little typing. You can use `install_github()` without running `library(remotes)`: This is how:
+
+```
+remotes::install_github("forestgeo/fgeo")
+```
+
+That syntax works for any package. For example, had you installed __devtools__, you could also install __fgeo__ with:
+
+```
+devtools::install_github("forestgeo/fgeo")
+```
+
+And now of course you need to "open" __fgeo__ if you want to use it:
+
+```
+library(fgeo)
+```
+
+Or you can use the syntax you just learned to use a specific function. For example:
+
+```
+fgeo::fgeo_update()
+```
+
+To learn what a package does you can run `help(package = "package-you-want-to-know-about")`. For example:
+
+```
+help(package = "fgeo")
+```
