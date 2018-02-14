@@ -24,3 +24,20 @@ This is an example of what you should avoided -- which results from setting the 
 knitr::include_graphics("/waste_fieldform.png")
 ```
 
+without leading /
+
+```{r waste2, echo=FALSE, fig.cap="Example of what to avoid. To avoid wasting one page per quadrat please set the optoin 'Header columns on all sheets' to 'No'."}
+knitr::include_graphics("waste_fieldform.png")
+```
+
+rmd sytax with leading
+
+![](/waste_fieldform.png)
+
+rmd sytax without leading
+
+![](waste_fieldform.png)
+
+Online
+
+![](https://i.imgur.com/BX5wnDJ.png)
