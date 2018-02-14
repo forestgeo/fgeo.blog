@@ -1,21 +1,20 @@
 ---
-title: Mapping tree tags for an upcoming census
+title: Suffix dead trees on the quadrat edge
 author: Mauro Lepore
 date: '2018-01-19'
-slug: mapping-tree-tags-for-an-upcoming-census
-categories: []
 tags:
-  - R
-  - tutorial
   - fgeo
   - fgeo.map
-  - map
   - fieldwork
+  - map
+  - R
+  - tutorial
+slug: mapping-tree-tags-for-an-upcoming-census
 ---
 
 
 
-<p>To create maps for an upcoming fieldwork you can use the function <code>maply_tag()</code>. You can read the help file of <code>maply_tag()</code> <a href="https://forestgeo.github.io/fgeo.map/reference/maply_tag.html">here</a>, and you can preview the effect of changing the default behavior of this function using <a href="https://bookdown.org/fgeocomm/maply_tag_app/">this online app</a>. This blog shows the code used to maps created in January 2018. In particular it shows how to add a sufix to – exclusively – dead trees.</p>
+<p>To create maps for an upcoming fieldwork you can use the function <code>maply_tag()</code>. You can read the help file of <code>maply_tag()</code> <a href="https://forestgeo.github.io/fgeo.map/reference/maply_tag.html">here</a>, and you can preview the effect of changing the default behavior of this function using <a href="https://bookdown.org/fgeocomm/maply_tag_app/">this online app</a>. This blog shows the code used to maps created in January 2018. In particular it shows how to add a sufix to – exclusively – dead trees that lay on each quadrat’s edge.</p>
 <div id="packages" class="section level2">
 <h2>Packages</h2>
 <pre class="r"><code>library(fgeo.map)
