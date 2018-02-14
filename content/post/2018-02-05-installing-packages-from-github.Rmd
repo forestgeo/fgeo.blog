@@ -12,6 +12,7 @@ tags:
   - devtools
   - install
   - github
+  - packages
 ---
 
 R packages live most commonly on [CRAN](https://cran.r-project.org/) or [GitHub](https://github.com/). To install packages that live on CRAN you use the function `install.packages()` which comes by default with R. 
@@ -65,3 +66,7 @@ To learn what a package does you can run `help(package = "package-you-want-to-kn
 ```
 help(package = "tidyverse")
 ```
+
+# Further reading
+
+[Other blogs about packages](https://fgeo.netlify.com/tags/packages/)

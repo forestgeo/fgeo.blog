@@ -8,6 +8,11 @@ tags:
   - R
   - r rstudio
   - github
+  - packages
 ---
 
 See [this post](https://maurolepore.netlify.com/2017/12/18/2017-12-18-a-checklist-to-rename-r-packages/).
+
+# Further reading
+
+[Other blogs about packages](https://fgeo.netlify.com/tags/packages/)

@@ -13,3 +13,7 @@ tags:
 ---
 
 See [this post](https://maurolepore.netlify.com/2017/12/06/2017-12-06-best-prectice-for-installing-packages-from-private-repos/).
+
+# Further reading
+
+[Other blogs about packages](https://fgeo.netlify.com/tags/packages/)
