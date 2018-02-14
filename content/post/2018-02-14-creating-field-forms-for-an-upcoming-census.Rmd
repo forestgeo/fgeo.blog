@@ -13,7 +13,7 @@ tags:
 If you are preparing for an upcoming census you may need to print maps and field forms. To create the maps you can use the function `maply_tag()` -- you can read the help file of `maply_tag()`  [here](https://forestgeo.github.io/fgeo.map/reference/maply_tag.html), and you can preview the effect of changing the default behaviors of this function using [this online app](https://bookdown.org/fgeocomm/maply_tag_app/)). To create the field forms you can use an app available via the database team. The app looks like this:
 
 ```{r app, echo=FALSE, fig.cap="App to create field forms. Access this app via the database team."}
-knitr::include_graphics("/db_fieldform.png")
+knitr::include_graphics("/post/2018-02-14-creating-field-forms-for-an-upcoming-census_files/db_fieldform.png")
 ```
 
 For the option "Header columns on all sheets" it is wisest to select "No". The value "No" forces a header to appear at the top of every page instead of on its own page. This way you will save one page per quadrat, and thus you will avoid wasting money and paper. 
@@ -21,6 +21,6 @@ For the option "Header columns on all sheets" it is wisest to select "No". The v
 This is an example of what you should avoided -- which results from setting the option "Header columns on all sheets" to "Yes" (please don't do this):
 
 ```{r waste, echo=FALSE, fig.cap="Example of what to avoid. To avoid wasting one page per quadrat please set the optoin 'Header columns on all sheets' to 'No'."}
-knitr::include_graphics("/waste_fieldform.png")
+knitr::include_graphics("/post/2018-02-14-creating-field-forms-for-an-upcoming-census_files/waste_fieldform.png")
 ```
 
