@@ -1,8 +1,8 @@
 ---
-title: Mapping tree tags for an upcomming census
+title: Mapping tree tags for an upcoming census
 author: Mauro Lepore
 date: '2018-01-19'
-slug: mapping-tree-tags-for-an-upcomming-census
+slug: mapping-tree-tags-for-an-upcoming-census
 categories: []
 tags:
   - R
@@ -15,9 +15,7 @@ tags:
 
 
 
-<div id="an-example-based-on-maps-produced-in-january-2018" class="section level2">
-<h2>An example based on maps produced in January 2018</h2>
-</div>
+<p>To create maps for an upcoming fieldwork you can use the function <code>maply_tag()</code>. You can read the help file of <code>maply_tag()</code> <a href="https://forestgeo.github.io/fgeo.map/reference/maply_tag.html">here</a>, and you can preview the effect of changing the default behavior of this function using <a href="https://bookdown.org/fgeocomm/maply_tag_app/">this online app</a>. This blog shows the code used to maps created in January 2018. In particular it shows how to add a sufix to – exclusively – dead trees.</p>
 <div id="packages" class="section level2">
 <h2>Packages</h2>
 <pre class="r"><code>library(fgeo.map)
@@ -75,12 +73,12 @@ dplyr::filter(suffixed, status == &quot;dead&quot;, (qx &gt; 20 | qy &gt; 20))
 </div>
 <div id="map" class="section level2">
 <h2>Map</h2>
-<pre class="r"><code>p &lt;- map_tag(suffixed, title_quad = &quot;Sinharaja, 2018.&quot;, move_edge = 0.5)</code></pre>
+<pre class="r"><code>p &lt;- maply_tag(suffixed, title_quad = &quot;Sinharaja, 2018.&quot;, move_edge = 0.5)</code></pre>
 </div>
 <div id="have-a-look" class="section level2">
 <h2>Have a look</h2>
 <pre class="r"><code>p[[2]]</code></pre>
-<p><img src="/post/2018-01-19-mapping-tree-tags-for-an-upcomming-census_files/figure-html/unnamed-chunk-5-1.png" width="98%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2018-01-19-mapping-tree-tags-for-an-upcoming-census_files/figure-html/unnamed-chunk-5-1.png" width="98%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="check-the-order-of-quadrats-is-correct" class="section level2">
 <h2>Check the order of quadrats is correct</h2>

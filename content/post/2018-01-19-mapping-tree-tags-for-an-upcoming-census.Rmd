@@ -1,8 +1,8 @@
 ---
-title: Mapping tree tags for an upcomming census
+title: Mapping tree tags for an upcoming census
 author: Mauro Lepore
 date: '2018-01-19'
-slug: mapping-tree-tags-for-an-upcomming-census
+slug: mapping-tree-tags-for-an-upcoming-census
 categories: []
 tags:
   - R
@@ -13,7 +13,7 @@ tags:
   - fieldwork
 ---
 
-## An example based on maps produced in January 2018
+To create maps for an upcoming fieldwork you can use the function `maply_tag()`. You can read the help file of `maply_tag()` [here](https://forestgeo.github.io/fgeo.map/reference/maply_tag.html), and you can preview the effect of changing the default behavior of this function using [this online app](https://bookdown.org/fgeocomm/maply_tag_app/). This blog shows the code used to maps created in January 2018. In particular it shows how to add a sufix to -- exclusively -- dead trees.
 
 ```{r setup, include=FALSE}
 set.seed(1014)
@@ -68,7 +68,7 @@ dplyr::filter(suffixed, status == "dead", (qx > 20 | qy > 20))
 ## Map
 
 ```{r}
-p <- map_tag(suffixed, title_quad = "Sinharaja, 2018.", move_edge = 0.5)
+p <- maply_tag(suffixed, title_quad = "Sinharaja, 2018.", move_edge = 0.5)
 ```
 
 ## Have a look
@@ -76,7 +76,6 @@ p <- map_tag(suffixed, title_quad = "Sinharaja, 2018.", move_edge = 0.5)
 ```{r}
 p[[2]]
 ```
-
 
 ## Check the order of quadrats is correct
 
