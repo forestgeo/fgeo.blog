@@ -74,17 +74,6 @@ dplyr::filter(suffixed, status == &quot;dead&quot;, (qx &gt; 20 | qy &gt; 20))
 <h2>Map</h2>
 <pre class="r"><code>p &lt;- maply_tag(suffixed, title_quad = &quot;Sinharaja, 2018.&quot;, move_edge = 0.5)</code></pre>
 </div>
-<div id="have-a-look" class="section level2">
-<h2>Have a look</h2>
-<pre class="r"><code>p[[2]]</code></pre>
-<p><img src="/post/2018-01-19-mapping-tree-tags-for-an-upcoming-census_files/figure-html/unnamed-chunk-5-1.png" width="98%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="check-the-order-of-quadrats-is-correct" class="section level2">
-<h2>Check the order of quadrats is correct</h2>
-<pre class="r"><code>names(p)
-#&gt;  [1] &quot;0100_1&quot; &quot;0100_2&quot; &quot;0100_3&quot; &quot;0100_4&quot; &quot;0101_1&quot; &quot;0101_2&quot; &quot;0101_3&quot;
-#&gt;  [8] &quot;0101_4&quot; &quot;1000_1&quot; &quot;1000_2&quot; &quot;1000_3&quot; &quot;1000_4&quot;</code></pre>
-</div>
 <div id="print-pdf" class="section level2">
 <h2>Print pdf</h2>
 <pre class="r"><code># Ensure R will let you print all the maps
@@ -97,4 +86,28 @@ options(&quot;max.print&quot;)
 <pre class="r"><code>pdf(&quot;Sinharaja_20180119.pdf&quot;, paper = &quot;letter&quot;, height = 10.5, width = 8)
 p
 dev.off()</code></pre>
+</div>
+<div id="have-a-look" class="section level2">
+<h2>Have a look</h2>
+<p>Finally, this is what the four maps of the first quadrat look like.</p>
+<div class="figure">
+<img src="https://i.imgur.com/iYOhQeZ.png" />
+
+</div>
+<div class="figure">
+<img src="https://i.imgur.com/L0scORt.png" />
+
+</div>
+<div class="figure">
+<img src="https://i.imgur.com/Z4PkcTh.png" />
+
+</div>
+<div class="figure">
+<img src="https://i.imgur.com/nBhLzjs.png" />
+
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<p><a href="https://fgeo.netlify.com/tags/fieldwork/">Other blogs about fieldwork</a></p>
 </div>

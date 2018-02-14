@@ -20,5 +20,6 @@ This is an example of what you should avoid -- which results from setting the op
 
 ![_Figure 2. Example of what to avoid. To avoid wasting one page per quadrat please set the optoin 'Header columns on all sheets' to 'No'._](https://i.imgur.com/4BIbUIK.png)
 
+# Further reading
 
-
+[Other blogs about fieldwork](https://fgeo.netlify.com/tags/fieldwork/)

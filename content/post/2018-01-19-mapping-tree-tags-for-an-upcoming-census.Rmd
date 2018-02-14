@@ -70,18 +70,6 @@ dplyr::filter(suffixed, status == "dead", (qx > 20 | qy > 20))
 p <- maply_tag(suffixed, title_quad = "Sinharaja, 2018.", move_edge = 0.5)
 ```
 
-## Have a look
-
-```{r}
-p[[2]]
-```
-
-## Check the order of quadrats is correct
-
-```{r}
-names(p)
-```
-
 ## Print pdf
 
 ```{r}
@@ -98,3 +86,18 @@ p
 dev.off()
 ```
 
+## Have a look
+
+Finally, this is what the four maps of the first quadrat look like.
+
+![](https://i.imgur.com/iYOhQeZ.png)
+
+![](https://i.imgur.com/L0scORt.png)
+
+![](https://i.imgur.com/Z4PkcTh.png)
+
+![](https://i.imgur.com/nBhLzjs.png)
+
+# Further reading
+
+[Other blogs about fieldwork](https://fgeo.netlify.com/tags/fieldwork/)
