@@ -1,0 +1,51 @@
+---
+title: Should I update all my R packages frequently? Yes/No? Why?
+author: Mauro Lepore
+date: '2018-03-06'
+slug: should-i-update-all-my-r-packages-frequently-yes-no-why
+categories: []
+tags:
+  - packages
+  - R
+  - install
+  - update
+  - bestpractice
+---
+
+> You will always eventually have a reason that you must update. So you can either do that very infrequently, suffer with old versions in the middle, and experience great pain at update. Or admit that maintaining your system is a normal ongoing activity, and do it more often.
+
+-- [Jenny Bryan (RStudio.com)](https://community.rstudio.com/t/should-i-update-all-my-r-packages-frequently-yes-no-why/5856/4?u=mauro_lepore)
+
+
+
+>  If it hurts - do it more often. (...) If you have this kind of exponential relationship, then if you do it more frequently, you can drastically reduce the pain. And this is what happens with Continuous Integration - by integrating every day, the pain of integration almost vanishes. It did hurt, so you did it more often, and now it no longer hurts.
+
+-- [Martin Fowler (thoughtworks.com)](https://martinfowler.com/bliki/FrequencyReducesDifficulty.html)
+
+![](https://martinfowler.com/bliki/images/frequency-reduces-difficulty/graph.png)
+
+
+
+
+
+> One day I was using a computer that I update much less frequently, and I got an error. I spent a bunch of time trying to debug it and reading the documentation, but in the end the solution was that I needed to update the purrr package on that machine.
+
+-- [John Blischak](https://community.rstudio.com/t/should-i-update-all-my-r-packages-frequently-yes-no-why/5856/3?u=mauro_lepore)
+
+
+
+
+> I've seen very few bugs introduced by updating. (...) Even when things are deprecated, they tend to stay that way for a good while before they ever get removed, so updating is more likely to generate warnings than errors. (...) On the other hand, I have seen a lot of bugs that have been fixed by updates.
+
+>There are a couple times you must update:
+
+> If you’re going to open a GitHub issue, always install the current development version first to check the bug hasn't already been fixed.
+
+> If you’re updating R itself, you should update your packages. 
+
+> If you’re installing a new package and it’s not working right, make sure its dependencies are updated.
+
+> As for concrete numbers, I’d guess I update every week or so. I wouldn’t look askance at updating every month or so. If it’s been 6 months to a year for someone who uses R daily, I'd expect a good reason (and they do exist).
+
+-- [Edward Visel](https://community.rstudio.com/t/should-i-update-all-my-r-packages-frequently-yes-no-why/5856/5?u=mauro_lepore)
+
