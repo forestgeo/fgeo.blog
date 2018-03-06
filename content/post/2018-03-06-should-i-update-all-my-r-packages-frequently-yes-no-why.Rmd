@@ -14,6 +14,8 @@ tags:
 
 > You will always eventually have a reason that you must update. So you can either do that very infrequently, suffer with old versions in the middle, and experience great pain at update. Or admit that maintaining your system is a normal ongoing activity, and do it more often.
 
+> There are definitely situations where people have good reason to not update or to do so infrequently or at specific milestones. But I personally encounter many more who suffer from the opposite: updating too infrequently, without any specific reason or because they fear disruption (which makes it worse in the end).
+
 -- [Jenny Bryan (RStudio.com)](https://community.rstudio.com/t/should-i-update-all-my-r-packages-frequently-yes-no-why/5856/4?u=mauro_lepore)
 
 
@@ -49,3 +51,10 @@ tags:
 
 -- [Edward Visel](https://community.rstudio.com/t/should-i-update-all-my-r-packages-frequently-yes-no-why/5856/5?u=mauro_lepore)
 
+
+
+> As an example of a good reason [to not update often], my facility is under strict configuration control procedures. Given the toxicity of what we work with (and the nature of the public to freak out about mistakes) we won’t tolerate anything unexpected happening due to a casual library update. To update (...) is a bit of a painful process, so I only do it if I am upgrading R itself. The last time I upgraded R and the library, it was a month long process.
+
+> On the other hand, when I do my own personal package development, or when I’ve taught R classes, I always update to the most recent version of R and update all the packages.
+
+-- [Benjamin](https://community.rstudio.com/t/should-i-update-all-my-r-packages-frequently-yes-no-why/5856/8?u=mauro_lepore)
