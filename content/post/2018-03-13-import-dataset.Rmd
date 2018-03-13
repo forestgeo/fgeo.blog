@@ -56,4 +56,5 @@ my_data <- read_csv(
 my_data
 ```
 
-Learn more about [__readr__](http://readr.tidyverse.org/reference/read_delim.html)
+* Learn more about [__readr__](http://readr.tidyverse.org/reference/read_delim.html)
+* Access [this document on rstudio.cloud](https://rstudio.cloud/project/23464)
