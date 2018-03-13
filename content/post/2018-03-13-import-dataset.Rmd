@@ -1,0 +1,59 @@
+---
+title: Import Dataset
+author: Mauro Lepore
+date: '2018-03-13'
+slug: import-dataset
+categories: []
+tags:
+  - bestpractice
+  - R
+  - r rstudio
+  - tutorial
+---
+
+
+Importing a dataset into R can be challenging. It often results in silent issues that cause severe errors later in your data analysis. Getting this right is important, and also it is simple if you use RStudio and the __readr__ package.
+
+```{r}
+# install.packages("readr")
+library(readr)
+# install.packages("here")
+library(here)
+```
+
+Suppose that you have a spreadsheet that looks like this:
+
+![](https://i.imgur.com/XrS4jAJ.png)
+
+A simple way to import this dataset is from the Environment tab of RStudio, using the option Import Dataset > From Text (readr) ... 
+
+![](https://i.imgur.com/JkwbOGA.png)
+
+The panel that pops-up will help you to find the file you want to import, and show you useful previews of the data (central panel) and code (bottom left) that the selected options generate.
+
+![](https://i.imgur.com/TqqT5ng.png)
+
+The defaults are often enough. Although you can click import, instead you should probably copy the code, paste it in your script, and run it.
+
+In this example the defaults are not enough: Some missing values are not automatically identified, and the type of the column `y` is not automatically parsed as the type I want -- I want not an integer but a double (real number).
+
+```{r}
+file_path <- here::here("static/my_data.csv")
+my_data <- read_csv(file_path)
+
+my_data
+```
+
+To fix this I'll show two additional arguments of [readr::read_csv()](http://readr.tidyverse.org/reference/read_delim.html) (and friends) that is good to know about because they solve common problems: `na`, and `col_types`.
+
+```{r}
+my_data <- read_csv(
+  file_path, 
+  na = c("", "NA", "NULL", "-999", "-"), 
+  col_types = list(x = "i", y = "d")
+)
+
+my_data
+```
+
+Learn more about [__readr__](http://readr.tidyverse.org/reference/read_delim.html)
