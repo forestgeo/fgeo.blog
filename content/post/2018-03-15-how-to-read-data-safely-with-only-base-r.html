@@ -13,7 +13,7 @@ tags:
 
 
 
-<p>When you read data into R you may silently introduce some issues that can complicate your data analysis. The most common problems are automatically handled by the <code>read_*()</code> (underscore) functions of the <strong>readr</strong> package – which I encourage you to use (see <a href="https://fgeo.netlify.com/2018/03/13/2018-03-13-import-dataset/">this post</a>). But if instead you use the <code>read.*()</code> (dot) functions – that come with R via the <strong>utils</strong> package – you need to know about these arguments:</p>
+<p>When you read data into R you may silently introduce some issues that can complicate your data analysis. The most common problems are automatically handled by the <code>read_*()</code> (underscore) functions of the <strong>readr</strong> package – which I encourage you to use (see <a href="https://fgeo.netlify.com/2018/03/13/2018-03-13-import-dataset/">this post</a>). But if you are careful, of course you can use only base R – that is, the <code>read.*()</code> (dot) functions – that come with R via the <strong>utils</strong> package. If that’s your choice you should read the documentation of <code>?read.table</code> carefully. Here I want to highlight three arguments:</p>
 <ul>
 <li><p><code>stringsAsFactors</code>: Use <code>FALSE</code> to interpret text strings as text strings. Unfortunately, the default converts text strings to factors (read argument <code>as.is</code>). If you don’t know what a factor is (<code>?factor</code>) you most likely don’t want it. (Even if you do want factors, your code will be more readable if you explicitly coerce strings to factors later, with something like <code>as.factor(&quot;your-string&quot;)</code>.) In short, always use <code>stringsAsFactors = FALSE</code>.</p></li>
 <li><p><code>colClasses</code>: A character vector of classes to be assumed for each columns. For example, <code>c(x = &quot;numeric&quot;, y = &quot;integer&quot;, z = &quot;character&quot;)</code>.</p></li>
@@ -26,7 +26,7 @@ tags:
 <p><img src="https://i.imgur.com/AOOpmHq.png" /></p>
 <p>The panel that pops-up will help me to (1) find the file I want to import; (2) preview the dataset; and (3) select values for the most common arguments. (Notice that Strings as factors is checked)</p>
 <p><img src="https://i.imgur.com/lVrTIHM.png" /></p>
-<p>But for reproducibility I prefer to insteada write code. Accepting all defaults – as you saw in the panel above – is equivalent to running this code:</p>
+<p>But to make my analysis reproducible I instead read the data via code. Accepting all defaults – as in the panel above – is equivalent to running this code:</p>
 <pre class="r"><code>my_path &lt;- here::here(&quot;static/my_dataset.csv&quot;)
 my_dataset &lt;- read.csv(my_path)</code></pre>
 <p>And this is the result.</p>
@@ -71,3 +71,7 @@ my_dataset</code></pre>
 ##  $ y: int  2 4 NA NA NA
 ##  $ z: chr  &quot;a&quot; NA &quot;b&quot; NA ...</code></pre>
 <p>Now the dataset is ready for analysis.</p>
+<div id="acknowledgements" class="section level3">
+<h3>Acknowledgements</h3>
+<p>Thanks to Suzanne Lao for sharing her tricks and for encouraging me to write this post.</p>
+</div>

@@ -11,7 +11,7 @@ tags:
   - tutorial
 ---
 
-When you read data into R you may silently introduce some issues that can complicate your data analysis. The most common problems are automatically handled by the `read_*()` (underscore) functions of the __readr__ package -- which I encourage you to use (see [this post](https://fgeo.netlify.com/2018/03/13/2018-03-13-import-dataset/)). But if instead you use the `read.*()` (dot) functions -- that come with R via the __utils__ package -- you need to know about these arguments:
+When you read data into R you may silently introduce some issues that can complicate your data analysis. The most common problems are automatically handled by the `read_*()` (underscore) functions of the __readr__ package -- which I encourage you to use (see [this post](https://fgeo.netlify.com/2018/03/13/2018-03-13-import-dataset/)). But if you are careful, of course you can use only base R -- that is, the `read.*()` (dot) functions -- that come with R via the __utils__ package. If that's your choice you should read the documentation of `?read.table` carefully. Here I want to highlight three arguments:
 
 * `stringsAsFactors`: Use `FALSE` to interpret text strings as text strings. Unfortunately, the default converts text strings to factors (read argument `as.is`). If you don't know what a factor is (`?factor`) you most likely don't want it. (Even if you do want factors, your code will be more readable if you explicitly coerce strings to factors later, with something like `as.factor("your-string")`.) In short, always use  `stringsAsFactors = FALSE`. 
 
@@ -33,7 +33,7 @@ The panel that pops-up will help me to (1) find the file I want to import; (2) p
 
 ![](https://i.imgur.com/lVrTIHM.png)
 
-But for reproducibility I prefer to insteada write code. Accepting all defaults -- as you saw in the panel above -- is equivalent to running this code:
+But to make my analysis reproducible I instead read the data via code. Accepting all defaults -- as in the panel above -- is equivalent to running this code:
 
 ```{r}
 my_path <- here::here("static/my_dataset.csv")
@@ -73,3 +73,7 @@ str(my_dataset)
 ```
 
 Now the dataset is ready for analysis.
+
+### Acknowledgements
+
+Thanks to Suzanne Lao for sharing her tricks and for encouraging me to write this post.
