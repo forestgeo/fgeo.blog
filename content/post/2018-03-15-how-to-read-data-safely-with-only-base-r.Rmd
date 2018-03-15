@@ -21,44 +21,43 @@ When you read data into R you may silently introduce some issues that can compli
 
 I emphasize these arguments because they are buried among many other arguments so they are easy to miss. (Sure, the arguments `header` and `sep` are important but you will unlikely miss them because they are in the second and third position of the function's signature (see `?read.table`).]
 
+To show you these arguments in action let's suppose I have a spreadsheet that looks like this:
 
-Suppose you have a spreadsheet that looks like this:
+![](https://i.imgur.com/ClZYWod.png)
 
-![](https://i.imgur.com/XrS4jAJ.png)
-
-A simple way to import this dataset is from the Environment tab of RStudio, using the option Import Dataset > From Text (base) ... 
+I can simply import this dataset from the Environment tab of RStudio, using the option Import Dataset > From Text (base) ... 
 
 ![](https://i.imgur.com/AOOpmHq.png)
 
-The panel that pops-up will help you to (1) find the file you want to import; (2) preview the dataset; and (3) select values for the most common arguments. (Notice that Strings as factors is checked)
+The panel that pops-up will help me to (1) find the file I want to import; (2) preview the dataset; and (3) select values for the most common arguments. (Notice that Strings as factors is checked)
 
 ![](https://i.imgur.com/lVrTIHM.png)
 
-Accepting all defaults is equivalent to running this code:
+But for reproducibility I prefer to insteada write code. Accepting all defaults -- as you saw in the panel above -- is equivalent to running this code:
 
 ```{r}
 my_path <- here::here("static/my_dataset.csv")
 my_dataset <- read.csv(my_path)
-
-my_dataset
 ```
 
+And this is the result.
+
 ```{r}
+my_dataset
 str(my_dataset)
 ```
 
 In this example the defaults are not enough. Here are some problems:
 
 * `x`: I want a double (real number) but instead I got an integer.
-
 * `y`: I want an integer but instead I got a factor. That is because "NULL" was interpreted as the literal string "NULL"; thus the entire column was interpreted first as a text string and then converted to a factor.
-
 * `z`: I want a character string but instead I got a factor.
 
-With the arguments you just learned about you can fix this problem from the root.
+But I can fix these problem with the arguments you just learned about.
 
 ```{r}
 my_path <- here::here("static/my_dataset.csv")
+
 my_dataset <- read.csv(
   my_path,
   stringsAsFactors = FALSE,
@@ -73,3 +72,4 @@ my_dataset
 str(my_dataset)
 ```
 
+Now the dataset is ready for analysis.
