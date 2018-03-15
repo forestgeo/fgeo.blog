@@ -42,7 +42,7 @@ my_data &lt;- read_csv(file_path)</code></pre>
 ## 2     3 4    
 ## 3    NA &lt;NA&gt; 
 ## 4     0 NULL 
-## 5  -999 -</code></pre>
+## 5    NA -</code></pre>
 <p>To fix this I’ll show two additional arguments of <a href="http://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a> (and friends) that is good to know about because they solve common problems: <code>na</code>, and <code>col_types</code>.</p>
 <pre class="r"><code>my_data &lt;- read_csv(
   file_path, 
@@ -62,4 +62,5 @@ my_data</code></pre>
 <ul>
 <li>Learn more about <a href="http://readr.tidyverse.org/reference/read_delim.html"><strong>readr</strong></a></li>
 <li>Access <a href="https://rstudio.cloud/project/23464">this document on rstudio.cloud</a></li>
+<li>Learn <a href="https://goo.gl/TNLRCK">how to read data safely with only base R</a></li>
 </ul>

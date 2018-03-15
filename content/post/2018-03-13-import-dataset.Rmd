@@ -58,3 +58,4 @@ my_data
 
 * Learn more about [__readr__](http://readr.tidyverse.org/reference/read_delim.html)
 * Access [this document on rstudio.cloud](https://rstudio.cloud/project/23464)
+* Learn [how to read data safely with only base R](https://goo.gl/TNLRCK)
