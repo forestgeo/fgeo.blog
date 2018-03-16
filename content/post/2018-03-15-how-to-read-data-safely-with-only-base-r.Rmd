@@ -13,7 +13,7 @@ tags:
 
 When you read data into R you may silently introduce some issues that can complicate your data analysis. The most common problems are automatically handled by the `read_*()` (underscore) functions of the __readr__ package -- which I encourage you to use (see [this post](https://fgeo.netlify.com/2018/03/13/2018-03-13-import-dataset/)). But if you are careful, of course you can use only base R -- that is, the `read.*()` (dot) functions -- that come with R via the __utils__ package. If that's your choice you should read the documentation of `?read.table` carefully. Here I want to highlight three arguments:
 
-* `stringsAsFactors`: Use `FALSE` to interpret text strings as text strings. Unfortunately, the default converts text strings to factors (read argument `as.is`). If you don't know what a factor is (`?factor`) you most likely don't want it. (Even if you do want factors, your code will be more readable if you explicitly coerce strings to factors later, with something like `as.factor("your-string")`.) In short, always use  `stringsAsFactors = FALSE`. 
+* `stringsAsFactors`: Use `FALSE` to interpret text strings as text strings. Unfortunately, the default converts text strings to factors (read argument `as.is`). If you don't know what a factor is (`?factor`) you most likely don't want it. (Even if you do want factors, your code will be more readable if you explicitly coerce strings to factors later, with something like `as.factor("your-string")`.) In short, always use  `stringsAsFactors = FALSE` (for details read [this post](https://goo.gl/rZmMLE) on the history of `stringsAsFactors`).
 
 * `colClasses`: A character vector of classes to be assumed for each columns. For example, `c(x = "numeric", y = "integer", z = "character")`.
 
