@@ -74,6 +74,11 @@ str(my_dataset)
 
 Now the dataset is ready for analysis.
 
+### More
+
+* See an [example using the argument `row.names`](https://goo.gl/MF4thJ)
+* Go to a [similar post but using the __readr__ package](https://goo.gl/qRSyME)
+
 ### Acknowledgements
 
 Thanks to Suzanne Lao for sharing her tricks and for encouraging me to write this post.
