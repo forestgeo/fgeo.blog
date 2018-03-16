@@ -9,7 +9,7 @@ tags:
   - tutorial
 ---
 
-1. __First__, you will need to connect Fast Field Forms to a Dropbox folder for direct delivery from the app. Open your form and choose the "Delivery" button. This dialog will open:
+1. First, you will need to connect Fast Field Forms to a Dropbox folder for direct delivery from the app. Open your form and choose the "Delivery" button. This dialog will open:
 
 ![](https://i.imgur.com/H5psSXO.png)
 
