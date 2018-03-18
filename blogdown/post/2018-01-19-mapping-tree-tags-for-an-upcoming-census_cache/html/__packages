@@ -1,4 +1,9 @@
 base
+datasets
+utils
+grDevices
+graphics
+stats
+methods
 fgeo.map
 dplyr
-bindrcpp
