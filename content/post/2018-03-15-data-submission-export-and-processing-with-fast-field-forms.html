@@ -1,0 +1,39 @@
+---
+title: Data Submission, Export, and Processing with Fast Field Forms
+author: Jessica Shue
+date: '2018-03-15'
+slug: data-submission-export-and-processing-with-fast-field-forms
+categories: []
+tags:
+  - fieldwork
+  - tutorial
+---
+
+
+
+<ol style="list-style-type: decimal">
+<li>First, you will need to connect Fast Field Forms to a Dropbox folder for direct delivery from the app. Open your form and choose the “Delivery” button. This dialog will open:</li>
+</ol>
+<div class="figure">
+<img src="https://i.imgur.com/H5psSXO.png" />
+
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Next, drag and drop the options you would like for file delivery. Linking to Dropbox is easiest, or you can have files e-mailed to a user.</li>
+</ol>
+<ul>
+<li><p>When linking to Dropbox: an “Apps” folder with a “FastField Mobile Forms” folder will be created. Choose for files to be sent in Excel format as this accommodates our data best and will be dealt with in the R code.</p></li>
+<li><p>If you would also like the files e-mailed to a User: the “User” will be the account holder. The website charges per user so to keep costs to a minimum we currently have 1 user per site. You can also choose to “Email External” if an e-mail account other than the “User’s” should receive the files.</p></li>
+<li><p>After configuring your options hit the blue “Save and Close” button.</p></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>To create an appropriate file name for each data submission go to “My Forms” and open your form by clicking the pencil next to the form name. Choose “Setup” and then “Setup Form”. A new dialog box will open and select the “Advanced” tab:</li>
+</ol>
+<div class="figure">
+<img src="https://i.imgur.com/xxmsonV.png" />
+
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li><p>You can now drag and drop field names into the blank square on the right. Separating the names with “_” is a good idea. So, for quadrat 0101 completed on March 15th 2018 by Jess Shue the box would show: <code>$Quadrat_1$_$datepicker_2$_$Team_4$</code> and display as: 0101_03-15-2018_JS.</p></li>
+<li><p>Now your form should be ready for submission. After collecting data in the field for a quadrat hit the green “Submit” button in the upper right hand corner. Once the tablet has connected to Wi-Fi the form will be submitted and sent to Dropbox and/or via e-mail.</p></li>
+</ol>

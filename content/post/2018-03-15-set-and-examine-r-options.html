@@ -1,0 +1,63 @@
+---
+title: Set and examine R options
+author: Mauro Lepore
+date: '2018-03-15'
+slug: set-and-examine-r-options
+categories: []
+tags:
+  - R
+  - r rstudio
+  - options
+  - bestpractice
+  - tip
+---
+
+
+
+<p>You can set and examine a variety of global options which affect the way in which R computes and displays its results. You may want to skim the section <em>Options used in base R</em> of the help file of <a href="https://goo.gl/9NctjE">base::options()</a> – at the end you’ll see a list of factory-fresh default-settings that looks like this:</p>
+<pre><code>##      option value
+## 1  continue     +
+## 2    digits     7
+## 3 max.print 99999
+## 4    prompt  &quot;&gt; &quot;
+## 5     width    80</code></pre>
+<p>For a comprehensive view you can use <code>View(options())</code>, which in RStudio will look like this:</p>
+<div class="figure">
+<img src="https://i.imgur.com/whfl7Wu.png" />
+
+</div>
+<p>You can examine the value of any option with <code>getOption(&quot;some-option&quot;)</code>.</p>
+<pre class="r"><code>getOption(&quot;max.print&quot;)</code></pre>
+<pre><code>## [1] 99999</code></pre>
+<p>And you can change any option with something like this: <code>options(some-option = new-value)</code>.</p>
+<pre class="r"><code>options(max.print = 999)
+getOption(&quot;max.print&quot;)</code></pre>
+<pre><code>## [1] 999</code></pre>
+<p>R <code>options()</code> are session dependent: Your changes remain active only until you restart your R session.</p>
+<div class="figure">
+<img src="https://i.imgur.com/OyZSha3.png" />
+
+</div>
+<p>After you restart your session the values return to their original values.</p>
+<pre class="r"><code>getOption(&quot;max.print&quot;)</code></pre>
+<pre><code>## [1] 1000</code></pre>
+<p>If you want your change to remain for future sessions you can set the option not in the R console but in the .Rprofile file. (If this is the only change you want to make, you don’t need to know what or where an .Rprofile is.) The easiest way to edit your .Rprofile is with the function <code>edit_r_profile()</code> of the <strong>usethis</strong> package.</p>
+<pre class="r"><code># install.packages(&quot;usethis&quot;)
+usethis::edit_r_profile()</code></pre>
+<p>This will automatically open .Rprofile for you so you can edit it.</p>
+<div class="figure">
+<img src="https://i.imgur.com/m0IFLAT.png" />
+
+</div>
+<p>Follow the prompts:</p>
+<ul>
+<li>Modify ‘.Rprofile’</li>
+<li>Restart R for changes to take effect</li>
+</ul>
+<p>Then you can close .Rprofile and forget about it. Now every R session will run with your preferred option.</p>
+<div class="figure">
+<img src="https://i.imgur.com/gAw3pO8.png" />
+
+</div>
+<pre class="r"><code>getOption(&quot;max.print&quot;)</code></pre>
+<pre><code>## [1] 999</code></pre>

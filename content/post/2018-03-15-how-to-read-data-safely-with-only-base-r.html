@@ -1,0 +1,93 @@
+---
+title: How to read data safely with only base R?
+author: Mauro Lepore
+date: '2018-03-15'
+slug: how-to-read-data-safely-with-only-base-r
+categories: []
+tags:
+  - R
+  - bestpractice
+  - tip
+  - tutorial
+---
+
+
+
+<p>When you read data into R you may silently introduce some issues that can complicate your data analysis. The most common problems are automatically handled by the <code>read_*()</code> (underscore) functions of the <strong>readr</strong> package – which I encourage you to use (see <a href="https://fgeo.netlify.com/2018/03/13/2018-03-13-import-dataset/">this post</a>). But if you are careful, of course you can use only base R – that is, the <code>read.*()</code> (dot) functions – that come with R via the <strong>utils</strong> package. If that’s your choice you should read the documentation of <code>?read.table</code> carefully. Here I want to highlight three arguments:</p>
+<ul>
+<li><p><code>stringsAsFactors</code>: Use <code>FALSE</code> to interpret text strings as text strings. Unfortunately, the default converts text strings to factors (read argument <code>as.is</code>). If you don’t know what a factor is (<code>?factor</code>) you most likely don’t want it. (Even if you do want factors, your code will be more readable if you explicitly coerce strings to factors later, with something like <code>as.factor(&quot;your-string&quot;)</code>.) In short, always use <code>stringsAsFactors = FALSE</code> (for details read <a href="https://goo.gl/rZmMLE">this post</a> on the history of <code>stringsAsFactors</code>).</p></li>
+<li><p><code>colClasses</code>: A character vector of classes to be assumed for each columns. For example, <code>c(x = &quot;numeric&quot;, y = &quot;integer&quot;, z = &quot;character&quot;)</code>.</p></li>
+<li><p><code>na.strings</code>: A character vector of strings which are to be interpreted as NA values. For example: <code>c(&quot;&quot;, &quot;NA&quot;, &quot;NULL&quot;, &quot;-&quot;)</code></p></li>
+</ul>
+<p>I emphasize these arguments because they are buried among many other arguments so they are easy to miss. (Sure, the arguments <code>header</code> and <code>sep</code> are important but you will unlikely miss them because they are in the second and third position of the function’s signature (see <code>?read.table</code>).]</p>
+<p>To show you these arguments in action let’s suppose I have a spreadsheet that looks like this:</p>
+<div class="figure">
+<img src="https://i.imgur.com/ClZYWod.png" />
+
+</div>
+<p>I can simply import this dataset from the Environment tab of RStudio, using the option Import Dataset &gt; From Text (base) …</p>
+<div class="figure">
+<img src="https://i.imgur.com/AOOpmHq.png" />
+
+</div>
+<p>The panel that pops-up will help me to (1) find the file I want to import; (2) preview the dataset; and (3) select values for the most common arguments. (Notice that Strings as factors is checked)</p>
+<div class="figure">
+<img src="https://i.imgur.com/lVrTIHM.png" />
+
+</div>
+<p>But to make my analysis reproducible I instead read the data via code. Accepting all defaults – as in the panel above – is equivalent to running this code:</p>
+<pre class="r"><code>my_path &lt;- here::here(&quot;static/my_dataset.csv&quot;)
+my_dataset &lt;- read.csv(my_path)</code></pre>
+<p>And this is the result.</p>
+<pre class="r"><code>my_dataset</code></pre>
+<pre><code>##    x    y    z
+## 1  1    2    a
+## 2  3    4     
+## 3 NA &lt;NA&gt;    b
+## 4  0 NULL    -
+## 5 NA    - NULL</code></pre>
+<pre class="r"><code>str(my_dataset)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
+##  $ x: int  1 3 NA 0 NA
+##  $ y: Factor w/ 4 levels &quot;-&quot;,&quot;2&quot;,&quot;4&quot;,&quot;NULL&quot;: 2 3 NA 4 1
+##  $ z: Factor w/ 5 levels &quot;&quot;,&quot;-&quot;,&quot;a&quot;,&quot;b&quot;,..: 3 1 4 2 5</code></pre>
+<p>In this example the defaults are not enough. Here are some problems:</p>
+<ul>
+<li><code>x</code>: I want a double (real number) but instead I got an integer.</li>
+<li><code>y</code>: I want an integer but instead I got a factor. That is because “NULL” was interpreted as the literal string “NULL”; thus the entire column was interpreted first as a text string and then converted to a factor.</li>
+<li><code>z</code>: I want a character string but instead I got a factor.</li>
+</ul>
+<p>But I can fix these problem with the arguments you just learned about.</p>
+<pre class="r"><code>my_path &lt;- here::here(&quot;static/my_dataset.csv&quot;)
+
+my_dataset &lt;- read.csv(
+  my_path,
+  stringsAsFactors = FALSE,
+  na.strings = c(&quot;&quot;, &quot;NA&quot;, &quot;NULL&quot;, &quot;-&quot;),
+  colClasses = c(&quot;double&quot;, &quot;integer&quot;, &quot;character&quot;)
+)
+
+my_dataset</code></pre>
+<pre><code>##    x  y    z
+## 1  1  2    a
+## 2  3  4 &lt;NA&gt;
+## 3 NA NA    b
+## 4  0 NA &lt;NA&gt;
+## 5 NA NA &lt;NA&gt;</code></pre>
+<pre class="r"><code>str(my_dataset)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
+##  $ x: num  1 3 NA 0 NA
+##  $ y: int  2 4 NA NA NA
+##  $ z: chr  &quot;a&quot; NA &quot;b&quot; NA ...</code></pre>
+<p>Now the dataset is ready for analysis.</p>
+<div id="more" class="section level3">
+<h3>More</h3>
+<ul>
+<li>See an <a href="https://goo.gl/MF4thJ">example using the argument <code>row.names</code></a></li>
+<li>Go to a <a href="https://goo.gl/qRSyME">similar post but using the <strong>readr</strong> package</a></li>
+</ul>
+</div>
+<div id="acknowledgements" class="section level3">
+<h3>Acknowledgements</h3>
+<p>Thanks to Suzanne Lao for sharing her tricks and for encouraging me to write this post.</p>
+</div>
