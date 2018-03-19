@@ -1,0 +1,72 @@
+---
+title: Changing R options
+author: Mauro Lepore
+date: '2018-03-15'
+slug: changing-r-options
+categories: []
+tags:
+  - R
+---
+
+You can set and examine a variety of global options which affect the way in which R computes and displays its results. You may want to skim the section _Options used in base R_ of the help file of [utils::options()](https://goo.gl/9NctjE) -- at the end you'll see a list of factory-fresh default-settings that looks like this:
+
+```{r, echo=FALSE}
+data.frame(
+  stringsAsFactors = FALSE,
+  option = c(
+    "continue",
+    "digits",
+    "max.print",
+    "prompt",
+    "width"
+  ),
+  value = c("+", "7", "99999", "\"> \"", "80")
+  )
+```
+
+For a comprehensive view you can use `View(options())`, which in RStudio will look like this:
+
+![](https://i.imgur.com/whfl7Wu.png)
+
+You can examine the value of any option with `getOption("some-option")`.
+
+```{r}
+getOption("max.print")
+```
+
+And you can change any option with `options(some-option = new-value)`.
+
+```{r}
+options(max.print = 999)
+getOption("max.print")
+```
+
+R `options()` are session dependent: Your changes remains active until you restart your R session.
+
+![](https://i.imgur.com/OyZSha3.png)
+
+After you restart your session the values return to their original values.
+
+```{r}
+getOption("max.print")
+```
+
+If you want your change to remain for future sessions you can set the option not in the R console but in the .Rprofile file. (If this is the only change you want to make, you don't need to know what or where an .Rprofile is.) The easiest way to edit your .Rprofile is with the function `edit_r_profile()` of the __usethis__ package.
+
+```{r}
+# install.packages("usethis")
+usethis::edit_r_profile()
+```
+
+![](https://i.imgur.com/m0IFLAT.png)
+
+Follow the prompts:
+* Modify '.Rprofile'
+* Restart R for changes to take effect
+
+Then you can close .Rprofile and forget about it. Now every R session will run with your preferred option.
+
+```{r}
+getOption("max.print")
+```
+
