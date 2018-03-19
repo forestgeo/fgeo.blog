@@ -17,6 +17,9 @@ Using up to date software, including R, RStudio, and R packages can save you a l
 
 ### Updating R
 
+![](https://i.imgur.com/mlSZ9ID.png)
+([See twitt](https://goo.gl/sXU3ZV))
+
 The package `installr` helps you update R. `installr` lives in CRAN so you can install it with
 
 ```R
