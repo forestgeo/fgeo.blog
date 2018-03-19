@@ -1,12 +1,12 @@
 # Commit
 git add .
-git commit -a -m "Add tag contributed and remove duplicated post."
+git commit -a -m "update tmp.sh"
 
 # Push
-git push
 git pull
+git push
 
-
+git status
 
 # Forget
 git rm --cached -r .
