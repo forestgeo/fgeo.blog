@@ -7,6 +7,7 @@ categories: []
 tags:
   - fieldwork
   - tutorial
+  - contributed
 ---
 
 1. First, you will need to connect Fast Field Forms to a Dropbox folder for direct delivery from the app. Open your form and choose the "Delivery" button. This dialog will open:
