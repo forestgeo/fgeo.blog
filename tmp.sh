@@ -1,11 +1,10 @@
 # Commit
 git add .
-git commit -a -m "xxx"
+git commit -a -m "Add tag contributed and remove duplicated post."
 
 # Push
 git push
 git pull
-
 
 
 
