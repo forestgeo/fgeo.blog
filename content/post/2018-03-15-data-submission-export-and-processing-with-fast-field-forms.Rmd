@@ -29,3 +29,9 @@ tags:
 4. You can now drag and drop field names into the blank square on the right. Separating the names with “_” is a good idea. So, for quadrat 0101 completed on March 15th 2018 by Jess Shue the box would show:  `$Quadrat_1$_$datepicker_2$_$Team_4$` and display as:  0101_03-15-2018_JS.
 
 5. Now your form should be ready for submission. After collecting data in the field for a quadrat hit the green “Submit” button in the upper right hand corner. Once the tablet has connected to Wi-Fi the form will be submitted and sent to Dropbox and/or via e-mail.
+
+
+
+
+
+
