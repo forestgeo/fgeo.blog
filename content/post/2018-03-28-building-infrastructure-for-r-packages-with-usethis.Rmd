@@ -17,13 +17,11 @@ tags:
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg)](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
 
-This is a kind of checklist that I use to build consistent package infrastructure with the __usethis__ package. This is quite personal but you may be able to adapt it for your own work.
+This is a kind of checklist that I use to build consistent package infrastructure with the __usethis__ package.
 
 ```R
 library(usethis)
 ```
-
-
 
 ## Once and for good
 
