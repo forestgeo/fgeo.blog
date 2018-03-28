@@ -18,109 +18,107 @@ tags:
 
 
 <p><a href="https://blog.codinghorror.com/the-works-on-my-machine-certification-program/"><img src="https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg" alt="lifecycle" /></a></p>
-<p>This is a kind of checklist that I use to build consistent package infrastructure with the <strong>usethis</strong> package.</p>
+<p>This is a kind of checklist that I use to build consistent package infrastructure with the <strong>usethis</strong> package. This is quite personal but you may be able to adapt it for your own work.</p>
+<pre class="r"><code>library(usethis)</code></pre>
 <div id="once-and-for-good" class="section level2">
 <h2>Once and for good</h2>
-<pre class="r"><code>usethis::use_usethis()
+<pre class="r"><code>use_usethis()
 
-usethis::use_description()
+use_description()
 
-usethis::use_blank_slate()
+use_blank_slate()
 </code></pre>
 </div>
 <div id="once-per-package" class="section level2">
 <h2>Once per package</h2>
-<pre class="r"><code>usethis::create_package(&quot;PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)&quot;)
+<pre class="r"><code>create_package(&quot;PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)&quot;)
 
-# usethis::use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)
-usethis::use_rmarkdown_template()
+use_rmarkdown_template()
+# I use `use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)`
 
-# Consider moving to .github; usethis::use_build_ignore(&quot;.github&quot;)
-usethis::use_tidy_coc()
+use_tidy_coc()
+# Consider moving to .github; use_build_ignore(&quot;.github&quot;)
 
-usethis::use_tidy_contributing()
-# Or
-usethis::use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)
+use_tidy_contributing()
+# I use `use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)`
 
-usethis::use_tidy_issue_template()
-# Or 
-usethis::use_template(template = &quot;ISSUE_TEMPLATE.md&quot;, package = &quot;fgeo&quot;)
+use_tidy_issue_template()
+# I use `use_template(template = &quot;ISSUE_TEMPLATE.md&quot;, package = &quot;fgeo&quot;)`
 
-usethis::use_tidy_support()
-# Or
-usethis::use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo&quot;)
+use_tidy_support()
+# I use `use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo&quot;)`
 
-usethis::use_template(template = &quot;rmarkdown_template.Rmd&quot;, package = &quot;fgeo&quot;)
+# I use `use_template(template = &quot;rmarkdown_template.Rmd&quot;, package = &quot;fgeo&quot;)`
 
-usethis::use_template(template = &quot;README.Rmd&quot;, package = &quot;fgeo&quot;)</code></pre>
+# I use `use_template(template = &quot;README.Rmd&quot;, package = &quot;fgeo&quot;)`</code></pre>
 </div>
 <div id="always" class="section level2">
 <h2>Always</h2>
-<pre class="r"><code>usethis::use_git()
+<pre class="r"><code>use_git()
 
-usethis::use_github()
+use_github()
 
-usethis::use_github_links()
+use_github_links()
 
-usethis::use_readme_rmd()
+use_readme_rmd()
 
-usethis::use_roxygen_md()
+use_roxygen_md()
 
-usethis::use_news_md()
+use_news_md()
 
 
-usethis::use_github_labels(delete_default = TRUE)
+use_github_labels(delete_default = TRUE)
 
-# *: mit, gpl3, apl2, cc0 -- but see usethis::use_description()
-usethis::use_*_license()
+# *: mit, gpl3, apl2, cc0 -- but see use_description()
+use_*_license()
 
 # Lifecycle stages according to https://www.tidyverse.org/lifecycle/
-usethis::use_lifecycle_badge()
+use_lifecycle_badge()
 
-usethis::use_cran_badge()
+use_cran_badge()
 
-usethis::use_package_doc()</code></pre>
+use_package_doc()</code></pre>
 </div>
 <div id="almost-always" class="section level2">
 <h2>Almost always</h2>
-<pre class="r"><code>usethis::use_testthat()
+<pre class="r"><code>use_testthat()
 
 # Generally I use `use_coverage(&quot;coveralls&quot;)`
-usethis::use_coverage()
+use_coverage()
 
 use_tidy_ci(browse = interactive())
 # Or
-usethis::use_travis()
+use_travis()
 
 
-usethis::use_pipe()
+use_pipe()
 
-usethis::use_pkgdown()
+use_pkgdown()
 
-usethis::use_tidy_eval()</code></pre>
+use_tidy_eval()</code></pre>
 </div>
 <div id="continuously-as-part-of-the-development-process" class="section level2">
 <h2>Continuously, as part of the development process</h2>
-<pre class="r"><code>usethis::use_build_ignore()
+<pre class="r"><code>use_build_ignore()
 
-usethis::use_git_ignore()
+use_git_ignore()
 
-usethis::use_data()
+use_data()
 
-usethis::use_data_raw()
+use_data_raw()
 
 # If necessary, set (build)ignore to TRUE.
-usethis::use_directory(&quot;PATH-GOES-HERE&quot;, ignore = FALSE)
+use_directory(&quot;PATH-GOES-HERE&quot;, ignore = FALSE)
 
-usethis::use_dev_package()
+use_dev_package()
 
-usethis::use_dev_version()
+use_dev_version()
 
-usethis::use_r()
+use_r()
 
-usethis::use_test()
+use_test()
 
-usethis::use_vignette()</code></pre>
+use_vignette()</code></pre>
 </div>
 <div id="ocationally-as-part-of-the-development-process" class="section level1">
 <h1>Ocationally, as part of the development process</h1>
@@ -128,9 +126,9 @@ usethis::use_vignette()</code></pre>
 
 use_tidy_versions(overwrite = FALSE)
 
-usethis::use_tidy_style()
+use_tidy_style()
 
-usethis::use_dev_version()
+use_dev_version()
 
-usethis::use_version()</code></pre>
+use_version()</code></pre>
 </div>

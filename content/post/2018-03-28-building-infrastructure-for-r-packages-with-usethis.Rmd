@@ -17,119 +17,122 @@ tags:
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg)](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
 
-This is a kind of checklist that I use to build consistent package infrastructure with the __usethis__ package.
+This is a kind of checklist that I use to build consistent package infrastructure with the __usethis__ package. This is quite personal but you may be able to adapt it for your own work.
+
+```R
+library(usethis)
+```
+
+
 
 ## Once and for good
 
 ```R
-usethis::use_usethis()
+use_usethis()
 
-usethis::use_description()
+use_description()
 
-usethis::use_blank_slate()
+use_blank_slate()
 
 ```
 
 ## Once per package
 
 ```R
-usethis::create_package("PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)")
+create_package("PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)")
 
-# usethis::use_template(template = "CONTRIBUTING.md", package = "fgeo")
-usethis::use_rmarkdown_template()
+use_rmarkdown_template()
+# I use `use_template(template = "CONTRIBUTING.md", package = "fgeo")`
 
-# Consider moving to .github; usethis::use_build_ignore(".github")
-usethis::use_tidy_coc()
+use_tidy_coc()
+# Consider moving to .github; use_build_ignore(".github")
 
-usethis::use_tidy_contributing()
-# Or
-usethis::use_template(template = "CONTRIBUTING.md", package = "fgeo")
+use_tidy_contributing()
+# I use `use_template(template = "CONTRIBUTING.md", package = "fgeo")`
 
-usethis::use_tidy_issue_template()
-# Or 
-usethis::use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo")
+use_tidy_issue_template()
+# I use `use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo")`
 
-usethis::use_tidy_support()
-# Or
-usethis::use_template(template = "SUPPORT.md", package = "fgeo")
+use_tidy_support()
+# I use `use_template(template = "SUPPORT.md", package = "fgeo")`
 
-usethis::use_template(template = "rmarkdown_template.Rmd", package = "fgeo")
+# I use `use_template(template = "rmarkdown_template.Rmd", package = "fgeo")`
 
-usethis::use_template(template = "README.Rmd", package = "fgeo")
+# I use `use_template(template = "README.Rmd", package = "fgeo")`
 ```
 
 ## Always
 
 ```R
-usethis::use_git()
+use_git()
 
-usethis::use_github()
+use_github()
 
-usethis::use_github_links()
+use_github_links()
 
-usethis::use_readme_rmd()
+use_readme_rmd()
 
-usethis::use_roxygen_md()
+use_roxygen_md()
 
-usethis::use_news_md()
+use_news_md()
 
 
-usethis::use_github_labels(delete_default = TRUE)
+use_github_labels(delete_default = TRUE)
 
-# *: mit, gpl3, apl2, cc0 -- but see usethis::use_description()
-usethis::use_*_license()
+# *: mit, gpl3, apl2, cc0 -- but see use_description()
+use_*_license()
 
 # Lifecycle stages according to https://www.tidyverse.org/lifecycle/
-usethis::use_lifecycle_badge()
+use_lifecycle_badge()
 
-usethis::use_cran_badge()
+use_cran_badge()
 
-usethis::use_package_doc()
+use_package_doc()
 ```
 
 ## Almost always
 
 ```R
-usethis::use_testthat()
+use_testthat()
 
 # Generally I use `use_coverage("coveralls")`
-usethis::use_coverage()
+use_coverage()
 
 use_tidy_ci(browse = interactive())
 # Or
-usethis::use_travis()
+use_travis()
 
 
-usethis::use_pipe()
+use_pipe()
 
-usethis::use_pkgdown()
+use_pkgdown()
 
-usethis::use_tidy_eval()
+use_tidy_eval()
 ```
 
 ## Continuously, as part of the development process
 
 ```R
-usethis::use_build_ignore()
+use_build_ignore()
 
-usethis::use_git_ignore()
+use_git_ignore()
 
-usethis::use_data()
+use_data()
 
-usethis::use_data_raw()
+use_data_raw()
 
 # If necessary, set (build)ignore to TRUE.
-usethis::use_directory("PATH-GOES-HERE", ignore = FALSE)
+use_directory("PATH-GOES-HERE", ignore = FALSE)
 
-usethis::use_dev_package()
+use_dev_package()
 
-usethis::use_dev_version()
+use_dev_version()
 
-usethis::use_r()
+use_r()
 
-usethis::use_test()
+use_test()
 
-usethis::use_vignette()
+use_vignette()
 ```
 
 # Ocationally, as part of the development process
@@ -139,9 +142,9 @@ use_tidy_description()
 
 use_tidy_versions(overwrite = FALSE)
 
-usethis::use_tidy_style()
+use_tidy_style()
 
-usethis::use_dev_version()
+use_dev_version()
 
-usethis::use_version()
+use_version()
 ```
