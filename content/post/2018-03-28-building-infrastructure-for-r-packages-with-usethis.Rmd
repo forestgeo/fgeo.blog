@@ -15,7 +15,9 @@ tags:
   - tip
 ---
 
-This is a kind of checklist to build consistent package infrastructure with the __usethis__ package.
+[![lifecycle](https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg)](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
+
+This is a kind of checklist that I use to build consistent package infrastructure with the __usethis__ package.
 
 ## Once and for good
 
