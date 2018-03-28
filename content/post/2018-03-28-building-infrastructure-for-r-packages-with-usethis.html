@@ -1,0 +1,108 @@
+---
+title: Building infrastructure for R-packages with usethis
+author: Mauro Lepore
+date: '2018-03-28'
+slug: building-infrastructure-for-r-packages-with-usethis
+categories: []
+tags:
+  - devtools
+  - usethis
+  - packages
+  - R
+  - r rstudio
+  - github
+  - tutorial
+  - tip
+---
+
+
+
+<p>This is a kind of checklist to build consistent package infrastructure with the <strong>usethis</strong> package.</p>
+<div id="once-and-for-good" class="section level2">
+<h2>Once and for good</h2>
+<pre class="r"><code>usethis::use_usethis()
+usethis::use_description()
+usethis::use_blank_slate()</code></pre>
+</div>
+<div id="once-per-package" class="section level2">
+<h2>Once per package</h2>
+<pre class="r"><code>usethis::create_package(&quot;PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)&quot;)
+
+# usethis::use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)
+usethis::use_rmarkdown_template()
+
+# Consider moving to .github; usethis::use_build_ignore(&quot;.github&quot;)
+usethis::use_tidy_coc()
+# TODO: Edit to replace tidyverse with your package. Also consider:
+# usethis::use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)
+usethis::use_tidy_contributing()
+# usethis::use_template(template = &quot;ISSUE_TEMPLATE.md&quot;, package = &quot;fgeo&quot;)
+usethis::use_tidy_issue_template()
+# usethis::use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo&quot;)
+usethis::use_tidy_support()
+
+usethis::use_template(template = &quot;rmarkdown_template.Rmd&quot;, package = &quot;fgeo&quot;)
+usethis::use_template(template = &quot;README.Rmd&quot;, package = &quot;fgeo&quot;)</code></pre>
+</div>
+<div id="always" class="section level2">
+<h2>Always</h2>
+<pre class="r"><code>usethis::use_git()
+usethis::use_github()
+usethis::use_github_links()
+usethis::use_readme_rmd()
+usethis::use_roxygen_md()
+usethis::use_news_md()
+
+usethis::use_github_labels(delete_default = TRUE)
+
+# *: mit, gpl3, apl2, cc0 -- but see usethis::use_description()
+usethis::use_*_license()
+
+# Lifecycle stages according to https://www.tidyverse.org/lifecycle/
+usethis::use_lifecycle_badge()
+usethis::use_cran_badge()
+
+usethis::use_package_doc()</code></pre>
+</div>
+<div id="almost-always" class="section level2">
+<h2>Almost always</h2>
+<pre class="r"><code>usethis::use_testthat()
+usethis::use_coverage()
+# or usethis::use_travis()
+use_tidy_ci(browse = interactive())
+
+
+usethis::use_pipe()
+
+usethis::use_pkgdown()
+
+usethis::use_tidy_eval()</code></pre>
+</div>
+<div id="continuously-as-part-of-the-development-process" class="section level2">
+<h2>Continuously, as part of the development process</h2>
+<pre class="r"><code>usethis::use_build_ignore()
+usethis::use_git_ignore()
+
+usethis::use_data()
+usethis::use_data_raw()
+
+# If necessary, set (build)ignore to TRUE.
+usethis::use_directory(&quot;PATH-GOES-HERE&quot;, ignore = FALSE)
+
+usethis::use_dev_package()
+usethis::use_dev_version()
+
+usethis::use_r()
+usethis::use_test()
+
+usethis::use_vignette()
+
+# Ocationally, as part of the development process
+
+use_tidy_description()
+use_tidy_versions(overwrite = FALSE)
+usethis::use_tidy_style()
+
+usethis::use_dev_version()
+usethis::use_version()</code></pre>
+</div>
