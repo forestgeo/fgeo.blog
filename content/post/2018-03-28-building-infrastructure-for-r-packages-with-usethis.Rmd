@@ -21,8 +21,11 @@ This is a kind of checklist to build consistent package infrastructure with the 
 
 ```R
 usethis::use_usethis()
+
 usethis::use_description()
+
 usethis::use_blank_slate()
+
 ```
 
 ## Once per package
@@ -35,15 +38,21 @@ usethis::use_rmarkdown_template()
 
 # Consider moving to .github; usethis::use_build_ignore(".github")
 usethis::use_tidy_coc()
-# TODO: Edit to replace tidyverse with your package. Also consider:
-# usethis::use_template(template = "CONTRIBUTING.md", package = "fgeo")
+
 usethis::use_tidy_contributing()
-# usethis::use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo")
+# Or
+usethis::use_template(template = "CONTRIBUTING.md", package = "fgeo")
+
 usethis::use_tidy_issue_template()
-# usethis::use_template(template = "SUPPORT.md", package = "fgeo")
+# Or 
+usethis::use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo")
+
 usethis::use_tidy_support()
+# Or
+usethis::use_template(template = "SUPPORT.md", package = "fgeo")
 
 usethis::use_template(template = "rmarkdown_template.Rmd", package = "fgeo")
+
 usethis::use_template(template = "README.Rmd", package = "fgeo")
 ```
 
@@ -51,11 +60,17 @@ usethis::use_template(template = "README.Rmd", package = "fgeo")
 
 ```R
 usethis::use_git()
+
 usethis::use_github()
+
 usethis::use_github_links()
+
 usethis::use_readme_rmd()
+
 usethis::use_roxygen_md()
+
 usethis::use_news_md()
+
 
 usethis::use_github_labels(delete_default = TRUE)
 
@@ -64,6 +79,7 @@ usethis::use_*_license()
 
 # Lifecycle stages according to https://www.tidyverse.org/lifecycle/
 usethis::use_lifecycle_badge()
+
 usethis::use_cran_badge()
 
 usethis::use_package_doc()
@@ -73,9 +89,13 @@ usethis::use_package_doc()
 
 ```R
 usethis::use_testthat()
+
+# Generally I use `use_coverage("coveralls")`
 usethis::use_coverage()
-# or usethis::use_travis()
+
 use_tidy_ci(browse = interactive())
+# Or
+usethis::use_travis()
 
 
 usethis::use_pipe()
@@ -89,28 +109,37 @@ usethis::use_tidy_eval()
 
 ```R
 usethis::use_build_ignore()
+
 usethis::use_git_ignore()
 
 usethis::use_data()
+
 usethis::use_data_raw()
 
 # If necessary, set (build)ignore to TRUE.
 usethis::use_directory("PATH-GOES-HERE", ignore = FALSE)
 
 usethis::use_dev_package()
+
 usethis::use_dev_version()
 
 usethis::use_r()
+
 usethis::use_test()
 
 usethis::use_vignette()
+```
 
 # Ocationally, as part of the development process
 
+```R
 use_tidy_description()
+
 use_tidy_versions(overwrite = FALSE)
+
 usethis::use_tidy_style()
 
 usethis::use_dev_version()
+
 usethis::use_version()
 ```
