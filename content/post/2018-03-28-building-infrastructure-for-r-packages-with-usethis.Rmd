@@ -85,7 +85,7 @@ use_github_labels(delete_default = TRUE)
 
 # *: mit, gpl3, apl2, cc0 -- but see use_description()
 # use_*_license()
-# I generally use
+# I frequently use
 # use_gpl3_license()
 
 # Lifecycle stages according to https://www.tidyverse.org/lifecycle/
@@ -101,8 +101,9 @@ use_package_doc()
 ```R
 use_testthat()
 
-# Generally I use `use_coverage("coveralls")`
 use_coverage()
+# I use 
+# use_coverage("coveralls")
 
 use_tidy_ci(browse = interactive())
 # Or
