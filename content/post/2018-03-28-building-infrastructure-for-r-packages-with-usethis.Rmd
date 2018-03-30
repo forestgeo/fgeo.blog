@@ -84,7 +84,9 @@ use_news_md()
 use_github_labels(delete_default = TRUE)
 
 # *: mit, gpl3, apl2, cc0 -- but see use_description()
-use_*_license()
+# use_*_license()
+# I generally use
+# use_gpl3_license()
 
 # Lifecycle stages according to https://www.tidyverse.org/lifecycle/
 use_lifecycle_badge()
