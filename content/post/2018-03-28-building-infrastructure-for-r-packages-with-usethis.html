@@ -26,31 +26,34 @@ tags:
 
 use_description()
 
-use_blank_slate()
-</code></pre>
+use_blank_slate()</code></pre>
+<pre><code># To add a template to templates&#39; list. E.g.
+# use_template(template = &quot;rmarkdown_template.Rmd&quot;, package = &quot;fgeo&quot;)</code></pre>
+<p><img src="https://i.imgur.com/4FXgj9Z.png" /></p>
 </div>
 <div id="once-per-package" class="section level2">
 <h2>Once per package</h2>
 <pre class="r"><code>create_package(&quot;PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)&quot;)
 
-use_rmarkdown_template()
-# I use `use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)`
-
 use_tidy_coc()
-# Consider moving to .github; use_build_ignore(&quot;.github&quot;)
 
 use_tidy_contributing()
-# I use `use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)`
+# TODO: Edit output file to customize for your package
+# I use
+# use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)
 
 use_tidy_issue_template()
-# I use `use_template(template = &quot;ISSUE_TEMPLATE.md&quot;, package = &quot;fgeo&quot;)`
+# I use
+# use_template(template = &quot;ISSUE_TEMPLATE.md&quot;, package = &quot;fgeo&quot;)
 
+# TODO: Edit output file to customize for your package
 use_tidy_support()
-# I use `use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo&quot;)`
+# I use
+# use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo&quot;)
 
-# I use `use_template(template = &quot;rmarkdown_template.Rmd&quot;, package = &quot;fgeo&quot;)`
-
-# I use `use_template(template = &quot;README.Rmd&quot;, package = &quot;fgeo&quot;)`</code></pre>
+# I use
+# use_template(template = &quot;README.Rmd&quot;, package = &quot;fgeo&quot;)
+# TODO: Edit output file to customize for your package</code></pre>
 </div>
 <div id="always" class="section level2">
 <h2>Always</h2>
