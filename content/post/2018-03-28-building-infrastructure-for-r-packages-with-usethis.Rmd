@@ -60,10 +60,6 @@ use_tidy_issue_template()
 use_tidy_support()
 # I use
 # use_template(template = "SUPPORT.md", package = "fgeo")
-
-# I use
-# use_template(template = "README.Rmd", package = "fgeo")
-# TODO: Edit output file to customize for your package
 ```
 
 ## Always
@@ -76,6 +72,9 @@ use_github()
 use_github_links()
 
 use_readme_rmd()
+# I use
+# use_template(template = "README.Rmd", package = "fgeo")
+# TODO: Edit output file to customize for your package
 
 use_roxygen_md()
 
