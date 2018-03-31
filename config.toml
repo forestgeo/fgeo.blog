@@ -3,7 +3,7 @@ title = "fgeo blog"
 theme = "ghostwriter"
 languageCode = "en-us"
 copyright = "ForestGEO"
-# disqusShortname = "XXX"
+disqusShortname = "fgeo"
 # googleAnalytics = "XXX"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 
