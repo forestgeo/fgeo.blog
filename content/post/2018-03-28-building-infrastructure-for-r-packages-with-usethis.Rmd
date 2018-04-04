@@ -23,108 +23,114 @@ This is a kind of checklist that I use to build consistent package infrastructur
 library(usethis)
 ```
 
-## Once and for good
-
 ```R
-use_usethis()
+# Once per package ========================================================
 
-use_description()
+# create_package("PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)")
 
-use_blank_slate()
-```
+# Side effects on DESCRIPTION ---------------------------------------------
 
-```
-# To add a template to templates' list. E.g.
-# use_template(template = "rmarkdown_template.Rmd", package = "fgeo")
-```
+# Manually edit the fields Title and Description.
 
-![](https://i.imgur.com/4FXgj9Z.png)
+# Manually edit the field Authors@R  -- but see use_description()
+# I use this snippet https://i.imgur.com/2YRijFP.png
+# * Learn about RStudio snippets: http://bit.ly/2uOPh4a
 
-## Once per package
+?licenses
+# I frequently use
+# use_gpl3_license()
 
-```R
-create_package("PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)")
+use_roxygen_md()
+
+use_github("OWNER-GOES-HERE")
+# I use
+# use_github("forestgeo")
+
+use_github_links()
+
+use_tidy_description()
+
+use_dev_version()
+
+# Documentation -----------------------------------------------------------
+
+use_package_doc()
+
+use_readme_rmd()
+# TODO: Edit output file to customize for your package
+# I use
+# use_template(template = "README.Rmd", package = "fgeo.templates")
+
+# Knit to create README.md
+
+# Lifecycle stages according to https://www.tidyverse.org/lifecycle/
+use_lifecycle_badge("experimental")
+# Remember to paste the contentes of your clipboard onto README
+
+use_cran_badge()
+
+use_news_md()
 
 use_tidy_coc()
 
 use_tidy_contributing()
 # TODO: Edit output file to customize for your package
+# TODO: Move to .github/
 # I use
-# use_template(template = "CONTRIBUTING.md", package = "fgeo")
+# use_template(template = "CONTRIBUTING.md", package = "fgeo.templates")
 
 use_tidy_issue_template()
+# TODO: Move to .github/
 # I use
-# use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo")
+# use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo.templates")
 
-# TODO: Edit output file to customize for your package
 use_tidy_support()
+# TODO: Edit output file to customize for your package
+# TODO: Move to .github/
 # I use
 # use_template(template = "SUPPORT.md", package = "fgeo")
-```
 
-## Always
-
-```R
-use_git()
-
-use_github()
-
-use_github_links()
-
-use_readme_rmd()
-# I use
-# use_template(template = "README.Rmd", package = "fgeo")
-# TODO: Edit output file to customize for your package
-
-use_roxygen_md()
-
-use_news_md()
-
+# GITHUB ------------------------------------------------------------------
 
 use_github_labels(delete_default = TRUE)
 
-# *: mit, gpl3, apl2, cc0 -- but see use_description()
-# use_*_license()
-# I frequently use
-# use_gpl3_license()
 
-# Lifecycle stages according to https://www.tidyverse.org/lifecycle/
-use_lifecycle_badge()
 
-use_cran_badge()
+# Almost always ===========================================================
 
-use_package_doc()
-```
+# Services ----------------------------------------------------------------
 
-## Almost always
-
-```R
 use_testthat()
 
 use_coverage()
-# I use 
+# I use
 # use_coverage("coveralls")
 
-use_tidy_ci(browse = interactive())
-# Or
 use_travis()
+# Or
+use_tidy_ci(browse = interactive())
 
+use_pkgdown()
+# I use
+# use_template(template = "_pkgdown.yml", package = "fgeo.templates")
+
+# Tidyverse ---------------------------------------------------------------
 
 use_pipe()
 
-use_pkgdown()
-
 use_tidy_eval()
-```
 
-## Continuously, as part of the development process
 
-```R
-use_build_ignore()
 
-use_git_ignore()
+# As required during development ==========================================
 
-use_data()
+# Relatively frequently ---------------------------------------------------
+
+use_build_ignore("FILE-NAME-GOES-HERE")
+
+use_git_ignore("FILE-NAME-GOES-HERE")
+
+use_data(DATASET-PLOT-OR-WHATEVER-OBJECT-GOES-HERE)
 
 use_data_raw()
 
@@ -140,18 +146,17 @@ use_r()
 use_test()
 
 use_vignette()
-```
 
-# Ocationally, as part of the development process
+# Less frequent -----------------------------------------------------------
 
-```R
 use_tidy_description()
+
+use_dev_version()
 
 use_tidy_versions(overwrite = FALSE)
 
 use_tidy_style()
 
-use_dev_version()
-
 use_version()
+
 ```

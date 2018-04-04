@@ -20,95 +20,113 @@ tags:
 <p><a href="https://blog.codinghorror.com/the-works-on-my-machine-certification-program/"><img src="https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg" alt="lifecycle" /></a></p>
 <p>This is a kind of checklist that I use to build consistent package infrastructure with the <strong>usethis</strong> package.</p>
 <pre class="r"><code>library(usethis)</code></pre>
-<div id="once-and-for-good" class="section level2">
-<h2>Once and for good</h2>
-<pre class="r"><code>use_usethis()
+<pre class="r"><code># Once per package ========================================================
 
-use_description()
+# create_package(&quot;PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)&quot;)
 
-use_blank_slate()</code></pre>
-<pre><code># To add a template to templates&#39; list. E.g.
-# use_template(template = &quot;rmarkdown_template.Rmd&quot;, package = &quot;fgeo&quot;)</code></pre>
-<p><img src="https://i.imgur.com/4FXgj9Z.png" /></p>
-</div>
-<div id="once-per-package" class="section level2">
-<h2>Once per package</h2>
-<pre class="r"><code>create_package(&quot;PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)&quot;)
+# Side effects on DESCRIPTION ---------------------------------------------
+
+# Manually edit the fields Title and Description.
+
+# Manually edit the field Authors@R  -- but see use_description()
+# I use this snippet https://i.imgur.com/2YRijFP.png
+# * Learn about RStudio snippets: http://bit.ly/2uOPh4a
+
+?licenses
+# I frequently use
+# use_gpl3_license()
+
+use_roxygen_md()
+
+use_github(&quot;OWNER-GOES-HERE&quot;)
+# I use
+# use_github(&quot;forestgeo&quot;)
+
+use_github_links()
+
+use_tidy_description()
+
+use_dev_version()
+
+# Documentation -----------------------------------------------------------
+
+use_package_doc()
+
+use_readme_rmd()
+# TODO: Edit output file to customize for your package
+# I use
+# use_template(template = &quot;README.Rmd&quot;, package = &quot;fgeo.templates&quot;)
+
+# Knit to create README.md
+
+# Lifecycle stages according to https://www.tidyverse.org/lifecycle/
+use_lifecycle_badge(&quot;experimental&quot;)
+# Remember to paste the contentes of your clipboard onto README
+
+use_cran_badge()
+
+use_news_md()
 
 use_tidy_coc()
 
 use_tidy_contributing()
 # TODO: Edit output file to customize for your package
+# TODO: Move to .github/
 # I use
-# use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo&quot;)
+# use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo.templates&quot;)
 
 use_tidy_issue_template()
+# TODO: Move to .github/
 # I use
-# use_template(template = &quot;ISSUE_TEMPLATE.md&quot;, package = &quot;fgeo&quot;)
+# use_template(template = &quot;ISSUE_TEMPLATE.md&quot;, package = &quot;fgeo.templates&quot;)
 
-# TODO: Edit output file to customize for your package
 use_tidy_support()
-# I use
-# use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo&quot;)</code></pre>
-</div>
-<div id="always" class="section level2">
-<h2>Always</h2>
-<pre class="r"><code>use_git()
-
-use_github()
-
-use_github_links()
-
-use_readme_rmd()
-# I use
-# use_template(template = &quot;README.Rmd&quot;, package = &quot;fgeo&quot;)
 # TODO: Edit output file to customize for your package
+# TODO: Move to .github/
+# I use
+# use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo&quot;)
 
-use_roxygen_md()
-
-use_news_md()
-
+# GITHUB ------------------------------------------------------------------
 
 use_github_labels(delete_default = TRUE)
 
-# *: mit, gpl3, apl2, cc0 -- but see use_description()
-# use_*_license()
-# I frequently use
-# use_gpl3_license()
 
-# Lifecycle stages according to https://www.tidyverse.org/lifecycle/
-use_lifecycle_badge()
 
-use_cran_badge()
+# Almost always ===========================================================
 
-use_package_doc()</code></pre>
-</div>
-<div id="almost-always" class="section level2">
-<h2>Almost always</h2>
-<pre class="r"><code>use_testthat()
+# Services ----------------------------------------------------------------
+
+use_testthat()
 
 use_coverage()
-# I use 
+# I use
 # use_coverage(&quot;coveralls&quot;)
 
-use_tidy_ci(browse = interactive())
-# Or
 use_travis()
+# Or
+use_tidy_ci(browse = interactive())
 
+use_pkgdown()
+# I use
+# use_template(template = &quot;_pkgdown.yml&quot;, package = &quot;fgeo.templates&quot;)
+
+# Tidyverse ---------------------------------------------------------------
 
 use_pipe()
 
-use_pkgdown()
+use_tidy_eval()
 
-use_tidy_eval()</code></pre>
-</div>
-<div id="continuously-as-part-of-the-development-process" class="section level2">
-<h2>Continuously, as part of the development process</h2>
-<pre class="r"><code>use_build_ignore()
 
-use_git_ignore()
 
-use_data()
+# As required during development ==========================================
+
+# Relatively frequently ---------------------------------------------------
+
+use_build_ignore(&quot;FILE-NAME-GOES-HERE&quot;)
+
+use_git_ignore(&quot;FILE-NAME-GOES-HERE&quot;)
+
+use_data(DATASET-PLOT-OR-WHATEVER-OBJECT-GOES-HERE)
 
 use_data_raw()
 
@@ -123,17 +141,17 @@ use_r()
 
 use_test()
 
-use_vignette()</code></pre>
-</div>
-<div id="ocationally-as-part-of-the-development-process" class="section level1">
-<h1>Ocationally, as part of the development process</h1>
-<pre class="r"><code>use_tidy_description()
+use_vignette()
+
+# Less frequent -----------------------------------------------------------
+
+use_tidy_description()
+
+use_dev_version()
 
 use_tidy_versions(overwrite = FALSE)
 
 use_tidy_style()
 
-use_dev_version()
-
-use_version()</code></pre>
-</div>
+use_version()
+</code></pre>
