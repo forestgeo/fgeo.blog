@@ -1,23 +1,24 @@
 ---
-title: Building infrastructure for R-packages with usethis
+title: Building infrastructure for a data package
 author: Mauro Lepore
-date: '2018-03-28'
-slug: building-infrastructure-for-r-packages-with-usethis
+date: '2018-04-04'
+slug: building-infrastructure-for-a-data-package
 categories: []
 tags:
-  - devtools
-  - usethis
-  - packages
   - R
   - r rstudio
-  - github
-  - tutorial
+  - usethis
+  - packages
+  - checklist
+  - devtools
+  - remotes
   - tip
+  - tutorial
 ---
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg)](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
 
-This is a kind of checklist that I use to build consistent package infrastructure with the __usethis__ package.
+This is a kind of checklist that I use to build consistent infrastructure for, specifically, data packages (for functions-based packages you'll need a bit more infrastructure; see [this other blog](http://bit.ly/2uI7Cjg)).
 
 ```R
 library(usethis)
@@ -134,16 +135,13 @@ use_tidy_support()
 use_github_labels(delete_default = TRUE)
 ```
 
+
 ## Almost always
 
 ```R
 # Services ----------------------------------------------------------------
 
 use_testthat()
-
-use_coverage()
-# I use
-# use_coverage("coveralls")
 
 use_travis()
 # Or
@@ -153,68 +151,16 @@ use_pkgdown()
 # TODO: If necessary, edit _pkgdown.yml
 # I use
 # use_template(template = "_pkgdown.yml", package = "fgeo.templates")
-
-# Tidyverse ---------------------------------------------------------------
-
-use_pipe()
-
-use_tidy_eval()
 ```
 
 ## As required during development
 
 ```R
-# Relatively frequently ---------------------------------------------------
+use_data_raw()
 
-use_r()
-
-use_test()
+use_data(DATASET-PLOT-OR-WHATEVER-OBJECT-GOES-HERE)
 
 use_build_ignore("FILE-NAME-GOES-HERE")
 
 use_git_ignore("FILE-NAME-GOES-HERE")
-
-use_package("NAME-OF-PACKAGE-TO-USE")
-
-use_dev_package("NAME-OF-PACKAGE-TO-USE")
-
-use_data(DATASET-PLOT-OR-WHATEVER-OBJECT-GOES-HERE)
-
-use_data_raw()
-
-# Less frequent -----------------------------------------------------------
-
-use_vignette()
-
-# If necessary, set (build)ignore to TRUE.
-use_directory("PATH-GOES-HERE", ignore = FALSE)
-# I commonly use
-# use_directory("inst")
-
-use_tidy_description()
-
-use_dev_version()
-
-use_tidy_versions(overwrite = FALSE)
-
-use_tidy_style()
-
-use_version()
 ```
-
-## Rare but good to know
-
-Create an rmarkdown template in your package that will be available when users install your package.
-
-```
-use_rmarkdown_template(
-  "TEMPLATE-NAME-GOES-HERE.Rmd",
-  template_description = "DESCRIPTION GOES HERE"
-)
-# TODO: Fill your template. It lives here:
-# "inst/rmarkdown/templates/TEMPLATE-NAME-GOES-HERE/skeleton/skeleton.Rmd"
-```
-
-Once users install your package, your template will be available in the templates' list.
-
-![](https://i.imgur.com/2UtulQU.png)
