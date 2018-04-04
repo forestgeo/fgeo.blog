@@ -24,9 +24,9 @@ tags:
 
 # create_package(&quot;PACKAGE-PATH-ENDING-WITH-PACKAGE-NAME&quot;)
 
-# Side effects on DESCRIPTION ---------------------------------------------
+# DESCRIPTION -------------------------------------------------------------
 
-# Manually edit the fields Title and Description.
+# In DESCRIPTION, Manually edit the fields Title and Description.
 
 # Manually edit the field Authors@R  -- but see use_description()
 # I use this snippet https://i.imgur.com/2YRijFP.png
@@ -107,6 +107,7 @@ use_travis()
 use_tidy_ci(browse = interactive())
 
 use_pkgdown()
+# TODO: If necessary, edit _pkgdown.yml
 # I use
 # use_template(template = &quot;_pkgdown.yml&quot;, package = &quot;fgeo.templates&quot;)
 
@@ -153,5 +154,4 @@ use_tidy_versions(overwrite = FALSE)
 
 use_tidy_style()
 
-use_version()
-</code></pre>
+use_version()</code></pre>
