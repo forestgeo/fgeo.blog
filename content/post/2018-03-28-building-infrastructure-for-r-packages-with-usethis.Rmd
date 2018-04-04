@@ -26,7 +26,7 @@ library(usethis)
 ```R
 # Once per package ========================================================
 
-# create_package("PACKAGE-PATH-(ENDING-WITH-PACKAGE-NAME)")
+# create_package("PACKAGE-PATH-ENDING-WITH-PACKAGE-NAME")
 
 # Side effects on DESCRIPTION ---------------------------------------------
 
