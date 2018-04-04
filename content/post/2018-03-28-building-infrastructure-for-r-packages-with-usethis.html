@@ -27,14 +27,6 @@ tags:
 use_description()
 
 use_blank_slate()</code></pre>
-<pre><code># To add an rmarkdown template to the templates&#39; list
-use_rmarkdown_template(
-  &quot;TEMPLATE-NAME-GOES-HERE.Rmd&quot;,
-  template_description = &quot;DESCRIPTION GOES HERE&quot;
-)
-# TODO: Fill your template. It lives here:
-# &quot;inst/rmarkdown/templates/TEMPLATE-NAME-GOES-HERE/skeleton/skeleton.Rmd&quot;</code></pre>
-<p><img src="https://i.imgur.com/4FXgj9Z.png" /></p>
 </div>
 <div id="once-per-package" class="section level1">
 <h1>Once per package</h1>
@@ -167,5 +159,17 @@ use_tidy_versions(overwrite = FALSE)
 use_tidy_style()
 
 use_version()</code></pre>
+</div>
+<div id="rare-but-good-to-know" class="section level2">
+<h2>Rare but good to know</h2>
+<p>Create an rmarkdown template in your package that will be available when users install your package.</p>
+<pre><code>use_rmarkdown_template(
+  &quot;TEMPLATE-NAME-GOES-HERE.Rmd&quot;,
+  template_description = &quot;DESCRIPTION GOES HERE&quot;
+)
+# TODO: Fill your template. It lives here:
+# &quot;inst/rmarkdown/templates/TEMPLATE-NAME-GOES-HERE/skeleton/skeleton.Rmd&quot;</code></pre>
+<p>Once users install your package, your template will be available in the templates’ list.</p>
+<p><img src="https://i.imgur.com/2UtulQU.png" /></p>
 </div>
 </div>

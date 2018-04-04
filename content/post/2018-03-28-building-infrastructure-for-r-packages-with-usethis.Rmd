@@ -33,18 +33,6 @@ use_description()
 use_blank_slate()
 ```
 
-```
-# To add an rmarkdown template to the templates' list
-use_rmarkdown_template(
-  "TEMPLATE-NAME-GOES-HERE.Rmd",
-  template_description = "DESCRIPTION GOES HERE"
-)
-# TODO: Fill your template. It lives here:
-# "inst/rmarkdown/templates/TEMPLATE-NAME-GOES-HERE/skeleton/skeleton.Rmd"
-```
-
-![](https://i.imgur.com/4FXgj9Z.png)
-
 # Once per package
 
 ```R
@@ -183,3 +171,20 @@ use_tidy_style()
 
 use_version()
 ```
+
+## Rare but good to know
+
+Create an rmarkdown template in your package that will be available when users install your package.
+
+```
+use_rmarkdown_template(
+  "TEMPLATE-NAME-GOES-HERE.Rmd",
+  template_description = "DESCRIPTION GOES HERE"
+)
+# TODO: Fill your template. It lives here:
+# "inst/rmarkdown/templates/TEMPLATE-NAME-GOES-HERE/skeleton/skeleton.Rmd"
+```
+
+Once users install your package, your template will be available in the templates' list.
+
+![](https://i.imgur.com/2UtulQU.png)
