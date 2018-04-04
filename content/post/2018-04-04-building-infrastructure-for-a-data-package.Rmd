@@ -23,7 +23,7 @@ This is a kind of checklist that I use to build consistent infrastructure for, s
 ```R
 library(usethis)
 
-# I use templats from fgeo.templates. I must have it installed but not loaded.
+# I use templates from fgeo.templates. I must have it installed but not loaded.
 # install.packages("fgeo.templates")
 ```
 
