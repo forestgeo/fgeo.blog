@@ -109,7 +109,7 @@ use_tidy_support()
 # I use
 # use_template(template = "SUPPORT.md", package = "fgeo.templates")
 
-# GITHUB ------------------------------------------------------------------
+# GitHub ------------------------------------------------------------------
 
 use_github_labels(delete_default = TRUE)
 ```
