@@ -127,7 +127,6 @@ use_tidy_support()
 # TODO: Move to .github/
 # I use
 # use_template(template = "SUPPORT.md", package = "fgeo.templates")
-# and EDIT-PACKAGE-NAME
 
 # GitHub ------------------------------------------------------------------
 
