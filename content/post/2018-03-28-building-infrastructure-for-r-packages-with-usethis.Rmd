@@ -23,8 +23,7 @@ This is a kind of checklist that I use to build consistent package infrastructur
 library(usethis)
 ```
 
-
-## Once and for good
+## Global options
 
 ```R
 use_usethis()
@@ -35,8 +34,13 @@ use_blank_slate()
 ```
 
 ```
-# To add a template to templates' list. E.g.
-# use_template(template = "rmarkdown_template.Rmd", package = "fgeo.templates")
+# To add an rmarkdown template to the templates' list
+use_rmarkdown_template(
+  "TEMPLATE-NAME-GOES-HERE.Rmd",
+  template_description = "DESCRIPTION GOES HERE"
+)
+# TODO: Fill your template. It lives here:
+# "inst/rmarkdown/templates/TEMPLATE-NAME-GOES-HERE/skeleton/skeleton.Rmd"
 ```
 
 ![](https://i.imgur.com/4FXgj9Z.png)
@@ -114,7 +118,7 @@ use_tidy_support()
 use_github_labels(delete_default = TRUE)
 ```
 
-# Almost always
+## Almost always
 
 ```R
 # Services ----------------------------------------------------------------
@@ -141,7 +145,7 @@ use_pipe()
 use_tidy_eval()
 ```
 
-# As required during development
+## As required during development
 
 ```R
 # Relatively frequently ---------------------------------------------------

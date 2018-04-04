@@ -20,15 +20,20 @@ tags:
 <p><a href="https://blog.codinghorror.com/the-works-on-my-machine-certification-program/"><img src="https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg" alt="lifecycle" /></a></p>
 <p>This is a kind of checklist that I use to build consistent package infrastructure with the <strong>usethis</strong> package.</p>
 <pre class="r"><code>library(usethis)</code></pre>
-<div id="once-and-for-good" class="section level2">
-<h2>Once and for good</h2>
+<div id="global-options" class="section level2">
+<h2>Global options</h2>
 <pre class="r"><code>use_usethis()
 
 use_description()
 
 use_blank_slate()</code></pre>
-<pre><code># To add a template to templates&#39; list. E.g.
-# use_template(template = &quot;rmarkdown_template.Rmd&quot;, package = &quot;fgeo.templates&quot;)</code></pre>
+<pre><code># To add an rmarkdown template to the templates&#39; list
+use_rmarkdown_template(
+  &quot;TEMPLATE-NAME-GOES-HERE.Rmd&quot;,
+  template_description = &quot;DESCRIPTION GOES HERE&quot;
+)
+# TODO: Fill your template. It lives here:
+# &quot;inst/rmarkdown/templates/TEMPLATE-NAME-GOES-HERE/skeleton/skeleton.Rmd&quot;</code></pre>
 <p><img src="https://i.imgur.com/4FXgj9Z.png" /></p>
 </div>
 <div id="once-per-package" class="section level1">
@@ -101,9 +106,8 @@ use_tidy_support()
 # GitHub ------------------------------------------------------------------
 
 use_github_labels(delete_default = TRUE)</code></pre>
-</div>
-<div id="almost-always" class="section level1">
-<h1>Almost always</h1>
+<div id="almost-always" class="section level2">
+<h2>Almost always</h2>
 <pre class="r"><code># Services ----------------------------------------------------------------
 
 use_testthat()
@@ -127,8 +131,8 @@ use_pipe()
 
 use_tidy_eval()</code></pre>
 </div>
-<div id="as-required-during-development" class="section level1">
-<h1>As required during development</h1>
+<div id="as-required-during-development" class="section level2">
+<h2>As required during development</h2>
 <pre class="r"><code># Relatively frequently ---------------------------------------------------
 
 use_build_ignore(&quot;FILE-NAME-GOES-HERE&quot;)
@@ -163,4 +167,5 @@ use_tidy_versions(overwrite = FALSE)
 use_tidy_style()
 
 use_version()</code></pre>
+</div>
 </div>
