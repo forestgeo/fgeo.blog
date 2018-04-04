@@ -23,8 +23,27 @@ This is a kind of checklist that I use to build consistent package infrastructur
 library(usethis)
 ```
 
+
+## Once and for good
+
 ```R
-# Once per package ========================================================
+use_usethis()
+
+use_description()
+
+use_blank_slate()
+```
+
+```
+# To add a template to templates' list. E.g.
+# use_template(template = "rmarkdown_template.Rmd", package = "fgeo.templates")
+```
+
+![](https://i.imgur.com/4FXgj9Z.png)
+
+# Once per package
+
+```R
 
 # create_package("PACKAGE-PATH-ENDING-WITH-PACKAGE-NAME")
 
@@ -88,16 +107,16 @@ use_tidy_support()
 # TODO: Edit output file to customize for your package
 # TODO: Move to .github/
 # I use
-# use_template(template = "SUPPORT.md", package = "fgeo")
+# use_template(template = "SUPPORT.md", package = "fgeo.templates")
 
 # GITHUB ------------------------------------------------------------------
 
 use_github_labels(delete_default = TRUE)
+```
 
+# Almost always
 
-
-# Almost always ===========================================================
-
+```R
 # Services ----------------------------------------------------------------
 
 use_testthat()
@@ -120,11 +139,11 @@ use_pkgdown()
 use_pipe()
 
 use_tidy_eval()
+```
 
+# As required during development
 
-
-# As required during development ==========================================
-
+```R
 # Relatively frequently ---------------------------------------------------
 
 use_build_ignore("FILE-NAME-GOES-HERE")
