@@ -62,7 +62,7 @@ In the terminal (send commands from R script to terminal with Control + Alt + En
 
 ```bash
 git add .
-git commit -a -m "Add private data to be ."
+git commit -a -m "Add infrastrucute to host private data only locally."
 git pull
 git push
 ```
