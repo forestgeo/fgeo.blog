@@ -24,9 +24,6 @@ After building the fundamental infrastructure of a data package (see [how](http:
 
 2. Import and clean each dataset in an individual data-raw/data-file.R. This is best if the datasets aren't closely related.
 
-This workflow considers that you may have private data that can't be uploaded to GitHub.
-
-
 # Create folders and files to store, clean and document data
 
 ```R
@@ -50,11 +47,27 @@ Now, working from some file in data-raw/, keep adding data to data/ with `usethi
 
 # Adding private data
 
+You may do this if you have private data that can't be uploaded to GitHub.
+
+
 ```R
 use_directory("data-raw/private")
 use_git_ignore("data-raw/private")
 ```
-Manually add data to data-raw/private/
+Manually add private data to data-raw/private/.
+
+---
+
+In the terminal (send commands from R script to terminal with Control + Alt + Enter)
+
+```bash
+git add .
+git commit -a -m "Add private data to be ."
+git pull
+git push
+```
+
+---
 
 Confirm the private data hasn't been pushed to dev branch.
 
@@ -70,4 +83,6 @@ Compare with local version.
 
 ![](https://i.imgur.com/WA9hYNT.png)
 
-Note that private/ exists in local but not remote version. __WARNING: Your private data lives nowhere online. It is not under version control -- Git isn't tracking it.__
+Note that private/ exists in local but not remote version. Your private data lives nowhere online.
+
+__WARNING: It is not under version control -- Git isn't tracking it.__
