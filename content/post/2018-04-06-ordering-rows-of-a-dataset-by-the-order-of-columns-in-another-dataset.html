@@ -1,0 +1,54 @@
+---
+title: Ordering rows of a dataset by the order of columns in another dataset
+author: Mauro Lepore
+date: '2018-04-06'
+slug: ordering-rows-of-a-dataset-by-the-order-of-columns-in-another-dataset
+categories: []
+tags:
+  - R
+  - tip
+  - tibble
+  - order
+  - definition
+---
+
+
+
+<p>As you build a dataset you may want to define its columns in a meta-dataset. After some time, the dataset and its meta-dataset may fall out of sync, with the row order of the meta-dataset no longer matching the column order of the dataset. Here is how to fix it.</p>
+<pre class="r"><code>library(tibble)
+
+dataset &lt;- tibble(
+  col1 = 1:3,
+  col2 = letters[1:3],
+  col3 = LETTERS[1:3]
+)
+dataset</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##    col1 col2  col3 
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 a     A    
+## 2     2 b     B    
+## 3     3 c     C</code></pre>
+<pre class="r"><code>mixed_rows &lt;- tibble::tribble(
+  ~cols, ~definition,
+  &quot;col3&quot;, &quot;Some LETTERS&quot;,
+  &quot;col1&quot;, &quot;Some numbers&quot;,
+  &quot;col2&quot;, &quot;Some letters&quot;
+)
+mixed_rows</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   cols  definition  
+##   &lt;chr&gt; &lt;chr&gt;       
+## 1 col3  Some LETTERS
+## 2 col1  Some numbers
+## 3 col2  Some letters</code></pre>
+<p>Fix.</p>
+<pre class="r"><code>ordered_cols &lt;- match(names(dataset), mixed_rows$cols)
+ordered_rows &lt;- mixed_rows[ordered_cols, ]
+ordered_rows</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   cols  definition  
+##   &lt;chr&gt; &lt;chr&gt;       
+## 1 col1  Some numbers
+## 2 col2  Some letters
+## 3 col3  Some LETTERS</code></pre>
