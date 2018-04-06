@@ -1,15 +1,15 @@
 ---
-title: Ordering rows of a dataset by the order of columns in another dataset
+title: Order rows of a meta-dataset by the column order of a dataset
 author: Mauro Lepore
 date: '2018-04-06'
-slug: ordering-rows-of-a-dataset-by-the-order-of-columns-in-another-dataset
+slug: order-rows-of-a-meta-dataset-by-the-column-order-of-a-dataset
 categories: []
 tags:
   - R
   - tip
-  - tibble
   - order
   - definition
+  - match
 ---
 
 As you build a dataset you may want to define its columns in a meta-dataset. After some time, the dataset and its meta-dataset may fall out of sync, with the row order of the meta-dataset no longer matching the column order of the dataset. Here is how to fix it.
