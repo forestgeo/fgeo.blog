@@ -23,8 +23,8 @@ This is a kind of checklist that I use to build consistent infrastructure for, s
 ```R
 library(usethis)
 
-# I use templates from fgeo.templates. I must have it installed but not loaded.
-# install.packages("fgeo.templates")
+# I use templates from fgeo.template. I must have it installed but not loaded.
+# install.packages("fgeo.template")
 ```
 
 ## Global options
@@ -98,7 +98,7 @@ use_package_doc()
 use_readme_rmd()
 # TODO: Edit output file to customize for your package
 # I use
-# use_template(template = "README.Rmd", package = "fgeo.templates")
+# use_template(template = "README.Rmd", package = "fgeo.template")
 # Knit to create README.md
 
 # Lifecycle stages according to https://www.tidyverse.org/lifecycle/
@@ -116,18 +116,18 @@ use_tidy_contributing()
 # TODO: Edit output file to customize for your package
 # TODO: Move to .github/
 # I use
-# use_template(template = "CONTRIBUTING.md", package = "fgeo.templates")
+# use_template(template = "CONTRIBUTING.md", package = "fgeo.template")
 
 use_tidy_issue_template()
 # TODO: Move to .github/
 # I use
-# use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo.templates")
+# use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo.template")
 
 use_tidy_support()
 # TODO: Edit output file to customize for your package
 # TODO: Move to .github/
 # I use
-# use_template(template = "SUPPORT.md", package = "fgeo.templates")
+# use_template(template = "SUPPORT.md", package = "fgeo.template")
 # and EDIT-PACKAGE-NAME
 
 # GitHub ------------------------------------------------------------------
@@ -150,7 +150,7 @@ use_tidy_ci(browse = interactive())
 use_pkgdown()
 # TODO: If necessary, edit _pkgdown.yml
 # I use
-# use_template(template = "_pkgdown.yml", package = "fgeo.templates")
+# use_template(template = "_pkgdown.yml", package = "fgeo.template")
 ```
 
 ## As required during development
