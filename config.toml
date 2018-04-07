@@ -4,7 +4,7 @@ theme = "ghostwriter"
 languageCode = "en-us"
 copyright = "ForestGEO"
 disqusShortname = "fgeo"
-# googleAnalytics = "XXX"
+googleAnalytics = "UA-117163749-1"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 
 [Author]
