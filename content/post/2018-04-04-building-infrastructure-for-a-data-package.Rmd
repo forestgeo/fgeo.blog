@@ -1,0 +1,166 @@
+---
+title: Building infrastructure for a data package
+author: Mauro Lepore
+date: '2018-04-04'
+slug: building-infrastructure-for-a-data-package
+categories: []
+tags:
+  - R
+  - r rstudio
+  - usethis
+  - packages
+  - checklist
+  - devtools
+  - remotes
+  - tip
+  - tutorial
+---
+
+[![lifecycle](https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg)](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
+
+This is a kind of checklist that I use to build consistent infrastructure for, specifically, data packages (for functions-based packages you'll need a bit more infrastructure; see [this other blog](http://bit.ly/2uI7Cjg)).
+
+```R
+library(usethis)
+
+# I use templates from fgeo.template. I must have it installed but not loaded.
+# install.packages("fgeo.template")
+```
+
+## Global options
+
+```R
+use_usethis()
+
+use_description()
+
+use_blank_slate()
+```
+
+# Once per package
+
+```R
+# create_package("PACKAGE-PATH-ENDING-WITH-PACKAGE-NAME")
+```
+
+# Work mostly on DESCRIPTION
+
+```R
+# In DESCRIPTION, Manually edit the fields Title and Description.
+
+# Manually edit the field Authors@R  -- but see use_description()
+# I use this snippet https://i.imgur.com/2YRijFP.png
+# * Learn about RStudio snippets: http://bit.ly/2uOPh4a
+
+?licenses
+# I frequently use
+# use_gpl3_license()
+
+use_roxygen_md()
+
+use_git()
+
+use_github("OWNER-GOES-HERE")
+# I use
+# use_github("forestgeo")
+
+# Confirm
+browse_github()
+
+# Not necessary if you run `use_github()` before
+use_github_links()
+
+use_dev_version()
+
+use_tidy_description()
+```
+
+Git may be able to push yet not create a permanent link with your remote origin. You can create such link from the terminal.
+
+```bash
+# Link origin and master
+git push -u origin master
+# Next time this will be enough
+git pull
+git push
+```
+
+# Work on other important documentation
+
+```R
+
+use_package_doc()
+
+
+
+# Effect on README
+
+use_readme_rmd()
+# TODO: Edit output file to customize for your package
+# I use
+# use_template(template = "README.Rmd", package = "fgeo.template")
+# Knit to create README.md
+
+# Lifecycle stages according to https://www.tidyverse.org/lifecycle/
+use_lifecycle_badge("experimental")
+
+use_cran_badge()
+
+use_tidy_coc()
+
+
+
+use_news_md()
+
+use_tidy_contributing()
+# TODO: Edit output file to customize for your package
+# TODO: Move to .github/
+# I use
+# use_template(template = "CONTRIBUTING.md", package = "fgeo.template")
+
+use_tidy_issue_template()
+# TODO: Move to .github/
+# I use
+# use_template(template = "ISSUE_TEMPLATE.md", package = "fgeo.template")
+
+use_tidy_support()
+# TODO: Edit output file to customize for your package
+# TODO: Move to .github/
+# I use
+# use_template(template = "SUPPORT.md", package = "fgeo.template")
+# and EDIT-PACKAGE-NAME
+
+# GitHub ------------------------------------------------------------------
+
+use_github_labels(delete_default = TRUE)
+```
+
+
+## Almost always
+
+```R
+# Services ----------------------------------------------------------------
+
+use_testthat()
+
+use_travis()
+# Or
+use_tidy_ci(browse = interactive())
+
+use_pkgdown()
+# TODO: If necessary, edit _pkgdown.yml
+# I use
+# use_template(template = "_pkgdown.yml", package = "fgeo.template")
+```
+
+## As required during development
+
+```R
+use_data_raw()
+
+use_data(DATASET-PLOT-OR-WHATEVER-OBJECT-GOES-HERE)
+
+use_build_ignore("FILE-NAME-GOES-HERE")
+
+use_git_ignore("FILE-NAME-GOES-HERE")
+```

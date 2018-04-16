@@ -1,0 +1,88 @@
+---
+title: Add data to data packages from raw (and maybe private) data
+author: Mauro Lepore
+date: '2018-04-05'
+slug: add-data-to-data-packages-from-raw-and-maybe-private-data
+categories: []
+tags:
+  - packages
+  - checklist
+  - fgeo
+  - devtools
+  - github
+  - R
+  - r rstudio
+  - tutorial
+  - usethis
+---
+
+This is a kind of checklist of my most common steps for adding data to data packages. (If you are serious about building packages you will learn much more at http://r-pkgs.had.co.nz/.) 
+
+After building the fundamental infrastructure of a data package (see [how](http://bit.ly/2JkSDiw)) you need to actually add data. Do this from some data-raw/file.R or some data-raw/file.Rmd. These two approaches are standard:
+
+1. Import and clean all data in a single data-raw/data.R file. This is a good idea if all datasets are closely related to each other (e.g. similar source, type, cleaning).
+
+2. Import and clean each dataset in an individual data-raw/data-file.R. This is best if the datasets aren't closely related.
+
+# Create folders and files to store, clean and document data
+
+```R
+library(usethis)
+library(fs)
+```
+
+```R
+use_data_raw()
+use_r("data.R")
+fs::file_copy("R/data.R", "data-raw/data.R")
+```
+
+Now, working from some file in data-raw/, keep adding data to data/ with `usethis::usedata()`.
+
+* Place a raw dataset in data-raw/ (manually is OK).
+* In data-raw/some-file.R:
+    * Document the source of the raw dataset.
+    * Clean the dataset.
+    * Export the dataset with `usethis::use_data(OBJECT-NAME-GOES-HERE)`.
+
+# Adding private data
+
+You may do this if you have private data that can't be uploaded to GitHub.
+
+
+```R
+use_directory("data-raw/private")
+use_git_ignore("data-raw/private")
+```
+Manually add private data to data-raw/private/.
+
+---
+
+In the terminal (send commands from R script to terminal with Control + Alt + Enter)
+
+```bash
+git add .
+git commit -a -m "Add infrastrucute to host private data only locally."
+git pull
+git push
+```
+
+---
+
+Confirm the private data hasn't been pushed to dev branch.
+
+```R
+browse_github()
+```
+
+Browse to branch dev > data-raw.
+
+![](https://i.imgur.com/dHYoQy4.png)
+
+Compare with local version.
+
+![](https://i.imgur.com/WA9hYNT.png)
+
+Note that private/ exists in local but not remote version. Your private data lives nowhere online.
+
+__WARNING: It is not under version control -- Git isn't tracking it.__

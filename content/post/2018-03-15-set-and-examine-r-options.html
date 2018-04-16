@@ -22,22 +22,16 @@ tags:
 ## 4    prompt  &quot;&gt; &quot;
 ## 5     width    80</code></pre>
 <p>For a comprehensive view you can use <code>View(options())</code>, which in RStudio will look like this:</p>
-<div class="figure">
-<img src="https://i.imgur.com/whfl7Wu.png" />
-
-</div>
+<p><img src="https://i.imgur.com/whfl7Wu.png" /></p>
 <p>You can examine the value of any option with <code>getOption(&quot;some-option&quot;)</code>.</p>
 <pre class="r"><code>getOption(&quot;max.print&quot;)</code></pre>
-<pre><code>## [1] 99999</code></pre>
+<pre><code>## [1] 1000</code></pre>
 <p>And you can change any option with something like this: <code>options(some-option = new-value)</code>.</p>
 <pre class="r"><code>options(max.print = 999)
 getOption(&quot;max.print&quot;)</code></pre>
 <pre><code>## [1] 999</code></pre>
 <p>R <code>options()</code> are session dependent: Your changes remain active only until you restart your R session.</p>
-<div class="figure">
-<img src="https://i.imgur.com/OyZSha3.png" />
-
-</div>
+<p><img src="https://i.imgur.com/OyZSha3.png" /></p>
 <p>After you restart your session the values return to their original values.</p>
 <pre class="r"><code>getOption(&quot;max.print&quot;)</code></pre>
 <pre><code>## [1] 1000</code></pre>
@@ -45,19 +39,13 @@ getOption(&quot;max.print&quot;)</code></pre>
 <pre class="r"><code># install.packages(&quot;usethis&quot;)
 usethis::edit_r_profile()</code></pre>
 <p>This will automatically open .Rprofile for you so you can edit it.</p>
-<div class="figure">
-<img src="https://i.imgur.com/m0IFLAT.png" />
-
-</div>
+<p><img src="https://i.imgur.com/m0IFLAT.png" /></p>
 <p>Follow the prompts:</p>
 <ul>
 <li>Modify ‘.Rprofile’</li>
 <li>Restart R for changes to take effect</li>
 </ul>
 <p>Then you can close .Rprofile and forget about it. Now every R session will run with your preferred option.</p>
-<div class="figure">
-<img src="https://i.imgur.com/gAw3pO8.png" />
-
-</div>
+<p><img src="https://i.imgur.com/gAw3pO8.png" /></p>
 <pre class="r"><code>getOption(&quot;max.print&quot;)</code></pre>
 <pre><code>## [1] 999</code></pre>

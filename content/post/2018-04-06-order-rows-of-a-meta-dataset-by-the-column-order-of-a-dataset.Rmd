@@ -1,0 +1,43 @@
+---
+title: Order rows of a meta-dataset by the column order of a dataset
+author: Mauro Lepore
+date: '2018-04-06'
+slug: order-rows-of-a-meta-dataset-by-the-column-order-of-a-dataset
+categories: []
+tags:
+  - R
+  - tip
+  - order
+  - definition
+  - match
+---
+
+As you build a dataset you may want to define its columns in a meta-dataset. After some time, the dataset and its meta-dataset may fall out of sync, with the row order of the meta-dataset no longer matching the column order of the dataset. Here is how to fix it.
+
+```{r}
+library(tibble)
+
+dataset <- tibble(
+  col1 = 1:3,
+  col2 = letters[1:3],
+  col3 = LETTERS[1:3]
+)
+dataset
+
+mixed_rows <- tibble::tribble(
+  ~cols, ~definition,
+  "col3", "Some LETTERS",
+  "col1", "Some numbers",
+  "col2", "Some letters"
+)
+mixed_rows
+```
+
+Fix.
+
+```{r}
+ordered_cols <- match(names(dataset), mixed_rows$cols)
+ordered_rows <- mixed_rows[ordered_cols, ]
+ordered_rows
+```
+

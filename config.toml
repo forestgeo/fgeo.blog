@@ -3,8 +3,8 @@ title = "fgeo blog"
 theme = "ghostwriter"
 languageCode = "en-us"
 copyright = "ForestGEO"
-# disqusShortname = "XXX"
-# googleAnalytics = "XXX"
+disqusShortname = "fgeo"
+googleAnalytics = "UA-117163749-1"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 
 [Author]
@@ -22,9 +22,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 #    gitlab = "https://gitlab.com/XXX"
 #    linkedin = "https://linkedin.com/in/XXX/"
 #    gplus = "https://google.com/+XXX"
-#    twitter = "https://twitter.com/XXX"
+    twitter = "https://twitter.com/mauro_lepore"
 #    stackoverflow = "https://stackoverflow.com/users/XXX/YYY"
-    email = "leporem@si.edu"
+#    email = "maurolepore@gmail.com"
     opengraph = true
     shareTwitter = true
     shareFacebook = true

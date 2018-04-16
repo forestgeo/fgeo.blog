@@ -21,20 +21,11 @@ tags:
 </ul>
 <p>I emphasize these arguments because they are buried among many other arguments so they are easy to miss. (Sure, the arguments <code>header</code> and <code>sep</code> are important but you will unlikely miss them because they are in the second and third position of the function’s signature (see <code>?read.table</code>).]</p>
 <p>To show you these arguments in action let’s suppose I have a spreadsheet that looks like this:</p>
-<div class="figure">
-<img src="https://i.imgur.com/ClZYWod.png" />
-
-</div>
+<p><img src="https://i.imgur.com/ClZYWod.png" /></p>
 <p>I can simply import this dataset from the Environment tab of RStudio, using the option Import Dataset &gt; From Text (base) …</p>
-<div class="figure">
-<img src="https://i.imgur.com/AOOpmHq.png" />
-
-</div>
+<p><img src="https://i.imgur.com/AOOpmHq.png" /></p>
 <p>The panel that pops-up will help me to (1) find the file I want to import; (2) preview the dataset; and (3) select values for the most common arguments. (Notice that Strings as factors is checked)</p>
-<div class="figure">
-<img src="https://i.imgur.com/lVrTIHM.png" />
-
-</div>
+<p><img src="https://i.imgur.com/lVrTIHM.png" /></p>
 <p>But to make my analysis reproducible I instead read the data via code. Accepting all defaults – as in the panel above – is equivalent to running this code:</p>
 <pre class="r"><code>my_path &lt;- here::here(&quot;static/my_dataset.csv&quot;)
 my_dataset &lt;- read.csv(my_path)</code></pre>
