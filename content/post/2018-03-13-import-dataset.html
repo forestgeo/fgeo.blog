@@ -18,13 +18,22 @@ tags:
 library(readr)
 # install.packages(&quot;here&quot;)
 library(here)</code></pre>
-<pre><code>## here() starts at C:/Users/LeporeM/Dropbox/git_repos/fgeo.blog</code></pre>
+<pre><code>## here() starts at C:/Users/dora/Dropbox/git_repos/fgeo.blog</code></pre>
 <p>Suppose that you have a spreadsheet that looks like this:</p>
-<p><img src="https://i.imgur.com/XrS4jAJ.png" /></p>
+<div class="figure">
+<img src="https://i.imgur.com/XrS4jAJ.png" />
+
+</div>
 <p>A simple way to import this dataset is from the Environment tab of RStudio, using the option Import Dataset &gt; From Text (readr) …</p>
-<p><img src="https://i.imgur.com/JkwbOGA.png" /></p>
+<div class="figure">
+<img src="https://i.imgur.com/JkwbOGA.png" />
+
+</div>
 <p>The panel that pops-up will help you to find the file you want to import, and show you useful previews of the data (central panel) and code (bottom left) that the selected options generate.</p>
-<p><img src="https://i.imgur.com/TqqT5ng.png" /></p>
+<div class="figure">
+<img src="https://i.imgur.com/TqqT5ng.png" />
+
+</div>
 <p>The defaults are often enough. Although you can click import, instead you should probably copy the code, paste it in your script, and run it.</p>
 <p>In this example the defaults are not enough: Some missing values are not automatically identified, and the type of the column <code>y</code> is not automatically parsed as the type I want – I want not an integer but a double (real number).</p>
 <pre class="r"><code>file_path &lt;- here::here(&quot;static/my_data.csv&quot;)
@@ -54,11 +63,11 @@ my_data</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##       x     y
 ##   &lt;int&gt; &lt;dbl&gt;
-## 1     1    2.
-## 2     3    4.
-## 3    NA   NA 
-## 4     0   NA 
-## 5    NA   NA</code></pre>
+## 1     1  2.00
+## 2     3  4.00
+## 3    NA NA   
+## 4     0 NA   
+## 5    NA NA</code></pre>
 <ul>
 <li>Learn more about <a href="http://readr.tidyverse.org/reference/read_delim.html"><strong>readr</strong></a></li>
 <li>Access <a href="https://rstudio.cloud/project/23464">this document on rstudio.cloud</a></li>

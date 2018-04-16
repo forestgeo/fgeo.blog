@@ -15,17 +15,26 @@ tags:
 
 <p>When you read data into R you may silently introduce some issues that can complicate your data analysis. The most common problems are automatically handled by the <code>read_*()</code> (underscore) functions of the <strong>readr</strong> package – which I encourage you to use (see <a href="https://fgeo.netlify.com/2018/03/13/2018-03-13-import-dataset/">this post</a>). But if you are careful, of course you can use only base R – that is, the <code>read.*()</code> (dot) functions – that come with R via the <strong>utils</strong> package. If that’s your choice you should read the documentation of <code>?read.table</code> carefully. Here I want to highlight three arguments:</p>
 <ul>
-<li><p><code>stringsAsFactors</code>: Use <code>FALSE</code> to interpret text strings as text strings. Unfortunately, the default converts text strings to factors (read argument <code>as.is</code>). If you don’t know what a factor is (<code>?factor</code>) you most likely don’t want it. (Even if you do want factors, your code will be more readable if you explicitly coerce strings to factors later, with something like <code>as.factor(&quot;your-string&quot;)</code>.) In short, always use <code>stringsAsFactors = FALSE</code>.</p></li>
+<li><p><code>stringsAsFactors</code>: Use <code>FALSE</code> to interpret text strings as text strings. Unfortunately, the default converts text strings to factors (read argument <code>as.is</code>). If you don’t know what a factor is (<code>?factor</code>) you most likely don’t want it. (Even if you do want factors, your code will be more readable if you explicitly coerce strings to factors later, with something like <code>as.factor(&quot;your-string&quot;)</code>.) In short, always use <code>stringsAsFactors = FALSE</code> (for details read <a href="https://goo.gl/rZmMLE">this post</a> on the history of <code>stringsAsFactors</code>).</p></li>
 <li><p><code>colClasses</code>: A character vector of classes to be assumed for each columns. For example, <code>c(x = &quot;numeric&quot;, y = &quot;integer&quot;, z = &quot;character&quot;)</code>.</p></li>
 <li><p><code>na.strings</code>: A character vector of strings which are to be interpreted as NA values. For example: <code>c(&quot;&quot;, &quot;NA&quot;, &quot;NULL&quot;, &quot;-&quot;)</code></p></li>
 </ul>
 <p>I emphasize these arguments because they are buried among many other arguments so they are easy to miss. (Sure, the arguments <code>header</code> and <code>sep</code> are important but you will unlikely miss them because they are in the second and third position of the function’s signature (see <code>?read.table</code>).]</p>
 <p>To show you these arguments in action let’s suppose I have a spreadsheet that looks like this:</p>
-<p><img src="https://i.imgur.com/ClZYWod.png" /></p>
+<div class="figure">
+<img src="https://i.imgur.com/ClZYWod.png" />
+
+</div>
 <p>I can simply import this dataset from the Environment tab of RStudio, using the option Import Dataset &gt; From Text (base) …</p>
-<p><img src="https://i.imgur.com/AOOpmHq.png" /></p>
+<div class="figure">
+<img src="https://i.imgur.com/AOOpmHq.png" />
+
+</div>
 <p>The panel that pops-up will help me to (1) find the file I want to import; (2) preview the dataset; and (3) select values for the most common arguments. (Notice that Strings as factors is checked)</p>
-<p><img src="https://i.imgur.com/lVrTIHM.png" /></p>
+<div class="figure">
+<img src="https://i.imgur.com/lVrTIHM.png" />
+
+</div>
 <p>But to make my analysis reproducible I instead read the data via code. Accepting all defaults – as in the panel above – is equivalent to running this code:</p>
 <pre class="r"><code>my_path &lt;- here::here(&quot;static/my_dataset.csv&quot;)
 my_dataset &lt;- read.csv(my_path)</code></pre>
@@ -71,6 +80,13 @@ my_dataset</code></pre>
 ##  $ y: int  2 4 NA NA NA
 ##  $ z: chr  &quot;a&quot; NA &quot;b&quot; NA ...</code></pre>
 <p>Now the dataset is ready for analysis.</p>
+<div id="more" class="section level3">
+<h3>More</h3>
+<ul>
+<li>See an <a href="https://goo.gl/MF4thJ">example using the argument <code>row.names</code></a></li>
+<li>Go to a <a href="https://goo.gl/qRSyME">similar post but using the <strong>readr</strong> package</a></li>
+</ul>
+</div>
 <div id="acknowledgements" class="section level3">
 <h3>Acknowledgements</h3>
 <p>Thanks to Suzanne Lao for sharing her tricks and for encouraging me to write this post.</p>
