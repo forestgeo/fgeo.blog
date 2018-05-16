@@ -1,7 +1,7 @@
 ---
 title: Data Submission, Export, and Processing with Fast Field Forms
 author: Jessica Shue
-date: '2018-03-15'
+date: '2018-03-26'
 slug: data-submission-export-and-processing-with-fast-field-forms
 categories: []
 tags:
@@ -10,11 +10,17 @@ tags:
   - contributed
 ---
 
-1. First, you will need to connect Fast Field Forms to a Dropbox folder for direct delivery from the app. Open your form and choose the "Delivery" button. This dialog will open:
+1. First, connect Fast Field Forms to a Dropbox folder for direct delivery from the app. Click the "edit" pencil to open your form and choose the "Delivery" button. 
+
+![](C:/Users/shuej/Dropbox (Smithsonian)/Field_Form_Data_Entry/app_demo/app_toolbar.png)
+
+This dialog will open:
 
 ![](https://i.imgur.com/H5psSXO.png)
 
 2. Next, drag and drop the options you would like for file delivery. Linking to Dropbox is easiest, or you can have files e-mailed to a user.
+
+- Click on "Connect and Authorize with Dropbox" and sign up to connect FastField Forms to Dropbox
 
 - When linking to Dropbox:  an "Apps" folder with a "FastField Mobile Forms" folder will be created. Choose for files to be sent in Excel format as this accommodates our data best and will be dealt with in the R code.
 
@@ -26,7 +32,7 @@ tags:
 
 ![](https://i.imgur.com/xxmsonV.png)
 
-4. You can now drag and drop field names into the blank square on the right. Separating the names with “_” is a good idea. So, for quadrat 0101 completed on March 15th 2018 by Jess Shue the box would show:  `$Quadrat_1$_$datepicker_2$_$Team_4$` and display as:  0101_03-15-2018_JS.
+4. You can now drag and drop field names into the blank square on the right. Separating the names with “_” is best. So, for quadrat 0101 completed on March 15th 2018 by Jess Shue the box would show:  `$Quadrat_1$_$datepicker_2$_$Team_4$` and it will display as:  0101_03-15-2018_JS.
 
 5. Now your form should be ready for submission. After collecting data in the field for a quadrat hit the green “Submit” button in the upper right hand corner. Once the tablet has connected to Wi-Fi the form will be submitted and sent to Dropbox and/or via e-mail.
 
