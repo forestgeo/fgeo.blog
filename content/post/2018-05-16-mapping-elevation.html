@@ -1,0 +1,69 @@
+---
+title: Mapping elevation
+author: Mauro Lepore
+date: '2018-05-16'
+slug: mapping-elevation
+categories: []
+tags:
+  - fgeo
+  - map
+  - elevation
+  - tutorial
+  - example
+  - Mpala
+  - Africa
+description: ''
+---
+
+
+
+<div id="easiest" class="section level1">
+<h1>Easiest</h1>
+<pre class="r"><code># https://forestgeo.github.io/fgeo.map/
+library(fgeo.map)
+
+# Load your own elevation data
+elevation &lt;- CTFSElev_mpala
+
+# You can use the elevation data in the elevation list directly
+str(elevation)
+#&gt; List of 4
+#&gt;  $ col :&#39;data.frame&#39;:    48581 obs. of  3 variables:
+#&gt;   ..$ x   : num [1:48581] 0 0 0 0 0 0 0 0 0 0 ...
+#&gt;   ..$ y   : num [1:48581] 0 5 10 15 20 25 30 35 40 45 ...
+#&gt;   ..$ elev: num [1:48581] 1791 1791 1791 1791 1791 ...
+#&gt;  $ xdim: num 2400
+#&gt;  $ ydim: num 500
+#&gt;  $ mat : num [1:101, 1:481] 1791 1791 1791 1791 1791 ...
+map_elev(elevation)</code></pre>
+<p><img src="/post/2018-05-16-mapping-elevation_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Also, you can extract the elevation dataframe and use that
+elev &lt;- elevation$col
+map_elev(elev)</code></pre>
+<p><img src="/post/2018-05-16-mapping-elevation_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># You have a number of options you can tweak
+map_elev(elev,
+  # Or choose colors by code from http://bit.ly/2rJgQba
+  low = &quot;grey&quot;, high = &quot;black&quot;, 
+  # How many lines, and how thick
+  bins = 100, contour_size = 0.5,
+  # Hide elevation numbers from inside the plot
+  label_elev = FALSE, 
+  # Keep the &quot;level&quot; legend
+  hide_legend_color = FALSE
+)</code></pre>
+<p><img src="/post/2018-05-16-mapping-elevation_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="more-flexible" class="section level1">
+<h1>More flexible</h1>
+<pre class="r"><code># http://ggplot2.tidyverse.org/reference/
+library(ggplot2)
+
+ggplot(elev, aes(x = x, y = y, z = elev)) +
+  geom_raster(aes(fill = elev)) +
+  geom_contour(color = &quot;white&quot;, bins = 100) +
+  scale_fill_gradient(low = &quot;grey&quot;, high = &quot;black&quot;) +
+  coord_equal() +
+  theme_bw()</code></pre>
+<p><img src="/post/2018-05-16-mapping-elevation_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
