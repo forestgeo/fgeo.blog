@@ -1,13 +1,13 @@
 ---
-title: Data Submission, Export, and Processing with Fast Field Forms
-author: Jessica Shue
+title: "Data Submission, Export, and Processing with Fast Field Forms"
+author: "Jessica Shue"
 date: '2018-03-26'
 slug: data-submission-export-and-processing-with-fast-field-forms
-categories: []
 tags:
-  - fieldwork
-  - tutorial
-  - contributed
+- fieldwork
+- tutorial
+- contributed
+categories: []
 ---
 
 1. First, connect Fast Field Forms to a Dropbox folder for direct delivery from the app. Click the "edit" pencil to open your form and choose the "Delivery" button. 
