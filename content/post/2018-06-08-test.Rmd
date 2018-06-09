@@ -8,7 +8,7 @@ tags: []
 description: ''
 ---
 
-```{r}
+```{r plot}
 plot(1:10)
 ```
 
