@@ -16,37 +16,27 @@ description: 'Code to pull species list from ForestGEO website (https://forestge
 <p>Code to pull species list from ForestGEO website (<a href="https://forestgeo.si.edu/sites/" class="uri">https://forestgeo.si.edu/sites/</a>)</p>
 <pre class="r"><code>#1.Install these packages
 
-install.packages(&quot;RCurl&quot;)</code></pre>
-<pre><code>## package &#39;RCurl&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\LeporeM\AppData\Local\Temp\1\RtmpSSq1Jt\downloaded_packages</code></pre>
-<pre class="r"><code>install.packages(&quot;XLM&quot;)</code></pre>
-<pre><code>## Warning: package &#39;XLM&#39; is not available (for R version 3.5.0)</code></pre>
-<pre class="r"><code>install.packages(&quot;rlist&quot;)</code></pre>
-<pre><code>## package &#39;rlist&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\LeporeM\AppData\Local\Temp\1\RtmpSSq1Jt\downloaded_packages</code></pre>
-<pre class="r"><code>library(XML)
+install.packages(&quot;RCurl&quot;)
 
-library(RCurl)</code></pre>
-<pre><code>## Loading required package: bitops</code></pre>
-<pre class="r"><code>library(rlist)
+install.packages(&quot;XLM&quot;)
+
+install.packages(&quot;rlist&quot;)
+
+library(XML)
+
+library(RCurl)
+
+library(rlist)
 
  
 
 #2. Lets start with an example: pull data from page 1, here for Korup..
 
-theurl &lt;- getURL(&quot;https://forestgeo.si.edu/korup-species-list?page=1&quot;,.opts = list(ssl.verifypeer = FALSE) )</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre class="r"><code>tables &lt;- readHTMLTable(theurl)</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre class="r"><code>tables &lt;- list.clean(tables, fun = is.null, recursive = FALSE)
+theurl &lt;- getURL(&quot;https://forestgeo.si.edu/korup-species-list?page=1&quot;,.opts = list(ssl.verifypeer = FALSE) )
+
+tables &lt;- readHTMLTable(theurl)
+
+tables &lt;- list.clean(tables, fun = is.null, recursive = FALSE)
 
  
 
@@ -83,141 +73,3 @@ for(page in 0:19) {
   korup &lt;- rbind(korup, do.call(rbind.data.frame, tables))
 
 }</code></pre>
-<pre><code>## [1] 0</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 2</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 3</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 6</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 7</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 8</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 9</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 10</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 11</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 12</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 13</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 14</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 15</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 16</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 17</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 18</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in seq.default(length = max(numEls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## [1] 19</code></pre>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument
-## match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<pre><code>## Warning in rep(header, length = length(tbls)): partial argument match of
-## &#39;length&#39; to &#39;length.out&#39;</code></pre>

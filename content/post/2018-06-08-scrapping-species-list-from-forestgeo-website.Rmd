@@ -13,7 +13,7 @@ description: 'Code to pull species list from ForestGEO website (https://forestge
 
 Code to pull species list from ForestGEO website (https://forestgeo.si.edu/sites/)
 
-```{r}
+```R
 #1.Install these packages
 
 install.packages("RCurl")
