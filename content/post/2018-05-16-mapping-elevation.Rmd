@@ -38,7 +38,7 @@ knitr::opts_chunk$set(
 # Easiest
 
 ```{r, echo=FALSE}
-load(here::here("../try/inst/private/CTFSElev_mpala.rdata"))
+load(here::here("private/CTFSElev_mpala.rdata"))
 ```
 
 ```{r}
@@ -50,11 +50,6 @@ elevation <- CTFSElev_mpala
 
 # You can use the elevation data in the elevation list directly
 str(elevation)
-map_elev(elevation)
-```
-
-```{r}
-# Also, you can extract the elevation dataframe and use that
 elev <- elevation$col
 map_elev(elev)
 ```
@@ -65,14 +60,13 @@ map_elev(elev,
   # Or choose colors by code from http://bit.ly/2rJgQba
   low = "grey", high = "black", 
   # How many lines, and how thick
-  bins = 100, contour_size = 0.5,
+  bins = 20, contour_size = 0.5,
   # Hide elevation numbers from inside the plot
   label_elev = FALSE, 
   # Keep the "level" legend
   hide_legend_color = FALSE
 )
 ```
-
 
 # More flexible
 
@@ -82,7 +76,7 @@ library(ggplot2)
 
 ggplot(elev, aes(x = x, y = y, z = elev)) +
   geom_raster(aes(fill = elev)) +
-  geom_contour(color = "white", bins = 100) +
+  geom_contour(color = "white", bins = 20) +
   scale_fill_gradient(low = "grey", high = "black") +
   coord_equal() +
   theme_bw()
