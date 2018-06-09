@@ -1,0 +1,14 @@
+---
+title: test
+author: Mauro Lepore
+date: '2018-06-08'
+slug: test
+categories: []
+tags: []
+description: ''
+---
+
+```{r}
+plot(1:10)
+```
+
