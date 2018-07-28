@@ -1,0 +1,103 @@
+---
+title: Gathering and spreading
+author: Mauro Lepore
+date: '2018-07-28'
+slug: gathering-and-spreading
+categories: []
+tags:
+  - R
+  - tidyr
+description: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+# Gathering
+
+ForestGEO datasets encode the status of each stem in the values of the column `status`.
+
+```{r}
+select(fgeo.data::luquillo_stem5_random, status)
+```
+In raw data, however, the values of `status` are sometimes spread across multiple columns. For example:
+
+```{r}
+wide <- tibble::tribble(
+  ~treeID, ~stemID,    ~gx,    ~gy, ~dbh,  ~A,  ~G, ~P,
+     104L,    143L,  10.31, 245.36,  193, "A",  NA, NA,
+     119L,    158L, 182.89, 410.15, 40.4, "A",  NA, NA,
+     180L,    222L, 164.61,  409.5,   NA,  NA, "G", NA,
+     180L,    223L, 164.61,  409.5,   NA,  NA, "G", NA,
+     180L,    224L, 164.61,  409.5,   NA,  NA, "G", NA,
+     180L,    225L, 164.61,  409.5,   45, "A",  NA, NA,
+     602L,    736L, 148.96, 414.44,   33, "A",  NA, NA,
+     631L,    775L,   38.3,  245.3,  140, "A",  NA, NA,
+     647L,    793L, 143.24, 410.91,  246, "A",  NA, NA,
+    1086L,   1339L,  68.89, 253.04,  176, "A",  NA, NA
+)
+
+wide
+```
+
+We can gather the multiple `status` columns with `tidyr::gather()`. See `?gather()` for a definition of each argument.
+
+```{r}
+long <- gather(wide, key = "status", "value", A, G, P, na.rm = TRUE)
+long
+
+# In this case the column `value` is useless
+select(long ,-value)
+```
+
+The raw data may also look like this.
+
+```{r}
+wide2 <- tibble::tribble(
+  ~treeID, ~stemID,    ~gx,    ~gy, ~dbh, ~A, ~G, ~P,
+     104L,    143L,  10.31, 245.36,  193,  1,  0,  0,
+     119L,    158L, 182.89, 410.15, 40.4,  1,  0,  0,
+     180L,    222L, 164.61,  409.5,   NA,  0,  1,  0,
+     180L,    223L, 164.61,  409.5,   NA,  0,  1,  0,
+     180L,    224L, 164.61,  409.5,   NA,  0,  1,  0,
+     180L,    225L, 164.61,  409.5,   45,  1,  0,  0,
+     602L,    736L, 148.96, 414.44,   33,  1,  0,  0,
+     631L,    775L,   38.3,  245.3,  140,  1,  0,  0,
+     647L,    793L, 143.24, 410.91,  246,  1,  0,  0,
+    1086L,   1339L,  68.89, 253.04,  176,  1,  0,  0
+)
+
+wide2
+```
+
+```{r}
+long2 <- gather(wide2, key = "status", value = "value", A, G, P)
+# Sorting to better understand the point that follows
+arrange(long2, treeID, stemID)
+```
+
+We need to remove duplicates. For each stem the number of rows should be unique but instead we have 3 rows -- one for each of the columns we gathered. Above we could fix this by using `na.rm`. Now we have no missing values but we can get the same result by excluding the rows where `value` is zero.
+
+```{r}
+filter(long2, value != 0)
+
+# We no longer need `value` so we can remove it
+
+single_rows <- filter(long2, value != 0)
+single_rows <- select(single_rows, -value)
+single_rows
+```
+
+# Spreading
+
+The opposite of gathering is spreading. This is not a common operation in ForestGEO data but I'll it for completeness.
+
+```{r}
+spread(long2, key = "status", value = "value")
+```
+

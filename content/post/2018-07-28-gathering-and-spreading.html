@@ -1,0 +1,201 @@
+---
+title: Gathering and spreading
+author: Mauro Lepore
+date: '2018-07-28'
+slug: gathering-and-spreading
+categories: []
+tags:
+  - R
+  - tidyr
+description: ''
+---
+
+
+
+<pre class="r"><code>library(tidyverse)
+## -- Attaching packages ---------------
+## v ggplot2 3.0.0     v purrr   0.2.5
+## v tibble  1.4.2     v dplyr   0.7.6
+## v tidyr   0.8.1     v stringr 1.3.1
+## v readr   1.1.1     v forcats 0.3.0
+## -- Conflicts ------------------------
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div id="gathering" class="section level1">
+<h1>Gathering</h1>
+<p>ForestGEO datasets encode the status of each stem in the values of the column <code>status</code>.</p>
+<pre class="r"><code>select(fgeo.data::luquillo_stem5_random, status)
+## # A tibble: 1,324 x 1
+##    status
+##    &lt;chr&gt; 
+##  1 A     
+##  2 A     
+##  3 G     
+##  4 G     
+##  5 G     
+##  6 A     
+##  7 A     
+##  8 A     
+##  9 A     
+## 10 A     
+## # ... with 1,314 more rows</code></pre>
+<p>In raw data, however, the values of <code>status</code> are sometimes spread across multiple columns. For example:</p>
+<pre class="r"><code>wide &lt;- tibble::tribble(
+  ~treeID, ~stemID,    ~gx,    ~gy, ~dbh,  ~A,  ~G, ~P,
+     104L,    143L,  10.31, 245.36,  193, &quot;A&quot;,  NA, NA,
+     119L,    158L, 182.89, 410.15, 40.4, &quot;A&quot;,  NA, NA,
+     180L,    222L, 164.61,  409.5,   NA,  NA, &quot;G&quot;, NA,
+     180L,    223L, 164.61,  409.5,   NA,  NA, &quot;G&quot;, NA,
+     180L,    224L, 164.61,  409.5,   NA,  NA, &quot;G&quot;, NA,
+     180L,    225L, 164.61,  409.5,   45, &quot;A&quot;,  NA, NA,
+     602L,    736L, 148.96, 414.44,   33, &quot;A&quot;,  NA, NA,
+     631L,    775L,   38.3,  245.3,  140, &quot;A&quot;,  NA, NA,
+     647L,    793L, 143.24, 410.91,  246, &quot;A&quot;,  NA, NA,
+    1086L,   1339L,  68.89, 253.04,  176, &quot;A&quot;,  NA, NA
+)
+
+wide
+## # A tibble: 10 x 8
+##    treeID stemID    gx    gy   dbh A     G     P    
+##     &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt;
+##  1    104    143  10.3  245. 193   A     &lt;NA&gt;  NA   
+##  2    119    158 183.   410.  40.4 A     &lt;NA&gt;  NA   
+##  3    180    222 165.   410.  NA   &lt;NA&gt;  G     NA   
+##  4    180    223 165.   410.  NA   &lt;NA&gt;  G     NA   
+##  5    180    224 165.   410.  NA   &lt;NA&gt;  G     NA   
+##  6    180    225 165.   410.  45   A     &lt;NA&gt;  NA   
+##  7    602    736 149.   414.  33   A     &lt;NA&gt;  NA   
+##  8    631    775  38.3  245. 140   A     &lt;NA&gt;  NA   
+##  9    647    793 143.   411. 246   A     &lt;NA&gt;  NA   
+## 10   1086   1339  68.9  253. 176   A     &lt;NA&gt;  NA</code></pre>
+<p>We can gather the multiple <code>status</code> columns with <code>tidyr::gather()</code>. See <code>?gather()</code> for a definition of each argument.</p>
+<pre class="r"><code>long &lt;- gather(wide, key = &quot;status&quot;, &quot;value&quot;, A, G, P, na.rm = TRUE)
+long
+## # A tibble: 10 x 7
+##    treeID stemID    gx    gy   dbh status value
+##  *  &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;
+##  1    104    143  10.3  245. 193   A      A    
+##  2    119    158 183.   410.  40.4 A      A    
+##  3    180    225 165.   410.  45   A      A    
+##  4    602    736 149.   414.  33   A      A    
+##  5    631    775  38.3  245. 140   A      A    
+##  6    647    793 143.   411. 246   A      A    
+##  7   1086   1339  68.9  253. 176   A      A    
+##  8    180    222 165.   410.  NA   G      G    
+##  9    180    223 165.   410.  NA   G      G    
+## 10    180    224 165.   410.  NA   G      G
+
+# In this case the column `value` is useless
+select(long ,-value)
+## # A tibble: 10 x 6
+##    treeID stemID    gx    gy   dbh status
+##  *  &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+##  1    104    143  10.3  245. 193   A     
+##  2    119    158 183.   410.  40.4 A     
+##  3    180    225 165.   410.  45   A     
+##  4    602    736 149.   414.  33   A     
+##  5    631    775  38.3  245. 140   A     
+##  6    647    793 143.   411. 246   A     
+##  7   1086   1339  68.9  253. 176   A     
+##  8    180    222 165.   410.  NA   G     
+##  9    180    223 165.   410.  NA   G     
+## 10    180    224 165.   410.  NA   G</code></pre>
+<p>The raw data may also look like this.</p>
+<pre class="r"><code>wide2 &lt;- tibble::tribble(
+  ~treeID, ~stemID,    ~gx,    ~gy, ~dbh, ~A, ~G, ~P,
+     104L,    143L,  10.31, 245.36,  193,  1,  0,  0,
+     119L,    158L, 182.89, 410.15, 40.4,  1,  0,  0,
+     180L,    222L, 164.61,  409.5,   NA,  0,  1,  0,
+     180L,    223L, 164.61,  409.5,   NA,  0,  1,  0,
+     180L,    224L, 164.61,  409.5,   NA,  0,  1,  0,
+     180L,    225L, 164.61,  409.5,   45,  1,  0,  0,
+     602L,    736L, 148.96, 414.44,   33,  1,  0,  0,
+     631L,    775L,   38.3,  245.3,  140,  1,  0,  0,
+     647L,    793L, 143.24, 410.91,  246,  1,  0,  0,
+    1086L,   1339L,  68.89, 253.04,  176,  1,  0,  0
+)
+
+wide2
+## # A tibble: 10 x 8
+##    treeID stemID    gx    gy   dbh     A     G     P
+##     &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1    104    143  10.3  245. 193       1     0     0
+##  2    119    158 183.   410.  40.4     1     0     0
+##  3    180    222 165.   410.  NA       0     1     0
+##  4    180    223 165.   410.  NA       0     1     0
+##  5    180    224 165.   410.  NA       0     1     0
+##  6    180    225 165.   410.  45       1     0     0
+##  7    602    736 149.   414.  33       1     0     0
+##  8    631    775  38.3  245. 140       1     0     0
+##  9    647    793 143.   411. 246       1     0     0
+## 10   1086   1339  68.9  253. 176       1     0     0</code></pre>
+<pre class="r"><code>long2 &lt;- gather(wide2, key = &quot;status&quot;, value = &quot;value&quot;, A, G, P)
+# Sorting to better understand the point that follows
+arrange(long2, treeID, stemID)
+## # A tibble: 30 x 7
+##    treeID stemID    gx    gy   dbh status value
+##     &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+##  1    104    143  10.3  245. 193   A          1
+##  2    104    143  10.3  245. 193   G          0
+##  3    104    143  10.3  245. 193   P          0
+##  4    119    158 183.   410.  40.4 A          1
+##  5    119    158 183.   410.  40.4 G          0
+##  6    119    158 183.   410.  40.4 P          0
+##  7    180    222 165.   410.  NA   A          0
+##  8    180    222 165.   410.  NA   G          1
+##  9    180    222 165.   410.  NA   P          0
+## 10    180    223 165.   410.  NA   A          0
+## # ... with 20 more rows</code></pre>
+<p>We need to remove duplicates. For each stem the number of rows should be unique but instead we have 3 rows – one for each of the columns we gathered. Above we could fix this by using <code>na.rm</code>. Now we have no missing values but we can get the same result by excluding the rows where <code>value</code> is zero.</p>
+<pre class="r"><code>filter(long2, value != 0)
+## # A tibble: 10 x 7
+##    treeID stemID    gx    gy   dbh status value
+##     &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+##  1    104    143  10.3  245. 193   A          1
+##  2    119    158 183.   410.  40.4 A          1
+##  3    180    225 165.   410.  45   A          1
+##  4    602    736 149.   414.  33   A          1
+##  5    631    775  38.3  245. 140   A          1
+##  6    647    793 143.   411. 246   A          1
+##  7   1086   1339  68.9  253. 176   A          1
+##  8    180    222 165.   410.  NA   G          1
+##  9    180    223 165.   410.  NA   G          1
+## 10    180    224 165.   410.  NA   G          1
+
+# We no longer need `value` so we can remove it
+
+single_rows &lt;- filter(long2, value != 0)
+single_rows &lt;- select(single_rows, -value)
+single_rows
+## # A tibble: 10 x 6
+##    treeID stemID    gx    gy   dbh status
+##     &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+##  1    104    143  10.3  245. 193   A     
+##  2    119    158 183.   410.  40.4 A     
+##  3    180    225 165.   410.  45   A     
+##  4    602    736 149.   414.  33   A     
+##  5    631    775  38.3  245. 140   A     
+##  6    647    793 143.   411. 246   A     
+##  7   1086   1339  68.9  253. 176   A     
+##  8    180    222 165.   410.  NA   G     
+##  9    180    223 165.   410.  NA   G     
+## 10    180    224 165.   410.  NA   G</code></pre>
+</div>
+<div id="spreading" class="section level1">
+<h1>Spreading</h1>
+<p>The opposite of gathering is spreading. This is not a common operation in ForestGEO data but I’ll it for completeness.</p>
+<pre class="r"><code>spread(long2, key = &quot;status&quot;, value = &quot;value&quot;)
+## # A tibble: 10 x 8
+##    treeID stemID    gx    gy   dbh     A     G     P
+##     &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1    104    143  10.3  245. 193       1     0     0
+##  2    119    158 183.   410.  40.4     1     0     0
+##  3    180    222 165.   410.  NA       0     1     0
+##  4    180    223 165.   410.  NA       0     1     0
+##  5    180    224 165.   410.  NA       0     1     0
+##  6    180    225 165.   410.  45       1     0     0
+##  7    602    736 149.   414.  33       1     0     0
+##  8    631    775  38.3  245. 140       1     0     0
+##  9    647    793 143.   411. 246       1     0     0
+## 10   1086   1339  68.9  253. 176       1     0     0</code></pre>
+</div>
