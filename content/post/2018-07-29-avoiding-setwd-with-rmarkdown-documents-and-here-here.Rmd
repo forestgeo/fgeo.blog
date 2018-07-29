@@ -52,7 +52,7 @@ You can use RStudio to change this setting from _Document directory_ to _Project
 Alternatively, you can leave the default untouched and build relative paths using `here::here()`.
 
 ```{r, error=TRUE}
-bad_path <- "R/dummy.R"
+bad_path <- "content/post/R/dummy.R"
 bad_path
 
 # This will fail
@@ -60,7 +60,7 @@ readLines(bad_path)
 ```
 
 ```{r, error=TRUE}
-good_path <- here::here("R/dummy.R")
+good_path <- here::here("content/post/R/dummy.R")
 good_path
 
 readLines(good_path)

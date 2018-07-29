@@ -44,21 +44,19 @@ here::here()
 <div id="build-relative-paths-to-anywhere-within-your-project-using-herehere." class="section level3">
 <h3>2. Build relative paths to anywhere within your project using <code>here::here()</code>.</h3>
 <p>Alternatively, you can leave the default untouched and build relative paths using <code>here::here()</code>.</p>
-<pre class="r"><code>bad_path &lt;- &quot;R/dummy.R&quot;
+<pre class="r"><code>bad_path &lt;- &quot;content/post/R/dummy.R&quot;
 bad_path
-## [1] &quot;R/dummy.R&quot;
+## [1] &quot;content/post/R/dummy.R&quot;
 
 # This will fail
 readLines(bad_path)
-## Warning in file(con, &quot;r&quot;): cannot open file &#39;R/dummy.R&#39;: No such file or
-## directory
+## Warning in file(con, &quot;r&quot;): cannot open file &#39;content/post/R/dummy.R&#39;: No
+## such file or directory
 ## Error in file(con, &quot;r&quot;): cannot open the connection</code></pre>
-<pre class="r"><code>good_path &lt;- here::here(&quot;R/dummy.R&quot;)
+<pre class="r"><code>good_path &lt;- here::here(&quot;content/post/R/dummy.R&quot;)
 good_path
-## [1] &quot;C:/Users/LeporeM/Documents/Dropbox/git/fgeo.blog/R/dummy.R&quot;
+## [1] &quot;C:/Users/LeporeM/Documents/Dropbox/git/fgeo.blog/content/post/R/dummy.R&quot;
 
 readLines(good_path)
-## Warning in file(con, &quot;r&quot;): cannot open file &#39;C:/Users/LeporeM/Documents/
-## Dropbox/git/fgeo.blog/R/dummy.R&#39;: No such file or directory
-## Error in file(con, &quot;r&quot;): cannot open the connection</code></pre>
+## [1] &quot;# Success!!!&quot;</code></pre>
 </div>
