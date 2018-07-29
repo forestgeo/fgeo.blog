@@ -1,0 +1,70 @@
+---
+title: Joining elevation and soil data
+author: Mauro Lepore and Rafael Cardenas
+date: '2018-07-29'
+slug: joining-elevation-and-soil-data
+categories: []
+tags:
+  - R
+  - join
+  - dpyr
+description: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+# Packages
+
+```{r}
+library(tidyverse)
+```
+
+# Data
+
+Toy datasets:
+
+* `soil` starts at `gx = 5` and `gy = 5` and increments by 10. 
+* `elevation` starts at `gx = 0` and `gy = 0` and increments by 5. 
+
+Therefore, `soil` and `elevation` therefore match in some but not all `gx`, `gy`. Here we show how to join `soil` and `elevation`, keeping only the matching rows. For details on joining see http://r4ds.had.co.nz/relational-data.html#mutating-joins.
+
+```{r}
+# Position and measurements of elements Al and P
+soil <- tribble(
+  ~gx, ~gy, ~Al, ~P,
+    5,   5,  99, 66, 
+   15,   5,  98, 65, 
+   25,   5,  97, 64, 
+    5,  15,  96, 63, 
+    5,  25,  95, 62
+)
+soil
+```
+
+```{r}
+elevation <- tribble(
+  ~gx, ~gy, ~elev,
+    0,   0,   111,
+    5,   5,   120,
+    5,  15,   125,
+   25,   5,   130,
+   25,  10,   135,
+    5,  25,   140
+)
+elevation
+```
+
+```{r}
+joint <- left_join(elevation, soil)
+joint
+```
+
+Exclude non-matching rows.
+
+```{r}
+matching <- joint[complete.cases(joint), ]
+matching
+```
+
