@@ -1,0 +1,70 @@
+---
+title: Calculating and plotting proportion of individual trees in a dataset
+author: Mauro Lepore and Monique Picon
+date: '2018-07-29'
+slug: calculating-and-plotting-proportion-of-individual-trees-in-a-dataset
+categories: []
+tags:
+  - tutorial
+  - R
+  - species
+  - count
+description: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+### Setup
+
+```{r}
+# Packages
+library(tidyverse)
+
+# Create a small dataset for examples
+tree <- fgeo.data::luquillo_tree5_random
+species <- unique(tree$sp)[1:3]
+tree <- filter(tree, sp %in% species)
+```
+
+### Data overview
+
+```{r}
+table(tree$sp)
+
+tree
+```
+
+### Calculate proportion by species.
+
+* Count all individuals by species.
+
+```{r}
+tree_n <- tree %>% 
+  add_count(sp) %>% 
+  arrange(sp, treeID) %>% 
+  select(treeID, sp, n, everything())
+tree_n
+```
+
+* Calculate the proportion relative to the total count of individuals.
+
+```{r}
+tree_prop <- tree_n %>% 
+  mutate(
+    total_n = nrow(.),
+    proportion = n / total_n
+  ) %>% 
+  select(treeID, total_n, n, proportion, everything()) %>% 
+  unique() 
+tree_prop
+```
+
+### Plot
+
+```{r}
+ggplot(tree_prop, aes(sp, proportion)) +
+  geom_bar(stat = "identity")
+```
+
