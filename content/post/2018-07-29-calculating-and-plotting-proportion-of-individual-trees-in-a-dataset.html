@@ -1,5 +1,5 @@
 ---
-title: Calculating and plotting proportion of individual trees in a dataset
+title: Calculating the proportion of individual trees in a dataset
 author: Mauro Lepore and Monique Picon
 date: '2018-07-29'
 slug: calculating-and-plotting-proportion-of-individual-trees-in-a-dataset
@@ -111,10 +111,4 @@ tree_prop
 ## #   MeasureID &lt;int&gt;, CensusID &lt;int&gt;, dbh &lt;dbl&gt;, pom &lt;chr&gt;, hom &lt;dbl&gt;,
 ## #   ExactDate &lt;dbl&gt;, DFstatus &lt;chr&gt;, codes &lt;chr&gt;, nostems &lt;dbl&gt;,
 ## #   status &lt;chr&gt;, date &lt;dbl&gt;</code></pre>
-</div>
-<div id="plot" class="section level3">
-<h3>Plot</h3>
-<pre class="r"><code>ggplot(tree_prop, aes(sp, proportion)) +
-  geom_bar(stat = &quot;identity&quot;)</code></pre>
-<p><img src="/post/2018-07-29-calculating-and-plotting-proportion-of-individual-trees-in-a-dataset_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>

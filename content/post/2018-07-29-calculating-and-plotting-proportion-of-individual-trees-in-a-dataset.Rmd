@@ -1,5 +1,5 @@
 ---
-title: Calculating and plotting proportion of individual trees in a dataset
+title: Calculating the proportion of individual trees in a dataset
 author: Mauro Lepore and Monique Picon
 date: '2018-07-29'
 slug: calculating-and-plotting-proportion-of-individual-trees-in-a-dataset
@@ -59,12 +59,5 @@ tree_prop <- tree_n %>%
   select(treeID, total_n, n, proportion, everything()) %>% 
   unique() 
 tree_prop
-```
-
-### Plot
-
-```{r}
-ggplot(tree_prop, aes(sp, proportion)) +
-  geom_bar(stat = "identity")
 ```
 
