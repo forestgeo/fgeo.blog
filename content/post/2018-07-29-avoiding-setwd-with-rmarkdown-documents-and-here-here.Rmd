@@ -25,7 +25,7 @@ This post extends on the problem and on these two solutions.
 
 ### The problem
 
-The document you are reading now is an rmarkdown document using the default working directory. Notice that it was a different notion of _woking directory_ compared to the project's working directory.
+The document you are reading now is an rmarkdown document using the default working directory. Notice that it has a different notion of _woking directory_ compared to the project's working directory.
 
 ```{r}
 getwd()
