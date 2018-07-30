@@ -32,6 +32,7 @@ str(object)
 
 ```{r}
 library(tibble)
+
 as_tibble(object)
 ```
 
@@ -43,6 +44,8 @@ Now it's obvious that `x` and `z` are factors. How can we convert them to string
 object <- data.frame(x = "A", y = 1, z = "Z", stringsAsFactors = TRUE)
 object$x <- as.character(object$x)
 object$y <- as.character(object$z)
+
+as_tibble(object)
 ```
 
 * Option 2: Use `lapply()` to do something similar to what I showed above, but in one single step.

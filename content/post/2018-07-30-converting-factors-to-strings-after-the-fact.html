@@ -26,6 +26,7 @@ object
 ##  $ y: num 1
 ##  $ z: Factor w/ 1 level &quot;Z&quot;: 1</code></pre>
 <pre class="r"><code>library(tibble)
+
 as_tibble(object)
 ## # A tibble: 1 x 3
 ##   x         y z    
@@ -37,7 +38,13 @@ as_tibble(object)
 </ul>
 <pre class="r"><code>object &lt;- data.frame(x = &quot;A&quot;, y = 1, z = &quot;Z&quot;, stringsAsFactors = TRUE)
 object$x &lt;- as.character(object$x)
-object$y &lt;- as.character(object$z)</code></pre>
+object$y &lt;- as.character(object$z)
+
+as_tibble(object)
+## # A tibble: 1 x 3
+##   x     y     z    
+##   &lt;chr&gt; &lt;chr&gt; &lt;fct&gt;
+## 1 A     Z     Z</code></pre>
 <ul>
 <li>Option 2: Use <code>lapply()</code> to do something similar to what I showed above, but in one single step.</li>
 </ul>
