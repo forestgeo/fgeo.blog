@@ -1,0 +1,64 @@
+---
+title: Converting factors to strings after the fact
+author: Mauro Lepore
+date: '2018-07-30'
+slug: converting-factors-to-strings-after-the-fact
+categories: []
+tags:
+  - tidyverse
+  - R
+  - purrr
+description: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+Some dataset contain factor-columns where you expected string-columns. Such problem commonly originate from the source of your data, when you imported or created the dataset. The best place to fix the problem is right there, usually by using the argument `stringsAsFactors = FALSE` to `read.csv()` or to `data.frame()`. But sometimes you have no choice other than fixing the problem after the fact. Here is how.
+
+Let's create an object which columns `x` and `z` are factors.
+
+```{r}
+object <- data.frame(x = "A", y = 1, z = "Z", stringsAsFactors = TRUE)
+object
+```
+
+This is hard to see unless you inspect the object's structure or convert the object to a tibble.
+
+```{r}
+str(object)
+```
+
+```{r}
+library(tibble)
+as_tibble(object)
+```
+
+Now it's obvious that `x` and `z` are factors. How can we convert them to strings?
+
+* Option 1: Convert each column to a character, one by one.
+
+```{r}
+object <- data.frame(x = "A", y = 1, z = "Z", stringsAsFactors = TRUE)
+object$x <- as.character(object$x)
+object$y <- as.character(object$z)
+```
+
+* Option 2: Use `lapply()` to do something similar to what I showed above, but in one single step.
+
+```{r}
+object <- data.frame(x = "A", y = 1, z = "Z", stringsAsFactors = TRUE)
+object[c("x", "y")] <- lapply(object[c("x", "y")], as.character)
+as_tibble(object)
+```
+
+* 3. Use `modify_if()`: This is best not only because you avoid the weird assignment (`object[]`) but also because you don't need to specify which are the factor-columns.
+
+```{r}
+library(purrr)
+
+object <- data.frame(x = "A", y = 1, z = "Z", stringsAsFactors = TRUE)
+object <- modify_if(object, is.factor, as.character)
+as_tibble(object)
+```
