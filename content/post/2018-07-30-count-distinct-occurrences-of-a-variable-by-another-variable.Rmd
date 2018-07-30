@@ -24,7 +24,7 @@ We want to count the number of species (`sp`) in each `site`. Here we'll use a d
 library(tidyverse)
 ```
 
-* Data
+* Data: Site A has only one species; site B has three species.
 
 ```{r}
 dataset <- tibble::tribble(
@@ -44,19 +44,25 @@ dataset
 ```{r}
 dataset %>% 
   group_by(site) %>% 
-  summarise(n = n_distinct(sp)) %>% 
-  write_csv("mydata.csv")
+  summarise(n = n_distinct(sp))
 ```
 
 * Option 2: A bit more cryptic way: Select the relevant columns; get the unique combinations of values; count the number of rows by `site`.
 
 ```{r}
-dataset %>% select(site, sp) %>% count(site)
+dataset %>% 
+  select(site, sp) %>% 
+  unique() %>% 
+  count(site)
 ```
 
 Warning: This is wrong. If you don't understand why, then use the more expressive approach (option 1 above).
 
 ```{r}
-dataset %>% select(site, sp) %>% count(sp)
+dataset %>% 
+  select(site, sp) %>% 
+  unique() %>% 
+  # This is wrong! You should count by site -- not species.
+  count(sp)
 ```
 

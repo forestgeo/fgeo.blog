@@ -28,7 +28,7 @@ description: ''
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <ul>
-<li>Data</li>
+<li>Data: Site A has only one species; site B has three species.</li>
 </ul>
 <pre class="r"><code>dataset &lt;- tibble::tribble(
   ~site,  ~sp, ~other_vars,
@@ -54,22 +54,33 @@ dataset
 </ul>
 <pre class="r"><code>dataset %&gt;% 
   group_by(site) %&gt;% 
-  summarise(n = n_distinct(sp)) %&gt;% 
-  write_csv(&quot;mydata.csv&quot;)</code></pre>
-<ul>
-<li>Option 2: A bit more cryptic way: Select the relevant columns; get the unique combinations of values; count the number of rows by <code>site</code>.</li>
-</ul>
-<pre class="r"><code>dataset %&gt;% select(site, sp) %&gt;% count(site)
+  summarise(n = n_distinct(sp))
 ## # A tibble: 2 x 2
 ##   site      n
 ##   &lt;chr&gt; &lt;int&gt;
-## 1 A         3
+## 1 A         1
+## 2 B         3</code></pre>
+<ul>
+<li>Option 2: A bit more cryptic way: Select the relevant columns; get the unique combinations of values; count the number of rows by <code>site</code>.</li>
+</ul>
+<pre class="r"><code>dataset %&gt;% 
+  select(site, sp) %&gt;% 
+  unique() %&gt;% 
+  count(site)
+## # A tibble: 2 x 2
+##   site      n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 A         1
 ## 2 B         3</code></pre>
 <p>Warning: This is wrong. If you don’t understand why, then use the more expressive approach (option 1 above).</p>
-<pre class="r"><code>dataset %&gt;% select(site, sp) %&gt;% count(sp)
+<pre class="r"><code>dataset %&gt;% 
+  select(site, sp) %&gt;% 
+  unique() %&gt;% 
+  # This is wrong! You should count by site -- not species.
+  count(sp)
 ## # A tibble: 3 x 2
 ##   sp        n
 ##   &lt;chr&gt; &lt;int&gt;
-## 1 sp1       4
+## 1 sp1       2
 ## 2 sp2       1
 ## 3 sp3       1</code></pre>
