@@ -1,0 +1,62 @@
+---
+title: Count distinct occurrences of a variable by another variable
+author: Mauro Lepore and Monique Picon
+date: '2018-07-30'
+slug: count-distinct-occurrences-of-a-variable-by-another-variable
+categories: []
+tags:
+  - R
+  - dplyr
+  - tidyverse
+  - count
+description: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+```
+
+We want to count the number of species (`sp`) in each `site`. Here we'll use a dataset that is so small that we can count by eye. But in real life you'll need to approach this problem programatically. Here is how.
+
+* Setup
+
+```{r}
+library(tidyverse)
+```
+
+* Data
+
+```{r}
+dataset <- tibble::tribble(
+  ~site,  ~sp, ~other_vars,
+    "A", "sp1",          1,
+    "A", "sp1",          1,
+    "A", "sp1",          2,
+    "B", "sp1",          3,
+    "B", "sp2",          4,
+    "B", "sp3",          5
+)
+dataset
+```
+
+* Option 1: Expressive way. Group the data by `site` and count the unique occurrences of `sp`.
+
+```{r}
+dataset %>% 
+  group_by(site) %>% 
+  summarise(n = n_distinct(sp)) %>% 
+  write_csv("mydata.csv")
+```
+
+* Option 2: A bit more cryptic way: Select the relevant columns; get the unique combinations of values; count the number of rows by `site`.
+
+```{r}
+dataset %>% select(site, sp) %>% count(site)
+```
+
+Warning: This is wrong. If you don't understand why, then use the more expressive approach (option 1 above).
+
+```{r}
+dataset %>% select(site, sp) %>% count(sp)
+```
+
