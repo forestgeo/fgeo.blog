@@ -47,8 +47,9 @@ dodge <- add_count(dodge, site_sp)
 
 Plot.
 
-```{r}
+```R
 ggplot(dodge, aes(x = site_sp, y = n, fill = status)) +
   geom_col()
 ```
 
+![](https://i.imgur.com/9IHNlyx.png)
