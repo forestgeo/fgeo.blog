@@ -14,13 +14,13 @@ description: ''
 
 
 <p>Setup.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages ---------------------------------------- tidyverse 1.2.1 --</code></pre>
-<pre><code>## v ggplot2 3.0.0     v purrr   0.2.5
+<pre class="r"><code>library(tidyverse)
+## -- Attaching packages ---------------------------------------- tidyverse 1.2.1 --
+## v ggplot2 3.0.0     v purrr   0.2.5
 ## v tibble  1.4.2     v dplyr   0.7.6
 ## v tidyr   0.8.1     v stringr 1.3.1
-## v readr   1.1.1     v forcats 0.3.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------- tidyverse_conflicts() --
+## v readr   1.1.1     v forcats 0.3.0
+## -- Conflicts ------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <p>Data.</p>
@@ -33,8 +33,8 @@ description: ''
     &quot;b&quot;, &quot;sp2&quot;,    &quot;D&quot;,
     &quot;b&quot;, &quot;sp3&quot;,    &quot;A&quot;
 )
-dataset</code></pre>
-<pre><code>## # A tibble: 6 x 3
+dataset
+## # A tibble: 6 x 3
 ##   site  sp    status
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; 
 ## 1 a     sp1   A     
@@ -45,8 +45,8 @@ dataset</code></pre>
 ## 6 b     sp3   A</code></pre>
 <p>Create an interaction variable to “dodge manually”.</p>
 <pre class="r"><code>dodge &lt;- mutate(dataset, site_sp = interaction(site, sp))
-dodge</code></pre>
-<pre><code>## # A tibble: 6 x 4
+dodge
+## # A tibble: 6 x 4
 ##   site  sp    status site_sp
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;fct&gt;  
 ## 1 a     sp1   A      a.sp1  
