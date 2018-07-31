@@ -75,4 +75,6 @@ model1
 model1$coefficients
 ```
 
+### Learn more
 
+[Project-oriented workflow](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
