@@ -1,0 +1,54 @@
+---
+title: 'Dodging by one variable and filling by another vriable'
+author: Mauro Lepore
+date: '2018-07-31'
+slug: dodging-by-one-variable-and-filling-by-another-vriable
+categories: []
+tags:
+  - ggplot2
+  - tutorial
+  - R
+description: ''
+---
+
+Setup.
+
+```{r}
+library(tidyverse)
+```
+
+Data.
+
+```{r}
+dataset <- tibble::tribble(
+  ~site,  ~sp, ~status,
+    "a", "sp1",    "A",
+    "a", "sp1",    "D",
+    "a", "sp1",    "A",
+    "b", "sp1",    "A",
+    "b", "sp2",    "D",
+    "b", "sp3",    "A"
+)
+dataset
+```
+
+Create an interaction variable to "dodge manually".
+
+```{r}
+dodge <- mutate(dataset, site_sp = interaction(site, sp))
+dodge
+```
+
+Count.
+
+```{r}
+dodge <- add_count(dodge, site_sp)
+```
+
+Plot.
+
+```{r}
+ggplot(dodge, aes(x = site_sp, y = n, fill = status)) +
+  geom_col()
+```
+

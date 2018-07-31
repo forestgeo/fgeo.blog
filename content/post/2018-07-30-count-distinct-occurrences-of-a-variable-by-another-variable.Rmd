@@ -39,12 +39,15 @@ dataset <- tibble::tribble(
 dataset
 ```
 
+## Count
+
 * Option 1: Expressive way. Group the data by `site` and count the unique occurrences of `sp`.
 
 ```{r}
-dataset %>% 
+n_sp <- dataset %>% 
   group_by(site) %>% 
   summarise(n = n_distinct(sp))
+n_sp
 ```
 
 * Option 2: A bit more cryptic way: Select the relevant columns; get the unique combinations of values; count the number of rows by `site`.
@@ -65,4 +68,28 @@ dataset %>%
   # This is wrong! You should count by site -- not species.
   count(sp)
 ```
+
+## Add count
+
+How can you add the count to the original dataset?
+
+```{r}
+site_species <- dataset %>% 
+  select(site, sp) %>% 
+  unique() %>% 
+  add_count(site)
+site_species
+```
+
+This is particularly useful when you want to create plots.
+
+```{r}
+library(ggplot2)
+
+to_plot <- site_species %>% mutate(site_sp = interaction(site, sp))
+
+ggplot(to_plot, aes(site_sp, n, color = sp)) +
+  geom_col()
+```
+
 
