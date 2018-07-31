@@ -1,0 +1,79 @@
+---
+title: Why does R/RStudio take so long to open?
+author: Mauro Lepore
+date: '2018-07-31'
+slug: why-does-r-rstudio-take-so-long-to-open
+categories: []
+tags:
+  - bestpractice
+  - R
+  - r rstudio
+  - workflow
+description: ''
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+One common reason why R/RStudio take long to open (or even crashes) is that it is set (by default) to re-load objects from previous sessions. This is bad. Really. Each session should be self contained, and you should be able to reproduce your analysis entirely from your script.
+
+What if the objects you need take a long time to produce? You use one script to create the time-consuming objects, then save them. Next time you need those objects you start not from scratch but from your saved object.
+
+First I'll show you how to change your settings to never re-load objects from previous R sessions. Then I'll show you how to save time by writing and then reading objects that take a long time to produce.
+
+### 1. Settings
+
+* Go to _Tools > Global Options... > R General_. Ensure these two settings are  as follows:
+
+![](https://i.imgur.com/zkuLUfV.png)
+
+* The next step will clean your environment. Before you do that you may want to save it. You can do that in RStudio from the _Environment_ tab.
+
+![](https://i.imgur.com/IsCBKNk.png)
+
+* Now restart your R session (Shift + Control/Command + F10).
+
+![](https://i.imgur.com/cepPavk.png)
+
+* Your environment should now be empty.
+
+![](https://i.imgur.com/flv0Na9.png)
+
+### Saving and re-loading objects that take long to produce
+
+A great way to manage your workflow is to write a script that produces and saves an object, and another script that reads that object and uses it for analysis.
+
+### Example
+
+* Script 1: project/R/write_object.R
+
+```{r}
+# This script creates a model that takes a long time to run
+model1 <- lm(disp ~ cyl, data = mtcars)
+model1
+
+# I'll use this model as
+readr::write_rds(model1, "models/model1.rds")
+```
+
+* You can now restart my R session (or close and reopen R/RStudio).
+
+Script 2: project/R/read_object.R
+
+```{r}
+# Prove that global environment is empty
+ls()
+```
+
+* Read the object you wrote before and continue your analysis.
+
+```{r}
+model1 <- readr::read_rds("models/model1.rds")
+model1
+
+model1$coefficients
+```
+
+
