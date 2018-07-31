@@ -1,8 +1,8 @@
 ---
-title: Why does R/RStudio take so long to open?
+title: Why does R/RStudio may take a long time to open?
 author: Mauro Lepore
 date: '2018-07-31'
-slug: why-does-r-rstudio-take-so-long-to-open
+slug: why-does-r-rstudio-may-take-a-long-time-to-open
 categories: []
 tags:
   - bestpractice
@@ -14,8 +14,8 @@ description: ''
 
 
 
-<p>One common reason why R/RStudio take long to open (or even crashes) is that it is set (by default) to re-load objects from previous sessions. This is bad. Really. Each session should be self contained, and you should be able to reproduce your analysis entirely from your script.</p>
-<p>What if the objects you need take a long time to produce? You use one script to create the time-consuming objects, then save them. Next time you need those objects you start not from scratch but from your saved object.</p>
+<p>R/RStudio may take long to open (or even crash) if it is set to re-load objects from previous sessions. Unfortunately, this is the default. And it is bad. Each session should be self contained, and you should be able to reproduce your analysis entirely from your script.</p>
+<p><strong>What if your analysis uses an object that takes a long time to produce?</strong> In that case you can use one script to create the time-consuming object, write that object into a file, and read it from any other scripts that use it. (If you’ll use that object from other projects you should consider <a href="https://youtu.be/Tvq2DiB5gxg">storing it into its own package</a> and loading it with <code>library(object)</code>.)</p>
 <p>First I’ll show you how to change your settings to never re-load objects from previous R sessions. Then I’ll show you how to save time by writing and then reading objects that take a long time to produce.</p>
 <div id="settings" class="section level3">
 <h3>1. Settings</h3>
@@ -47,36 +47,38 @@ description: ''
 </ul>
 <pre class="r"><code># This script creates a model that takes a long time to run
 model1 &lt;- lm(disp ~ cyl, data = mtcars)
-model1</code></pre>
-<pre><code>## 
+model1
+## 
 ## Call:
 ## lm(formula = disp ~ cyl, data = mtcars)
 ## 
 ## Coefficients:
 ## (Intercept)          cyl  
-##      -156.6         62.6</code></pre>
-<pre class="r"><code># I&#39;ll use this model as
+##      -156.6         62.6
+
+# Writing model1 to a file so I can use reuse it
 readr::write_rds(model1, &quot;models/model1.rds&quot;)</code></pre>
 <ul>
 <li>You can now restart my R session (or close and reopen R/RStudio).</li>
 </ul>
 <p>Script 2: project/R/read_object.R</p>
 <pre class="r"><code># Prove that global environment is empty
-ls()</code></pre>
-<pre><code>## [1] &quot;model1&quot;</code></pre>
+ls()
+## [1] &quot;model1&quot;</code></pre>
 <ul>
 <li>Read the object you wrote before and continue your analysis.</li>
 </ul>
 <pre class="r"><code>model1 &lt;- readr::read_rds(&quot;models/model1.rds&quot;)
-model1</code></pre>
-<pre><code>## 
+model1
+## 
 ## Call:
 ## lm(formula = disp ~ cyl, data = mtcars)
 ## 
 ## Coefficients:
 ## (Intercept)          cyl  
-##      -156.6         62.6</code></pre>
-<pre class="r"><code>model1$coefficients</code></pre>
-<pre><code>## (Intercept)         cyl 
+##      -156.6         62.6
+
+model1$coefficients
+## (Intercept)         cyl 
 ##  -156.60898    62.59893</code></pre>
 </div>

@@ -1,8 +1,8 @@
 ---
-title: Why does R/RStudio take so long to open?
+title: Why does R/RStudio may take a long time to open?
 author: Mauro Lepore
 date: '2018-07-31'
-slug: why-does-r-rstudio-take-so-long-to-open
+slug: why-does-r-rstudio-may-take-a-long-time-to-open
 categories: []
 tags:
   - bestpractice
@@ -12,14 +12,13 @@ tags:
 description: ''
 ---
 
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
 ```
 
-One common reason why R/RStudio take long to open (or even crashes) is that it is set (by default) to re-load objects from previous sessions. This is bad. Really. Each session should be self contained, and you should be able to reproduce your analysis entirely from your script.
+R/RStudio may take long to open (or even crash) if it is set to re-load objects from previous sessions. Unfortunately, this is the default. And it is bad. Each session should be self contained, and you should be able to reproduce your analysis entirely from your script.
 
-What if the objects you need take a long time to produce? You use one script to create the time-consuming objects, then save them. Next time you need those objects you start not from scratch but from your saved object.
+__What if your analysis uses an object that takes a long time to produce?__ In that case you can use one script to create the time-consuming object, write that object into a file, and read it from any other scripts that use it. (If you'll use that object from other projects you should consider [storing it into its own package](https://youtu.be/Tvq2DiB5gxg) and loading it with `library(object)`.)
 
 First I'll show you how to change your settings to never re-load objects from previous R sessions. Then I'll show you how to save time by writing and then reading objects that take a long time to produce.
 
@@ -54,7 +53,7 @@ A great way to manage your workflow is to write a script that produces and saves
 model1 <- lm(disp ~ cyl, data = mtcars)
 model1
 
-# I'll use this model as
+# Writing model1 to a file so I can use reuse it
 readr::write_rds(model1, "models/model1.rds")
 ```
 
