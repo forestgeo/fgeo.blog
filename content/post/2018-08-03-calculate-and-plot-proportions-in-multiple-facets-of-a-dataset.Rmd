@@ -1,0 +1,129 @@
+---
+title: Calculate and plot proportions in multiple facets of a dataset
+author: Mauro Lepore and Monique Picon
+date: '2018-08-03'
+slug: calculate-and-plot-proportions-in-multiple-facets-of-a-dataset
+categories: []
+tags:
+  - ggplot2
+  - R
+description: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+
+knitr::opts_chunk$set(
+  # fig.path = "public/post/2018-08-03-calculate-and-plot-proportions-in-multiple-facets-of-a-dataset_files/figure-html"
+  echo = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  cache = FALSE,
+  # Figures (http://r4ds.had.co.nz/)
+  out.width = "95%",
+  fig.align = "center",
+  fig.width = 6,
+  fig.asp = 0.618,
+  fig.show = "hold"
+)
+```
+
+How would you plot the proportion of observations by a categorical variable, for multiple facets of your data? Here we do it with the tidyverse.
+
+```{r}
+library(tidyverse)
+```
+
+We use a (private) dataset on the damage recorded on dead and alive trees at three different sites.
+ 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+dmg <- read_csv(here::here("content/post/data/private/damage10.csv"))
+dmg
+```
+
+### Clean data
+
+(This section is mainly cosmetic -- not the main point of this post.)
+
+We recode the values of three variables to make them more informative. 
+
+```{r, fig.align="default", out.width="50%", fig.widh=(6 * 0.5 / 0.7)}
+dmg <- dmg %>% 
+  mutate(
+    site = case_when(
+      site == "EV1" ~ "M1",
+      site == "SB1" ~ "M2",
+      site == "SB3" ~ "OG"
+    )
+  ) %>% 
+  mutate(
+    b_u = case_when(
+      b_u == "B" ~ "broken",
+      b_u == "U" ~ "uprooted",
+      b_u == "B/U" ~ "both",
+      is.na(b_u) ~ "none"
+    )
+  ) %>% 
+  mutate(
+    status = case_when(
+      status == "A" ~ "Alive",
+      status == "D" ~ "Dead"
+    )
+  )
+```
+
+We also rename a variable, make it a factor, and reorder its levels, so that they appear in the plot in the order that best tells the story we want to tell with this dataset.
+
+```{r}
+dmg <- dmg %>% 
+  rename(stem_damage = b_u) %>%
+  mutate(stem_damage = lvls_reorder(factor(stem_damage), c(4, 2, 1, 3)))
+dmg
+```
+
+Now we compute on each site separately. We create a helper function to calculate the proportion of stem damage in each status category. Our helper does the computation for one site.
+
+```{r}
+# Calculate the proportion of each damage category in a single site
+proportion_each_site <- function(dmg_site) {
+  dmg_site %>% 
+    select(status, stem_damage) %>% 
+    count(status, stem_damage) %>% 
+    # The column `n` results from `count()`
+    mutate(total = sum(n, na.rm = TRUE), proportion = n / total)
+}
+```
+
+Now we apply the helper function to each site with `map()`. We use `nest()` to work within a dataframe.
+
+```{r}
+dmg_prop <- dmg %>% 
+  nest(-site) %>% 
+  mutate(data = map(data, ~proportion_each_site(.x))) %>% 
+  unnest()
+dmg_prop
+```
+
+Finally we plot each facet of our data in a different panel.
+
+```{r}
+dmg_prop %>% 
+  ggplot(aes(status, proportion)) +
+    geom_col(aes(fill = stem_damage)) +
+    facet_wrap(vars(site))
+```
+
+Note that the values within each panel add to 1.
+
+### What did NOT work
+
+We first calculated the proportion for each site directly within the ggplot with `stat()`, hoping that the calculation would be applied to each facet of the data independently. But this didn't work: The proportion was calculated not for each facet independently but for the entire dataset.
+
+```{r}
+ggplot(dmg, aes(status)) +
+  facet_wrap(vars(site)) +
+  geom_bar(aes(fill = stem_damage, y = stat(count / sum(count)))) +
+  labs(y = "proportion")
+```
+
+If you know how to adapt this approach to plot what we want please let us know.
