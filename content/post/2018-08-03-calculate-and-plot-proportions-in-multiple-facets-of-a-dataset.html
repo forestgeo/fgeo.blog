@@ -116,7 +116,7 @@ dmg_prop
   ggplot(aes(status, proportion)) +
     geom_col(aes(fill = stem_damage)) +
     facet_wrap(vars(site))</code></pre>
-<p><img src="/post/2018-08-03-calculate-and-plot-proportions-in-multiple-facets-of-a-dataset_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p><img src="https://i.imgur.com/OKWKFcS.png" /></p>
 <p>Note that the values within each panel add to 1.</p>
 </div>
 <div id="what-did-not-work" class="section level3">
@@ -126,6 +126,6 @@ dmg_prop
   facet_wrap(vars(site)) +
   geom_bar(aes(fill = stem_damage, y = stat(count / sum(count)))) +
   labs(y = &quot;proportion&quot;)</code></pre>
-<p><img src="/post/2018-08-03-calculate-and-plot-proportions-in-multiple-facets-of-a-dataset_files/figure-html/unnamed-chunk-8-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p><img src="https://i.imgur.com/zb7LlSh.png" /></p>
 <p>If you know how to adapt this approach to plot what we want please let us know.</p>
 </div>

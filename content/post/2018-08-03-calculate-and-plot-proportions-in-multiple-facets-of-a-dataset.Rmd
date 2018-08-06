@@ -95,7 +95,7 @@ proportion_each_site <- function(dmg_site) {
 
 Now we apply the helper function to each site with `map()`. We use `nest()` to work within a dataframe.
 
-```{r, eval=FALSE}
+```{r}
 dmg_prop <- dmg %>% 
   nest(-site) %>% 
   mutate(data = map(data, ~proportion_each_site(.x))) %>% 
@@ -103,17 +103,16 @@ dmg_prop <- dmg %>%
 dmg_prop
 ```
 
-![](http://127.0.0.1:4321/)
-
-
 Finally we plot each facet of our data in a different panel.
 
-```{r}
+```{r, eval=FALSE}
 dmg_prop %>% 
   ggplot(aes(status, proportion)) +
     geom_col(aes(fill = stem_damage)) +
     facet_wrap(vars(site))
 ```
+
+![](https://i.imgur.com/OKWKFcS.png)
 
 Note that the values within each panel add to 1.
 
