@@ -14,7 +14,6 @@ description: ''
 knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
 
 knitr::opts_chunk$set(
-  fig.path = "public/post/2018-08-03-calculate-and-plot-proportions-in-multiple-facets-of-a-dataset_files/",
   echo = TRUE,
   comment = "#>",
   collapse = TRUE,
@@ -96,13 +95,16 @@ proportion_each_site <- function(dmg_site) {
 
 Now we apply the helper function to each site with `map()`. We use `nest()` to work within a dataframe.
 
-```{r}
+```{r, eval=FALSE}
 dmg_prop <- dmg %>% 
   nest(-site) %>% 
   mutate(data = map(data, ~proportion_each_site(.x))) %>% 
   unnest()
 dmg_prop
 ```
+
+![](http://127.0.0.1:4321/)
+
 
 Finally we plot each facet of our data in a different panel.
 
@@ -119,11 +121,13 @@ Note that the values within each panel add to 1.
 
 We first calculated the proportion for each site directly within the ggplot with `stat()`, hoping that the calculation would be applied to each facet of the data independently. But this didn't work: The proportion was calculated not for each facet independently but for the entire dataset.
 
-```{r}
+```{r, eval=FALSE}
 ggplot(dmg, aes(status)) +
   facet_wrap(vars(site)) +
   geom_bar(aes(fill = stem_damage, y = stat(count / sum(count)))) +
   labs(y = "proportion")
 ```
+
+![](https://i.imgur.com/zb7LlSh.png)
 
 If you know how to adapt this approach to plot what we want please let us know.
