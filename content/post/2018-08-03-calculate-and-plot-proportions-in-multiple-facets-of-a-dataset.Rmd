@@ -14,7 +14,7 @@ description: ''
 knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
 
 knitr::opts_chunk$set(
-  # fig.path = "public/post/2018-08-03-calculate-and-plot-proportions-in-multiple-facets-of-a-dataset_files/figure-html"
+  fig.path = "public/post/2018-08-03-calculate-and-plot-proportions-in-multiple-facets-of-a-dataset_files/",
   echo = TRUE,
   comment = "#>",
   collapse = TRUE,
