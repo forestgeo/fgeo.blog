@@ -97,9 +97,12 @@ use_tidy_coc()
 
 use_news_md()
 
+# GitHub ------------------------------------------------------------------
+
+# Docs
+
 use_tidy_contributing()
 # TODO: Edit output file to customize for your package
-# TODO: Move to .github/
 # I use
 # use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo.template&quot;)
 
@@ -114,9 +117,21 @@ use_tidy_support()
 # I use
 # use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo.template&quot;)
 
-# GitHub ------------------------------------------------------------------
+# Labels
 
-use_github_labels(delete_default = TRUE)</code></pre>
+use_github_labels(delete_default = TRUE)
+
+# Apps
+
+# Install a stale-probot at https://probot.github.io/apps/stale/
+# TODO: Move to .github/stale.yml
+# I use
+# use_template(template = &quot;stale.yml&quot;, package = &quot;fgeo.template&quot;)
+
+# Install todo at https://github.com/apps/todo
+# TODO: Move to .github/config.yml
+# I use
+# use_template(template = &quot;config.yml&quot;, package = &quot;fgeo.template&quot;)</code></pre>
 <div id="almost-always" class="section level2">
 <h2>Almost always</h2>
 <pre class="r"><code># Services ----------------------------------------------------------------
