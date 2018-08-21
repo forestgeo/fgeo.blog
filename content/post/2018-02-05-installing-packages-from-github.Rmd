@@ -15,23 +15,23 @@ tags:
   - packages
 ---
 
-R packages live most commonly on [CRAN](https://cran.r-project.org/) or [GitHub](https://github.com/). To install packages that live on CRAN you use the function `install.packages()` which comes by default with R. 
-To install packages that live on GitHub you use the function `install_github()`, which comes not by default but with the packages __devtools__ and __remotes__. I recommend __remotes__ because it is lighter. __remotes__ lives in CRAN, so you can install it with:
+R packages live most commonly on [CRAN](https://cran.r-project.org/) or [GitHub](https://github.com/). To install packages that live on CRAN, you use the function `install.packages()` which comes by default with R. 
+To install packages that live on GitHub you use the function `install_github()`, which comes not by default but with the packages __devtools__ and __remotes__. __remotes__ has less features than __devtools__ but it is often enough. __remotes__ lives on CRAN, so you can install it with:
 
 ```
 install.packages("remotes")
 ```
 
-R packages are like any other software. To use an R package -- or any software -- you need to install it once, and then "open" (load) it every time you want to use it. In R you load a package with `library(package)`. Let's open __remotes__: 
+R packages are like any other software: After you install some software you generally can't use it until you "open" it. To use an R package you "open" it with `library(package)`. Let's open __remotes__: 
 
 ```
 library(remotes)
 ```
 
-Now you can use the function `install_github()`. The description and examples of the help file `?install_github()` show you what to do next. You need to feed `install_github()` with a username and a repository name. For example, this is what you should run if you want to install the package __tidyverse__ from the GitHub username "hadley":
+Now you can use the function `install_github()`. The description and examples of the help file `?install_github()` show you what to do next: You need to feed `install_github()` with the repository address in the format `username/repo`. For example, this is what you should run if you want to install the package __tidyverse__ from the GitHub organization (equivalent to username) "tidyverse":
 
 ```
-install_github("hadley/tidyverse")
+install_github("tidyverse/tidyverse")
 ```
 
 There is a way to save a little typing. You can use `install_github()` without running `library(remotes)`: This is how:

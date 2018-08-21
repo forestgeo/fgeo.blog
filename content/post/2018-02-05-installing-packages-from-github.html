@@ -17,13 +17,13 @@ tags:
 
 
 
-<p>R packages live most commonly on <a href="https://cran.r-project.org/">CRAN</a> or <a href="https://github.com/">GitHub</a>. To install packages that live on CRAN you use the function <code>install.packages()</code> which comes by default with R.
-To install packages that live on GitHub you use the function <code>install_github()</code>, which comes not by default but with the packages <strong>devtools</strong> and <strong>remotes</strong>. I recommend <strong>remotes</strong> because it is lighter. <strong>remotes</strong> lives in CRAN, so you can install it with:</p>
+<p>R packages live most commonly on <a href="https://cran.r-project.org/">CRAN</a> or <a href="https://github.com/">GitHub</a>. To install packages that live on CRAN, you use the function <code>install.packages()</code> which comes by default with R.
+To install packages that live on GitHub you use the function <code>install_github()</code>, which comes not by default but with the packages <strong>devtools</strong> and <strong>remotes</strong>. <strong>remotes</strong> has less features than <strong>devtools</strong> but it is often enough. <strong>remotes</strong> lives on CRAN, so you can install it with:</p>
 <pre><code>install.packages(&quot;remotes&quot;)</code></pre>
-<p>R packages are like any other software. To use an R package – or any software – you need to install it once, and then “open” (load) it every time you want to use it. In R you load a package with <code>library(package)</code>. Let’s open <strong>remotes</strong>:</p>
+<p>R packages are like any other software: After you install some software you generally can’t use it until you “open” it. To use an R package you “open” it with <code>library(package)</code>. Let’s open <strong>remotes</strong>:</p>
 <pre><code>library(remotes)</code></pre>
-<p>Now you can use the function <code>install_github()</code>. The description and examples of the help file <code>?install_github()</code> show you what to do next. You need to feed <code>install_github()</code> with a username and a repository name. For example, this is what you should run if you want to install the package <strong>tidyverse</strong> from the GitHub username “hadley”:</p>
-<pre><code>install_github(&quot;hadley/tidyverse&quot;)</code></pre>
+<p>Now you can use the function <code>install_github()</code>. The description and examples of the help file <code>?install_github()</code> show you what to do next: You need to feed <code>install_github()</code> with the repository address in the format <code>username/repo</code>. For example, this is what you should run if you want to install the package <strong>tidyverse</strong> from the GitHub organization (equivalent to username) “tidyverse”:</p>
+<pre><code>install_github(&quot;tidyverse/tidyverse&quot;)</code></pre>
 <p>There is a way to save a little typing. You can use <code>install_github()</code> without running <code>library(remotes)</code>: This is how:</p>
 <pre><code>remotes::install_github(&quot;hadley/tidyverse&quot;)</code></pre>
 <p>The syntax <code>package::function</code> works for any package. For example, had you installed <strong>devtools</strong>, you could also install <strong>tidyverse</strong> with:</p>
