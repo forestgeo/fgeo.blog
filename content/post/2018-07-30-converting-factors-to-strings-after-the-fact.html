@@ -1,0 +1,71 @@
+---
+title: Converting factors to strings after the fact
+author: Mauro Lepore
+date: '2018-07-30'
+slug: converting-factors-to-strings-after-the-fact
+categories: []
+tags:
+  - tidyverse
+  - R
+  - purrr
+description: ''
+---
+
+
+
+<p>Some dataset contain factor-columns where you expected string-columns. Such problem commonly originate from the source of your data, when you imported or created the dataset. The best place to fix the problem is right there, usually by using the argument <code>stringsAsFactors = FALSE</code> to <code>read.csv()</code> or to <code>data.frame()</code>. But sometimes you have no choice other than fixing the problem after the fact. Here is how.</p>
+<p>Let’s create an object which columns <code>x</code> and <code>z</code> are factors.</p>
+<pre class="r"><code>object &lt;- data.frame(x = &quot;A&quot;, y = 1, z = &quot;Z&quot;, stringsAsFactors = TRUE)
+object
+##   x y z
+## 1 A 1 Z</code></pre>
+<p>This is hard to see unless you inspect the object’s structure or convert the object to a tibble.</p>
+<pre class="r"><code>str(object)
+## &#39;data.frame&#39;:    1 obs. of  3 variables:
+##  $ x: Factor w/ 1 level &quot;A&quot;: 1
+##  $ y: num 1
+##  $ z: Factor w/ 1 level &quot;Z&quot;: 1</code></pre>
+<pre class="r"><code>library(tibble)
+
+as_tibble(object)
+## # A tibble: 1 x 3
+##   x         y z    
+##   &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt;
+## 1 A         1 Z</code></pre>
+<p>Now it’s obvious that <code>x</code> and <code>z</code> are factors. How can we convert them to strings?</p>
+<ul>
+<li>Option 1: Convert each column to a character, one by one.</li>
+</ul>
+<pre class="r"><code>object &lt;- data.frame(x = &quot;A&quot;, y = 1, z = &quot;Z&quot;, stringsAsFactors = TRUE)
+object$x &lt;- as.character(object$x)
+object$y &lt;- as.character(object$z)
+
+as_tibble(object)
+## # A tibble: 1 x 3
+##   x     y     z    
+##   &lt;chr&gt; &lt;chr&gt; &lt;fct&gt;
+## 1 A     Z     Z</code></pre>
+<ul>
+<li>Option 2: Use <code>lapply()</code> to do something similar to what I showed above, but in one single step.</li>
+</ul>
+<pre class="r"><code>object &lt;- data.frame(x = &quot;A&quot;, y = 1, z = &quot;Z&quot;, stringsAsFactors = TRUE)
+object[c(&quot;x&quot;, &quot;y&quot;)] &lt;- lapply(object[c(&quot;x&quot;, &quot;y&quot;)], as.character)
+as_tibble(object)
+## # A tibble: 1 x 3
+##   x     y     z    
+##   &lt;chr&gt; &lt;chr&gt; &lt;fct&gt;
+## 1 A     1     Z</code></pre>
+<ul>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Use <code>modify_if()</code>: This is best not only because you avoid the weird assignment (<code>object[]</code>) but also because you don’t need to specify which are the factor-columns.</li>
+</ol></li>
+</ul>
+<pre class="r"><code>library(purrr)
+
+object &lt;- data.frame(x = &quot;A&quot;, y = 1, z = &quot;Z&quot;, stringsAsFactors = TRUE)
+object &lt;- modify_if(object, is.factor, as.character)
+as_tibble(object)
+## # A tibble: 1 x 3
+##   x         y z    
+##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1 A         1 Z</code></pre>

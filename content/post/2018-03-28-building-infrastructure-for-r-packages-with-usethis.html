@@ -1,0 +1,211 @@
+---
+title: Building infrastructure for R-packages with usethis
+author: Mauro Lepore
+date: '2018-03-28'
+slug: building-infrastructure-for-r-packages-with-usethis
+categories: []
+tags:
+  - devtools
+  - usethis
+  - packages
+  - R
+  - r rstudio
+  - github
+  - tutorial
+  - tip
+---
+
+
+
+<p><a href="https://blog.codinghorror.com/the-works-on-my-machine-certification-program/"><img src="https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg" alt="lifecycle" /></a></p>
+<p>This is a kind of checklist that I use to build consistent package infrastructure with the <strong>usethis</strong> package.</p>
+<pre class="r"><code>library(usethis)
+
+# I use templates from fgeo.template. I must have it installed but not loaded.
+# install.packages(&quot;fgeo.template&quot;)</code></pre>
+<div id="global-options" class="section level2">
+<h2>Global options</h2>
+<pre class="r"><code>use_usethis()
+
+use_description()
+
+use_blank_slate()</code></pre>
+</div>
+<div id="once-per-package" class="section level1">
+<h1>Once per package</h1>
+<pre class="r"><code># create_package(&quot;PACKAGE-PATH-ENDING-WITH-PACKAGE-NAME&quot;)</code></pre>
+</div>
+<div id="work-mostly-on-description" class="section level1">
+<h1>Work mostly on DESCRIPTION</h1>
+<pre class="r"><code># In DESCRIPTION, Manually edit the fields Title and Description.
+
+# Manually edit the field Authors@R  -- but see use_description()
+# I use this snippet https://i.imgur.com/2YRijFP.png
+# * Learn about RStudio snippets: http://bit.ly/2uOPh4a
+
+?licenses
+# I frequently use
+# use_gpl3_license()
+
+use_roxygen_md()
+
+use_git()
+
+use_github(&quot;OWNER-GOES-HERE&quot;)
+# I use
+# use_github(&quot;forestgeo&quot;)
+
+# Confirm
+browse_github()
+
+# Not necessary if you run `use_github()` before
+use_github_links()
+
+use_dev_version()
+
+use_tidy_description()</code></pre>
+<p>Git may be able to push yet not create a permanent link with your remote origin. You can create such link from the terminal.</p>
+<pre class="bash"><code># Link origin and master
+git push -u origin master
+# Next time this will be enough
+git pull
+git push</code></pre>
+</div>
+<div id="work-on-other-important-documentation" class="section level1">
+<h1>Work on other important documentation</h1>
+<pre class="r"><code>
+use_package_doc()
+
+
+
+# Effect on README
+
+use_readme_rmd()
+# TODO: Edit output file to customize for your package
+# I use
+# use_template(template = &quot;README.Rmd&quot;, package = &quot;fgeo.template&quot;)
+# Knit to create README.md
+
+# Lifecycle stages according to https://www.tidyverse.org/lifecycle/
+use_lifecycle_badge(&quot;experimental&quot;)
+
+use_cran_badge()
+
+use_tidy_coc()
+
+
+
+use_news_md()
+
+# GitHub ------------------------------------------------------------------
+
+# Docs
+
+use_tidy_contributing()
+# TODO: Edit output file to customize for your package
+# I use
+# use_template(template = &quot;CONTRIBUTING.md&quot;, package = &quot;fgeo.template&quot;)
+
+use_tidy_issue_template()
+# TODO: Move to .github/
+# I use
+# use_template(template = &quot;ISSUE_TEMPLATE.md&quot;, package = &quot;fgeo.template&quot;)
+
+use_tidy_support()
+# TODO: Edit output file to customize for your package
+# TODO: Move to .github/
+# I use
+# use_template(template = &quot;SUPPORT.md&quot;, package = &quot;fgeo.template&quot;)
+
+# Labels
+
+use_github_labels(delete_default = TRUE)
+
+# Apps
+
+# Install a stale-probot at https://probot.github.io/apps/stale/
+# TODO: Move to .github/stale.yml
+# I use
+# use_template(template = &quot;stale.yml&quot;, package = &quot;fgeo.template&quot;)
+
+# Install todo at https://github.com/apps/todo
+# TODO: Move to .github/config.yml
+# I use
+# use_template(template = &quot;config.yml&quot;, package = &quot;fgeo.template&quot;)</code></pre>
+<div id="almost-always" class="section level2">
+<h2>Almost always</h2>
+<pre class="r"><code># Services ----------------------------------------------------------------
+
+use_testthat()
+
+use_coverage()
+# I use
+# use_coverage(&quot;coveralls&quot;)
+
+use_travis()
+# Or
+use_tidy_ci(browse = interactive())
+
+use_pkgdown()
+# TODO: If necessary, edit _pkgdown.yml
+# I use
+# use_template(template = &quot;_pkgdown.yml&quot;, package = &quot;fgeo.template&quot;)
+
+# Tidyverse ---------------------------------------------------------------
+
+use_pipe()
+
+use_tidy_eval()</code></pre>
+</div>
+<div id="as-required-during-development" class="section level2">
+<h2>As required during development</h2>
+<pre class="r"><code># Relatively frequently ---------------------------------------------------
+
+use_r()
+
+use_test()
+
+use_build_ignore(&quot;FILE-NAME-GOES-HERE&quot;)
+
+use_git_ignore(&quot;FILE-NAME-GOES-HERE&quot;)
+
+use_package(&quot;NAME-OF-PACKAGE-TO-USE&quot;)
+
+use_dev_package(&quot;NAME-OF-PACKAGE-TO-USE&quot;)
+
+use_data(DATASET-PLOT-OR-WHATEVER-OBJECT-GOES-HERE)
+
+use_data_raw()
+
+# Less frequent -----------------------------------------------------------
+
+use_vignette()
+
+# If necessary, set (build)ignore to TRUE.
+use_directory(&quot;PATH-GOES-HERE&quot;, ignore = FALSE)
+# I commonly use
+# use_directory(&quot;inst&quot;)
+
+use_tidy_description()
+
+use_dev_version()
+
+use_tidy_versions(overwrite = FALSE)
+
+use_tidy_style()
+
+use_version()</code></pre>
+</div>
+<div id="rare-but-good-to-know" class="section level2">
+<h2>Rare but good to know</h2>
+<p>Create an rmarkdown template in your package that will be available when users install your package.</p>
+<pre><code>use_rmarkdown_template(
+  &quot;TEMPLATE-NAME-GOES-HERE.Rmd&quot;,
+  template_description = &quot;DESCRIPTION GOES HERE&quot;
+)
+# TODO: Fill your template. It lives here:
+# &quot;inst/rmarkdown/templates/TEMPLATE-NAME-GOES-HERE/skeleton/skeleton.Rmd&quot;</code></pre>
+<p>Once users install your package, your template will be available in the templates’ list.</p>
+<p><img src="https://i.imgur.com/OfofcYL.png" /></p>
+</div>
+</div>

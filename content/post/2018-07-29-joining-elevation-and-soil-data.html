@@ -1,0 +1,95 @@
+---
+title: Joining elevation and soil data
+author: Mauro Lepore and Rafael Cardenas
+date: '2018-07-29'
+slug: joining-elevation-and-soil-data
+categories: []
+tags:
+  - R
+  - join
+  - dpyr
+description: ''
+---
+
+
+
+<div id="packages" class="section level1">
+<h1>Packages</h1>
+<pre class="r"><code>library(tidyverse)
+## -- Attaching packages -------------------------------------------- tidyverse 1.2.1 --
+## v ggplot2 3.1.0     v purrr   0.2.5
+## v tibble  2.0.0     v dplyr   0.7.8
+## v tidyr   0.8.2     v stringr 1.3.1
+## v readr   1.3.1     v forcats 0.3.0
+## -- Conflicts ----------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>Toy datasets:</p>
+<ul>
+<li><code>soil</code> starts at <code>gx = 5</code> and <code>gy = 5</code> and increments by 10.</li>
+<li><code>elevation</code> starts at <code>gx = 0</code> and <code>gy = 0</code> and increments by 5.</li>
+</ul>
+<p>Therefore, <code>soil</code> and <code>elevation</code> therefore match in some but not all <code>gx</code>, <code>gy</code>. Here we show how to join <code>soil</code> and <code>elevation</code>, keeping only the matching rows. For details on joining see <a href="http://r4ds.had.co.nz/relational-data.html#mutating-joins" class="uri">http://r4ds.had.co.nz/relational-data.html#mutating-joins</a>.</p>
+<pre class="r"><code># Position and measurements of elements Al and P
+soil &lt;- tribble(
+  ~gx, ~gy, ~Al, ~P,
+    5,   5,  99, 66, 
+   15,   5,  98, 65, 
+   25,   5,  97, 64, 
+    5,  15,  96, 63, 
+    5,  25,  95, 62
+)
+soil
+## # A tibble: 5 x 4
+##      gx    gy    Al     P
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     5     5    99    66
+## 2    15     5    98    65
+## 3    25     5    97    64
+## 4     5    15    96    63
+## 5     5    25    95    62</code></pre>
+<pre class="r"><code>elevation &lt;- tribble(
+  ~gx, ~gy, ~elev,
+    0,   0,   111,
+    5,   5,   120,
+    5,  15,   125,
+   25,   5,   130,
+   25,  10,   135,
+    5,  25,   140
+)
+elevation
+## # A tibble: 6 x 3
+##      gx    gy  elev
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0     0   111
+## 2     5     5   120
+## 3     5    15   125
+## 4    25     5   130
+## 5    25    10   135
+## 6     5    25   140</code></pre>
+<pre class="r"><code>joint &lt;- left_join(elevation, soil)
+## Joining, by = c(&quot;gx&quot;, &quot;gy&quot;)
+joint
+## # A tibble: 6 x 5
+##      gx    gy  elev    Al     P
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0     0   111    NA    NA
+## 2     5     5   120    99    66
+## 3     5    15   125    96    63
+## 4    25     5   130    97    64
+## 5    25    10   135    NA    NA
+## 6     5    25   140    95    62</code></pre>
+<p>Exclude non-matching rows.</p>
+<pre class="r"><code>matching &lt;- joint[complete.cases(joint), ]
+matching
+## # A tibble: 4 x 5
+##      gx    gy  elev    Al     P
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     5     5   120    99    66
+## 2     5    15   125    96    63
+## 3    25     5   130    97    64
+## 4     5    25   140    95    62</code></pre>
+</div>

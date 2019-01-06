@@ -1,0 +1,75 @@
+---
+title: Scrapping species list from ForestGEO website
+author: Erika Gonzalez & Valentine Herrmann
+date: '2018-06-08'
+slug: scrapping-species-list-from-forestgeo-website
+categories: []
+tags:
+  - species
+  - forestgeo
+  - R
+description: 'Code to pull species list from ForestGEO website (https://forestgeo.si.edu/sites/)'
+---
+
+
+
+<p>Code to pull species list from ForestGEO website (<a href="https://forestgeo.si.edu/sites/" class="uri">https://forestgeo.si.edu/sites/</a>)</p>
+<pre class="r"><code>#1.Install these packages
+
+install.packages(&quot;RCurl&quot;)
+
+install.packages(&quot;XLM&quot;)
+
+install.packages(&quot;rlist&quot;)
+
+library(XML)
+
+library(RCurl)
+
+library(rlist)
+
+ 
+
+#2. Lets start with an example: pull data from page 1, here for Korup..
+
+theurl &lt;- getURL(&quot;https://forestgeo.si.edu/korup-species-list?page=1&quot;,.opts = list(ssl.verifypeer = FALSE) )
+
+tables &lt;- readHTMLTable(theurl)
+
+tables &lt;- list.clean(tables, fun = is.null, recursive = FALSE)
+
+ 
+
+#But many sites show their species list in more than 1 page (only display 25 per page),
+
+#so work with a loop to include as many pages as shown on the website.
+
+#Korup, for example has 465 species displayed in 19 pages
+
+ 
+
+#3.Create an empty dataframe
+
+korup &lt;- NULL
+
+ 
+
+#4.Run the loop. Change &quot;page in 0:19&quot; to include the number of pages in the website
+
+#(the only manual part) for the site you need
+
+ 
+
+for(page in 0:19) {
+
+  print(page)
+
+  theurl &lt;- getURL(paste0(&quot;https://forestgeo.si.edu/korup-species-list?page=&quot;, page),.opts = list(ssl.verifypeer = FALSE) )
+
+  tables &lt;- readHTMLTable(theurl)
+
+  tables &lt;- list.clean(tables, fun = is.null, recursive = FALSE)
+
+  korup &lt;- rbind(korup, do.call(rbind.data.frame, tables))
+
+}</code></pre>
